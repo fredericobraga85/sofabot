@@ -1,0 +1,36 @@
+import numpy as np
+import ChartAnalyzer
+import Visualizer
+
+from Poloniex import Poloniex
+
+
+
+poloniex = Poloniex()
+df_chart_data = poloniex.get_chart_data('BTC_FCT','1496448000', '1496793600','300')
+
+#BTC_FCT
+#BTC_LSK
+#03/06 1496448000
+#07/6 1496793600
+#22/6 1498089600
+#23/6 1498176000 1498262400
+#24/6 1498262400 1498348800
+#25/6 1498348800 9999999999
+
+
+
+chart_analyzer = ChartAnalyzer.ChartAnalyzer()
+chart_analyzer.df = df_chart_data
+chart_analyzer.feature_engineer()
+chart_analyzer.decide_action()
+
+
+Visualizer.print_full(df_chart_data[['isUp', 'weightedAverage', 'indexGain','buyValue','perGain','gained', 'Buy']]) #'supportQuote', 'resistanceQuote'
+
+
+print df_chart_data.groupby("gained").agg({"gained": np.sum})
+print df_chart_data['perGain'].values.sum()
+print 'Open 1st period', df_chart_data['open'][0]
+print 'Close  last period', df_chart_data['close'].iloc[-1]
+print 'Gain period', (df_chart_data['close'].iloc[-1]/ df_chart_data['open'][0] - 1) * 100
