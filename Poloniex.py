@@ -7,9 +7,22 @@ from time import sleep
 class Poloniex:
 
     def get_chart_data(self, currencyPair, start, end, period):
-        params = {'currencyPair': currencyPair, 'start': start, 'end': end, 'period': period}
-        json = s.get_url('https://poloniex.com/public?command=returnChartData', params)
-        return self.chart_feature_engineering(json)
+
+        file_name = currencyPair + start + end + period + '.csv'
+
+        try:
+            chart = pd.read_csv(file_name)
+
+        except:
+
+            params = {'currencyPair': currencyPair, 'start': start, 'end': end, 'period': period}
+            json = s.get_url('https://poloniex.com/public?command=returnChartData', params)
+            chart = self.chart_feature_engineering(json)
+
+            chart.to_csv(file_name, index=False)
+
+        return chart
+
 
     def chart_feature_engineering(self, json):
 
