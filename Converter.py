@@ -6,3 +6,9 @@ def convert_to_timestamp(date):
 
 def convert_to_float(text):
     return float(text)
+
+def convert_to_up_or_down(isUp):
+    if isUp:
+        return 1
+    else:
+        return -1
