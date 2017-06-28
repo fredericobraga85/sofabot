@@ -1,6 +1,8 @@
+import json
 import pandas as pd
 import Service as s
 import Converter
+from time import sleep
 
 class Poloniex:
 
@@ -17,4 +19,16 @@ class Poloniex:
 
         return df_chart_data
 
+    def get_ticker(self, currencyPair):
 
+        # sleep(0.1)
+        params = {}
+        j = s.get_url('https://poloniex.com/public?command=returnTicker', params)
+        return self.ticker_feature_engineering(j, currencyPair)
+
+    def ticker_feature_engineering(self, j, currencyPair):
+
+
+        df_ticker = pd.read_json(j)
+
+        return df_ticker[currencyPair]
