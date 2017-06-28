@@ -22,8 +22,9 @@ class ChartAnalyzer:
         last_i = i
         start_i = 0 if last_i < 3 else last_i - 3
 
-        if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].max()) < self.df['weightedAverage'].iloc[last_i] * 0.02:
+        if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].max()) < self.df['weightedAverage'].iloc[last_i] * 0.015:
             self.support = self.df['weightedAverage'].iloc[last_i]
+
 
         self.df.loc[i, 'supportQuote'] = self.support
 
@@ -33,10 +34,15 @@ class ChartAnalyzer:
 
     def calculateResistance(self, i):
 
-        if self.df.iloc[i - 1]['isUp'] == 1 and self.df.iloc[i]['isUp'] == -1:
-            self.resistance = self.df.iloc[i - 1]['weightedAverage']
+        last_i = i
+        start_i = 0 if last_i < 3 else last_i - 3
 
-            self.df.loc[i, 'resistanceQuote'] = self.resistance
+        if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].max()) < self.df['weightedAverage'].iloc[last_i] * 0.015:
+            self.resistance = self.df['weightedAverage'].iloc[last_i]
+
+        self.df.loc[i, 'resistanceQuote'] = self.resistance
+
+
 
     def calculate_growth(self, series, index=1):
         return (series / series.shift(index) - 1) * 100
@@ -114,8 +120,7 @@ class ChartAnalyzer:
 
             if self.actual_price < self.support :
                 buy = True
-            # elif self.df["isUp"].iloc[start_i : i].sum() > 3 and self.actual_price < self.support * 1.01:
-            #      buy = True
+
 
         return buy
 
