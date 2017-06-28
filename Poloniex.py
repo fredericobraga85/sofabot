@@ -17,20 +17,21 @@ class Poloniex:
 
             params = {'currencyPair': currencyPair, 'start': start, 'end': end, 'period': period}
             json = s.get_url('https://poloniex.com/public?command=returnChartData', params)
-            chart = self.chart_feature_engineering(json)
+            chart = pd.read_json(json)
 
             chart.to_csv(file_name, index=False)
 
+        chart_edited = self.chart_feature_engineering(chart)
+
+        return chart_edited
+
+
+    def chart_feature_engineering(self, chart):
+
+        chart['quoteVolume'] = chart['quoteVolume'].apply(Converter.convert_to_float)
+        chart['date'] = chart['date'].apply(Converter.convert_to_timestamp)
+
         return chart
-
-
-    def chart_feature_engineering(self, json):
-
-        df_chart_data = pd.read_json(json)
-        df_chart_data['quoteVolume'] = df_chart_data['quoteVolume'].apply(Converter.convert_to_float)
-        df_chart_data['date'] = df_chart_data['date'].apply(Converter.convert_to_timestamp)
-
-        return df_chart_data
 
     def get_ticker(self, currencyPair):
 

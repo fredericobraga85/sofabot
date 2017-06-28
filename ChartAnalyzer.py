@@ -2,6 +2,7 @@ from Poloniex import Poloniex
 
 class ChartAnalyzer:
 
+
     def init(self, currencyPair , start, end , period, btc):
 
         self.btc = btc
@@ -15,10 +16,12 @@ class ChartAnalyzer:
 
     def calculateSupport(self, i):
 
-        if self.df.iloc[i - 3]['isUp'] == False and self.df.iloc[i - 2]['isUp'] == False and self.df.iloc[i - 1]['isUp'] == True and self.df.iloc[i]['isUp'] == True:
-            self.support = self.df.iloc[i]['weightedAverage']
-            self.df.loc[i, 'supportQuote'] = self.support
+        # if self.df.iloc[i - 3]['isUp'] == False and self.df.iloc[i - 2]['isUp'] == False and self.df.iloc[i - 1]['isUp'] == True and self.df.iloc[i]['isUp'] == True:
+        #     self.support = self.df.iloc[i-2]['weightedAverage']
+        #     self.df.loc[i, 'supportQuote'] = self.support
 
+        self.support = self.df['weightedAverage'].iloc[-20:].min()
+        self.df.loc[i, 'supportQuote'] = self.support
 
     def calculateResistance(self, i):
 
@@ -83,8 +86,6 @@ class ChartAnalyzer:
                     self.wait(i)
 
 
-
-
     def getActualPrice(self, i):
         self.actual_price = self.df.iloc[i]['weightedAverage']
         # self.actual_price = self.poloniex.get_ticker(self, self.currencyPair)['last']
@@ -96,15 +97,15 @@ class ChartAnalyzer:
         if self.inBuy == False:
 
 
-            if self.df.iloc[i - 2]['isUp'] == False:
-                if self.df.iloc[i- 1]['isUp'] == False:
-                    if self.df.iloc[i]['isUp'] == True:
-                        if self.df.iloc[i ]['weightedAverage'] < self.support:
-                            buy = True
-            elif self.df.iloc[i - 1]['isUp'] == True:
-                if self.df.iloc[i]['isUp'] == True:
-                    if self.actual_price > (self.support + (self.support * self.gain)):
-                        buy = True
+            # if self.df.iloc[i - 2]['isUp'] == False:
+            #     if self.df.iloc[i- 1]['isUp'] == False:
+            #         if self.df.iloc[i]['isUp'] == True:
+            if self.df.iloc[i]['weightedAverage'] < self.support:
+                buy = True
+            # elif self.df.iloc[i - 1]['isUp'] == True:
+            #     if self.df.iloc[i]['isUp'] == True:
+            #         if self.actual_price > (self.support + (self.support * self.gain)):
+            #             buy = True
 
         return buy
 
@@ -139,7 +140,7 @@ class ChartAnalyzer:
 
                 return True
 
-        79.576268 * 0.012172 * 0.0015
+
         return False
 
     def set_stop_limit(self):
