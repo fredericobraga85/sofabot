@@ -32,7 +32,7 @@ class ChartAnalyzer:
             if dif_open_close_3 > (dif_open_close_1 + dif_open_close_2) * self.support_resistance_dif:
                 self.support = self.df['open'].iloc[i - 1]
 
-                if self.df['close'].iloc[i - 1] > self.resistance or self.resistance == 0:
+                if self.df['close'].iloc[i - 1] > self.resistance and self.resistance == 0:
                     self.resistance = self.df['close'].iloc[i - 1]
 
         elif dif_open_close_3 < 0:
@@ -41,7 +41,7 @@ class ChartAnalyzer:
                 if abs(dif_open_close_3) > (dif_open_close_1 + dif_open_close_2) * self.support_resistance_dif:
                     self.resistance = self.df['open'].iloc[i - 1]
 
-                    if self.df['close'].iloc[i - 1] < self.support or self.support == 0:
+                    if self.df['close'].iloc[i - 1] < self.support and self.support == 0:
                         self.support = self.df['close'].iloc[i - 1]
 
 
@@ -131,6 +131,7 @@ class ChartAnalyzer:
 
                 self.inBuy = True
                 self.buy_value = self.resistance * self.resistance_tolerance
+                self.resistance = self.actual_price
                 self.actualCurrency = (self.btc / self.buy_value) - (self.btc / self.buy_value * self.buy_perc)
                 self.btc = 0
                 self.buy_index = i
