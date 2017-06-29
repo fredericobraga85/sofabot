@@ -19,12 +19,20 @@ class ChartAnalyzer:
 
     def calculateSupport(self, i):
 
-        last_i = i
-        start_i = 0 if last_i < 3 else last_i - 3
+        start_i = 0 if i < 3 else i - 3
 
-        if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].max()) < self.df['weightedAverage'].iloc[last_i] * 0.015:
-            self.support = self.df['weightedAverage'].iloc[last_i]
 
+        # if i > 10:
+        #     if self.df['isUp'].iloc[-10:i].sum < -3:
+        #         self.support = self.actual_price * 1.001
+        #     else:
+        #         if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].max()) < self.actual_price * 0.015:
+        #             self.support = self.actual_price
+
+        if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].min()) < self.actual_price * 0.025:
+            self.support = self.actual_price
+        # else:
+        #     self.support = self.actual_price * 1.01
 
         self.df.loc[i, 'supportQuote'] = self.support
 
@@ -34,11 +42,11 @@ class ChartAnalyzer:
 
     def calculateResistance(self, i):
 
-        last_i = i
+        last_i = i - 1
         start_i = 0 if last_i < 3 else last_i - 3
 
-        if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].max()) < self.df['weightedAverage'].iloc[last_i] * 0.015:
-            self.resistance = self.df['weightedAverage'].iloc[last_i]
+        if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].max()) < self.actual_price * 0.015:
+            self.resistance = self.actual_price
 
         self.df.loc[i, 'resistanceQuote'] = self.resistance
 
@@ -85,9 +93,10 @@ class ChartAnalyzer:
         for i, row in self.df.iterrows():
             if i > 0 and (i < len(self.df.index) - 1):
 
+                self.getActualPrice(i)
                 self.calculateSupport(i)
                 self.calculateResistance(i)
-                self.getActualPrice(i)
+
 
 
                 if self.shouldBuy(i):
@@ -115,8 +124,6 @@ class ChartAnalyzer:
         buy = False
 
         if self.inBuy == False:
-
-            start_i = 0 if i < 5 else i - 5
 
             if self.actual_price < self.support :
                 buy = True
