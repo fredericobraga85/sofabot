@@ -29,7 +29,7 @@ class Poloniex:
     def chart_feature_engineering(self, chart):
 
         chart['quoteVolume'] = chart['quoteVolume'].apply(Converter.convert_to_float)
-        chart['date'] = chart['date'].apply(Converter.convert_to_timestamp)
+        chart['timestamp'] = chart['date'].apply(Converter.convert_to_timestamp)
 
         return chart
 

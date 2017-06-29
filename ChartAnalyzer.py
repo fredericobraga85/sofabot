@@ -1,54 +1,49 @@
 from Poloniex import Poloniex
 import Converter
+import Visualizer
 
 class ChartAnalyzer:
 
 
     def init(self, currencyPair , start, end , period, btc):
 
-        self.inital_btc = btc
+        self.currencyPair = currencyPair
         self.btc = btc
         self.actualCurrency = 0.0
-        self.currencyPair = currencyPair
         self.piggy_safe = 0.0
+        self.support = 0.0
+        self.resistance = 0.0
+
+        self.reset_values()
 
         self.poloniex = Poloniex()
         self.df = self.poloniex.get_chart_data(currencyPair, start, end, period)
         self.feature_engineer()
 
 
-    def calculateSupport(self, i):
-
-        start_i = 0 if i < 3 else i - 3
 
 
-        # if i > 10:
-        #     if self.df['isUp'].iloc[-10:i].sum < -3:
-        #         self.support = self.actual_price * 1.001
-        #     else:
-        #         if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].max()) < self.actual_price * 0.015:
-        #             self.support = self.actual_price
+    def calculateSupportAndResistance(self, i):
 
-        if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].min()) < self.actual_price * 0.025:
-            self.support = self.actual_price
-        # else:
-        #     self.support = self.actual_price * 1.01
+        dif_open_close_1 = abs(self.df['close'].iloc[i - 3] - self.df['open'].iloc[i - 3])
+        dif_open_close_2 = abs(self.df['close'].iloc[i - 2] - self.df['open'].iloc[i - 2])
+        dif_open_close_3 =     self.df['close'].iloc[i - 1] - self.df['open'].iloc[i - 1]
 
-        self.df.loc[i, 'supportQuote'] = self.support
+        if dif_open_close_3 > 0 :
+            if dif_open_close_3 > dif_open_close_1 + dif_open_close_2:
+                self.support = self.df['open'].iloc[i - 1]
 
-    #     self.support = self.df['weightedAverage'].iloc[-20].min()
-    #
-    # self.df.loc[i, 'supportQuote'] = self.support
+                if self.df['close'].iloc[i - 1] > self.resistance or self.resistance == 0:
+                    self.resistance = self.df['close'].iloc[i - 1]
 
-    def calculateResistance(self, i):
+        elif dif_open_close_3 < 0:
 
-        last_i = i - 1
-        start_i = 0 if last_i < 3 else last_i - 3
+            if dif_open_close_3 < 0:
+                if abs(dif_open_close_3) > dif_open_close_1 + dif_open_close_2:
+                    self.resistance = self.df['open'].iloc[i - 1]
 
-        if abs(self.df['open'].iloc[start_i:i].max() - self.df['close'].iloc[start_i:i].max()) < self.actual_price * 0.015:
-            self.resistance = self.actual_price
-
-        self.df.loc[i, 'resistanceQuote'] = self.resistance
+                    if self.df['close'].iloc[i - 1] < self.support or self.support == 0:
+                        self.support = self.df['close'].iloc[i - 1]
 
 
 
@@ -69,140 +64,107 @@ class ChartAnalyzer:
         self.df['quoteGrowth1stPeriod'] = self.calculate_growth_1st_period(self.df['weightedAverage'])
         self.df['isUp'] = self.isUp(self.df['quoteGrowth1stPeriod'])
 
-    def decide_action(self, gain, loss, loss_after_gain, gain_turbo_perc):
+    def decide_action(self, gain, loss):
 
         self.gain = gain
         self.loss = loss
-        self.loss_after_gain = loss_after_gain
-        self.initial_gain = self.gain
-        self.initial_loss = self.loss
-        self.gain_turbo_perc = gain_turbo_perc
-        self.support = 0.0
-
-        self.inBuy = False
-        self.buy_value = 0.0
-        self.buy_index = 0
-        self.resistance = 0.0
 
         self.df['indexGain'] = 0
         self.df['perGain'] = 0
         self.df['buyValue'] = 0
+        self.df['sellValue'] = 0
         self.df['gained'] = False
         self.df['Buy'] = 0
 
         for i, row in self.df.iterrows():
-            if i > 0 and (i < len(self.df.index) - 1):
+            if (i < len(self.df.index) - 1):
 
                 self.getActualPrice(i)
-                self.calculateSupport(i)
-                self.calculateResistance(i)
+                self.calculateSupportAndResistance(i)
 
+                if i >= 16:
+                    if self.buy(i):
 
+                        self.df.loc[i, 'Buy'] = 1
+                        self.df.loc[i, 'btc'] = self.btc
+                        self.df.loc[i, 'buyValue'] = self.buy_value
+                        self.df.loc[i, 'actualCurrency'] = self.actualCurrency
 
-                if self.shouldBuy(i):
+                    elif self.sell(i):
 
-                    self.buy(i)
+                        self.df.loc[i, 'perGain'] = (self.sell_value / self.buy_value - 1) * 100
+                        self.df.loc[i, 'btc'] = self.btc
+                        self.df.loc[i, 'actualCurrency'] = self.actualCurrency
+                        self.df.loc[i, 'indexGain'] = i - self.buy_index
+                        self.df.loc[i, 'buyValue'] = self.buy_value
+                        self.df.loc[i, 'sellValue'] = self.sell_value
+                        self.df.loc[i, 'gained'] = True
+                        self.df.loc[i, 'Buy'] = 0
 
-                elif self.shouldSell(i):
+                        self.reset_values()
 
-                    self.sell(i)
+                    else:
+                        self.wait(i)
 
                 else:
                     self.wait(i)
 
-                    #last
-                    # self.sell(len(self.df.index -1))
-                    # self.send_to_piggy_safe()
+                self.df.loc[i, 'supportQuote'] = self.support
+                self.df.loc[i, 'resistanceQuote'] = self.resistance
 
+                # self.printChart(self.df.iloc[i])
 
     def getActualPrice(self, i):
         self.actual_price = self.df.iloc[i]['weightedAverage']
         # self.actual_price = self.poloniex.get_ticker(self, self.currencyPair)['last']
 
-    def shouldBuy(self, i):
-
-        buy = False
+    def buy(self, i):
 
         if self.inBuy == False:
 
-            if self.actual_price < self.support :
-                buy = True
+            if self.actual_price > self.resistance * 1.005 :
 
+                self.inBuy = True
+                self.buy_value = self.resistance * 1.005
+                self.actualCurrency = (self.btc / self.buy_value) - (self.btc / self.buy_value * 0.00150)
+                self.btc = 0
+                self.buy_index = i
 
-        return buy
+            return self.inBuy
 
-    def buy(self, i):
-
-        self.buy_value = self.actual_price
-        self.sell_value = self.buy_value
-        self.actualCurrency = (self.btc/self.buy_value) - (self.btc/self.buy_value * 0.00300)
-        self.btc = 0
-        self.buy_index = i
-        self.df.loc[i, 'Buy'] = 1
-        self.df.loc[i, 'btc'] = self.btc
-        self.df.loc[i, 'actualCurrency'] = self.actualCurrency
-        self.inBuy = True
-
-
-    def shouldSell(self, i):
-
-        if self.inBuy == True:
-
-            if self.execute_stop_limit() == False:
-
-                perc = self.actual_price / self.buy_value
-                uhu = perc >= (1 + self.gain)
-
-                if uhu:
-
-                    self.gain = self.gain * self.gain_turbo_perc
-                    self.set_stop_limit()
-
-            else:
-
-                return True
-
-
-        return False
-
-    def set_stop_limit(self):
-        self.sell_value = self.actual_price
-        self.loss = self.loss_after_gain
-
-    def execute_stop_limit(self):
-
-        self.perGain = self.actual_price / self.sell_value <= (1 - self.loss)
-        return self.perGain
+        return  False
 
     def sell(self, i):
 
         if self.inBuy == True:
 
-            self.sell_value = self.actual_price
+            if self.actual_price / self.buy_value > 1 + self.gain:
+                self.sell_value = self.buy_value * (1 + self.gain)
 
-            if self.loss == self.loss_after_gain:
-                self.df.loc[i, 'perGain'] = (self.sell_value / self.buy_value - 1) * 100
-                self.btc = (self.sell_value * self.actualCurrency) - (self.sell_value * self.actualCurrency * 0.00150)
-                self.actualCurrency = 0
+            elif self.actual_price / self.buy_value < 1 - self.loss:
+                self.sell_value = self.buy_value * (1 - self.loss)
+
             else:
-                self.df.loc[i, 'perGain'] = self.loss * 100 * -1
-                self.btc = (self.buy_value * self.actualCurrency) - (self.buy_value * self.actualCurrency * self.loss) - (self.buy_value * self.actualCurrency * 0.00150)
-                self.actualCurrency = 0
+                return False
 
-
-
-            self.df.loc[i, 'btc'] = self.btc
-            self.df.loc[i, 'actualCurrency'] = self.actualCurrency
-            self.df.loc[i, 'indexGain'] = i - self.buy_index
-            self.df.loc[i, 'buyValue'] = self.buy_value
-            self.df.loc[i, 'gained'] = True
-            self.df.loc[i, 'Buy'] = 0
             self.inBuy = False
-            self.perGain = 0
-            self.buy_value = 0.0
-            self.buy_index = 0
-            self.gain = self.initial_gain
-            self.loss = self.initial_loss
+            self.btc = (self.sell_value * self.actualCurrency) - (self.sell_value * self.actualCurrency * 0.00150)
+            self.actualCurrency = 0
+
+            return True
+
+    def reset_values(self):
+        self.inBuy = False
+        self.perGain = 0
+        self.buy_value = 0.0
+        self.buy_index = 0
+
+
+
+    def set_stop_limit(self):
+        self.sell_value = self.actual_price
+        self.loss = self.loss_after_gain
+
 
     def wait(self, i):
 
@@ -214,3 +176,28 @@ class ChartAnalyzer:
         if self.btc > self.inital_btc :
             self.piggy_safe = self.btc - self.inital_btc
             self.btc = self.inital_btc
+
+
+    def printChart(self, df):
+        Visualizer.print_full(df[[
+            'date',
+            # 'timestamp'
+            'close',
+            # 'high',
+            # 'low',
+            'open',
+            'supportQuote',
+            'resistanceQuote',
+            # 'quoteVolume',
+            # 'volume',
+            'isUp',
+            'quoteGrowth1stPeriod',
+            'weightedAverage',
+            'buyValue',
+            'sellValue',
+            'perGain',
+            'btc',
+            'actualCurrency',
+            'Buy',
+
+        ]])
