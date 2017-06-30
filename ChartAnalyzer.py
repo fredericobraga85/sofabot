@@ -28,22 +28,30 @@ class ChartAnalyzer:
         dif_open_close_2 = abs(self.df['close'].iloc[i - 2] - self.df['open'].iloc[i - 2])
         dif_open_close_3 =     self.df['close'].iloc[i - 1] - self.df['open'].iloc[i - 1]
 
-        if dif_open_close_3 > 0 :
-            if dif_open_close_3 > (dif_open_close_1 + dif_open_close_2) * self.support_resistance_dif:
-                self.support = self.df['open'].iloc[i - 1]
+        if dif_open_close_1 + dif_open_close_2 > 0.000001:
 
-                if self.df['close'].iloc[i - 1] > self.resistance and self.resistance == 0:
-                    self.resistance = self.df['close'].iloc[i - 1]
+            if dif_open_close_3 > 0 :
+                if dif_open_close_3 > (dif_open_close_1 + dif_open_close_2) * self.support_resistance_dif_tolerance:
+                    self.support = self.df['open'].iloc[i - 1]
 
-        elif dif_open_close_3 < 0:
+                    if self.df['close'].iloc[i - 1] > self.resistance or self.resistance == 0:
+                        self.resistance = self.df['close'].iloc[i - 1]
 
-            if dif_open_close_3 < 0:
-                if abs(dif_open_close_3) > (dif_open_close_1 + dif_open_close_2) * self.support_resistance_dif:
+            elif dif_open_close_3 < 0:
+
+                if abs(dif_open_close_3) > (dif_open_close_1 + dif_open_close_2) * self.support_resistance_dif_tolerance:
                     self.resistance = self.df['open'].iloc[i - 1]
 
-                    if self.df['close'].iloc[i - 1] < self.support and self.support == 0:
+                    if self.df['close'].iloc[i - 1] < self.support or self.support == 0:
                         self.support = self.df['close'].iloc[i - 1]
 
+
+            if self.inBuy:
+                if self.actual_price < self.support:
+                    self.support = self.actual_price
+
+                if self.actual_price > self.resistance:
+                    self.resistance = self.actual_price
 
 
     def calculate_growth(self, series, index=1):
@@ -63,11 +71,11 @@ class ChartAnalyzer:
         self.df['quoteGrowth1stPeriod'] = self.calculate_growth_1st_period(self.df['weightedAverage'])
         self.df['isUp'] = self.isUp(self.df['quoteGrowth1stPeriod'])
 
-    def decide_action(self, gain, loss, support_resistance_dif, resistance_tolerance, buy_perc , sell_perc):
+    def decide_action(self, gain, loss, support_resistance_dif_tolerance, resistance_tolerance, buy_perc , sell_perc):
 
         self.gain = gain
         self.loss = loss
-        self.support_resistance_dif = support_resistance_dif
+        self.support_resistance_dif_tolerance = support_resistance_dif_tolerance
         self.resistance_tolerance = resistance_tolerance
         self.buy_perc = buy_perc
         self.sell_perc = sell_perc
@@ -130,8 +138,8 @@ class ChartAnalyzer:
             if self.resistance != 0 and self.actual_price > self.resistance * self.resistance_tolerance:
 
                 self.inBuy = True
-                self.buy_value = self.resistance * self.resistance_tolerance
-                self.resistance = self.actual_price
+                self.resistance_on_buy = self.resistance * self.resistance_tolerance
+                self.buy_value = self.resistance_on_buy
                 self.actualCurrency = (self.btc / self.buy_value) - (self.btc / self.buy_value * self.buy_perc)
                 self.btc = 0
                 self.buy_index = i
@@ -164,6 +172,7 @@ class ChartAnalyzer:
         self.buy_value = 0.0
         self.sell_value = 0.0
         self.buy_index = 0
+        self.resistance_on_buy = 0.0
 
 
 
@@ -174,6 +183,10 @@ class ChartAnalyzer:
         self.df.loc[i, 'buyValue'] = self.buy_value
         self.df.loc[i, 'sellValue'] = self.sell_value
         self.df.loc[i, 'actualCurrency'] = self.actualCurrency
+
+        if self.inBuy:
+            self.df.loc[i, 'perGain'] = ((self.actual_price / self.buy_value) - 1) * 100
+
 
     def send_to_piggy_safe(self):
         if self.btc > self.inital_btc :
