@@ -9,6 +9,7 @@ class ChartAnalyzer:
 
         self.currencyPair = currencyPair
         self.btc = btc
+        self.initial_btc = self.btc
         self.actualCurrency = 0.0
         self.piggy_safe = 0.0
         self.support = 0.0
@@ -71,8 +72,10 @@ class ChartAnalyzer:
         self.df['quoteGrowth1stPeriod'] = self.calculate_growth_1st_period(self.df['weightedAverage'])
         self.df['isUp'] = self.isUp(self.df['quoteGrowth1stPeriod'])
 
-    def decide_action(self, gain, loss, support_resistance_dif_tolerance, resistance_tolerance, buy_perc , sell_perc):
+    def decide_action(self, objective_gain,limit_loss,  gain, loss, support_resistance_dif_tolerance, resistance_tolerance, buy_perc , sell_perc):
 
+        self.objective_gain = objective_gain
+        self.limit_loss = limit_loss
         self.gain = gain
         self.loss = loss
         self.support_resistance_dif_tolerance = support_resistance_dif_tolerance
@@ -116,8 +119,14 @@ class ChartAnalyzer:
 
                         self.reset_values()
 
+                        if self.reached_objective() or self.reached_limit_loss():
+                            break
+
                     else:
                         self.wait(i)
+
+                        if self.reached_objective() or self.reached_limit_loss():
+                            break
 
                 else:
                     self.wait(i)
@@ -126,6 +135,38 @@ class ChartAnalyzer:
                 self.df.loc[i, 'resistanceQuote'] = self.resistance
 
                 # self.printChart(self.df.iloc[i])
+
+    def reached_objective(self):
+
+        if self.btc == 0:
+
+            current_btc = (self.actual_price * self.actualCurrency) - (self.actual_price * self.actualCurrency * self.sell_perc)
+
+            if current_btc / self.initial_btc >= self.objective_gain:
+                return True
+
+        else:
+
+            if self.btc / self.initial_btc >= self.objective_gain:
+                return True
+
+        return False
+
+    def reached_limit_loss(self):
+
+        if self.btc == 0:
+
+            current_btc = (self.actual_price * self.actualCurrency) - (self.actual_price * self.actualCurrency * self.sell_perc)
+
+            if current_btc / self.initial_btc <= self.limit_loss:
+                return True
+
+        else:
+
+            if self.btc / self.initial_btc <= self.limit_loss:
+                return True
+
+        return False
 
     def getActualPrice(self, i):
         self.actual_price = self.df.iloc[i]['weightedAverage']
