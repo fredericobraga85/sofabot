@@ -8,7 +8,7 @@ class Poloniex:
 
     def get_chart_data(self, currencyPair, start, end, period):
 
-        file_name = currencyPair + start + end + period + '.csv'
+        file_name = 'history/'+ currencyPair + start + end + period + '.csv'
 
         try:
             chart = pd.read_csv(file_name)
