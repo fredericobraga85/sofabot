@@ -15,11 +15,17 @@ class Poloniex:
 
         except:
 
-            params = {'currencyPair': currencyPair, 'start': start, 'end': end, 'period': period}
-            json = s.get_url('https://poloniex.com/public?command=returnChartData', params)
-            chart = pd.read_json(json)
+            try:
+                params = {'currencyPair': currencyPair, 'start': start, 'end': end, 'period': period}
+                json = s.get_url('https://poloniex.com/public?command=returnChartData', params)
+                chart = pd.read_json(json)
 
-            chart.to_csv(file_name, index=False)
+                chart.to_csv(file_name, index=False)
+
+            except:
+                print 'Error loading ',  currencyPair
+                return  None
+
 
         chart_edited = self.chart_feature_engineering(chart)
 

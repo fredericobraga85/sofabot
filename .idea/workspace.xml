@@ -2,49 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="988c3d69-1a4a-4de5-8e95-bc31a2ffec0c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14964480001496534400300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14964480001496793600300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14964480009999999999300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14965344001496620800300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14966208001496707200300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14967072001496793600300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14967936001496880000300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14967936001497312000300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14967936001497744000300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14967936001498089600300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14968800001496966400300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14969664001497052800300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14970528001497139200300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14971392001497225600300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14972256001497312000300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14973120001497398400300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14973120001498003200300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14973120001498521600300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14973120009999999999300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14973984001497484800300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14974848001497571200300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14975712001497657600300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14976576001497744000300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT1497744000149774400014978304001497916800149800320014980896001498176000300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14977440001497744000300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14977440001497830400300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14978304001497916800300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14979168001498003200300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14980032001498089600300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14980896001498176000300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14981760001498262400300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14981760001498521600300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14982624001498348800300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14983488001498435200300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14983488001498521600300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14984352001498521600300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14985216001498608000300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14985216009999999999300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14986080001498694400300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14986944001498780800300.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/BTC_FCT14987808009999999999300.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MG10.iml" afterPath="$PROJECT_DIR$/.idea/MG10.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChartAnalyzer.py" afterPath="$PROJECT_DIR$/ChartAnalyzer.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Poloniex.py" afterPath="$PROJECT_DIR$/Poloniex.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bot.py" afterPath="$PROJECT_DIR$/bot.py" />
     </list>
@@ -81,20 +41,8 @@
       <file leaf-file-name="ChartAnalyzer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ChartAnalyzer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="60" column="16" lean-forward="false" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__builtin__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/348993582/__builtin__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="1858" column="8" lean-forward="false" selection-start-line="1858" selection-start-column="8" selection-end-line="1858" selection-end-column="8" />
+            <state relative-caret-position="300">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -103,28 +51,8 @@
       <file leaf-file-name="Poloniex.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Poloniex.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="indexing.py" pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Python/2.7/site-packages/pandas/core/indexing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18120">
-              <caret line="1230" column="0" lean-forward="false" selection-start-line="1230" selection-start-column="0" selection-end-line="1230" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="frame.py" pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Python/2.7/site-packages/pandas/core/frame.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28095">
-              <caret line="1963" column="0" lean-forward="false" selection-start-line="1963" selection-start-column="0" selection-end-line="1963" selection-end-column="0" />
+            <state relative-caret-position="330">
+              <caret line="26" column="28" lean-forward="false" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -133,8 +61,8 @@
       <file leaf-file-name="bot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+            <state relative-caret-position="446">
+              <caret line="61" column="17" lean-forward="false" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -185,6 +113,7 @@
       <find>perGain</find>
       <find>resistance_on_buy</find>
       <find>support_resistance_dif_tolerance</find>
+      <find>sum</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -196,16 +125,16 @@
         <option value="$PROJECT_DIR$/FileUtils.py" />
         <option value="$PROJECT_DIR$/Visualizer.py" />
         <option value="$PROJECT_DIR$/Converter.py" />
-        <option value="$PROJECT_DIR$/Poloniex.py" />
         <option value="$PROJECT_DIR$/ChartAnalyzer.py" />
+        <option value="$PROJECT_DIR$/Poloniex.py" />
         <option value="$PROJECT_DIR$/bot.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1916" />
-    <option name="height" value="1053" />
+    <option name="width" value="2560" />
+    <option name="height" value="1342" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -379,18 +308,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1916" height="1053" extended-state="6" />
+    <frame x="0" y="23" width="2560" height="1342" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14926931" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11171875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29605964" sideWeight="0.50183153" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5071138" sideWeight="0.4981685" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25687352" sideWeight="0.4981685" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4593496" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4593496" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -464,6 +394,102 @@
     <entry file="file://$PROJECT_DIR$/Converter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
+          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChartAnalyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2955">
+          <caret line="199" column="50" lean-forward="false" selection-start-line="199" selection-start-column="50" selection-end-line="199" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Poloniex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="51" column="8" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visualizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Converter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChartAnalyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="60" column="16" lean-forward="false" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Poloniex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="20" column="28" lean-forward="true" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visualizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Converter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
           <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
           <folding />
         </state>
@@ -473,9 +499,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1950">
           <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -487,22 +511,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/indexing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18450">
-          <caret line="1230" column="0" lean-forward="false" selection-start-line="1230" selection-start-column="0" selection-end-line="1230" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/frame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29445">
-          <caret line="1963" column="0" lean-forward="false" selection-start-line="1963" selection-start-column="0" selection-end-line="1963" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/indexing.py" />
+    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/frame.py" />
     <entry file="file://$PROJECT_DIR$/bot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -523,9 +533,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="34" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -541,42 +549,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1815">
           <caret line="121" column="26" lean-forward="true" selection-start-line="121" selection-start-column="26" selection-end-line="121" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FileUtils.py" />
     <entry file="file:///Library/Python/2.7/site-packages/pandas/io/parsers.py" />
-    <entry file="file://$PROJECT_DIR$/BTC_FCT14964480001496793600300.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/BTC_FCT14964480001496793600300.csv" />
     <entry file="file:///Library/Python/2.7/site-packages/pandas/util/_decorators.py" />
-    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/frame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28095">
-          <caret line="1963" column="0" lean-forward="false" selection-start-line="1963" selection-start-column="0" selection-end-line="1963" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/indexing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18120">
-          <caret line="1230" column="0" lean-forward="false" selection-start-line="1230" selection-start-column="0" selection-end-line="1230" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/frame.py" />
+    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/indexing.py" />
     <entry file="file://$PROJECT_DIR$/Service.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/348993582/__builtin__.py" />
+    <entry file="file://$PROJECT_DIR$/Visualizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
           <folding />
         </state>
       </provider>
@@ -589,44 +584,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Poloniex.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/348993582/__builtin__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="1858" column="8" lean-forward="false" selection-start-line="1858" selection-start-column="8" selection-end-line="1858" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ChartAnalyzer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="60" column="16" lean-forward="false" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="300">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Poloniex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="26" column="28" lean-forward="false" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+        <state relative-caret-position="446">
+          <caret line="61" column="17" lean-forward="false" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
           <folding />
         </state>
       </provider>
