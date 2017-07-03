@@ -32,7 +32,7 @@ class OrderState:
         return self.inBuy == True and self.sell_order_active == False
 
     def waitingForSellOrderToBeExecuted(self):
-        return self.sell_order_active == False
+        return self.sell_order_active
 
     def setInBuyStatus(self):
 
@@ -42,7 +42,7 @@ class OrderState:
         self.sell_order_active = False
 
 
-    def setInSellStatus(self):
+    def setSoldStatus(self):
 
         self.inBuy = False
 

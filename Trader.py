@@ -43,17 +43,31 @@ class Trader:
 
                 self.getActualPrice(i)
 
-                if i >= 16:
+                self.train_inidicators(i)
+
+                if i >= 3 and self.stop == False:
 
                     if self.orderState.waitingForBuyOpportunity():
 
-                        self.getActualPrice(i)
-
                         if self.reached_objective() or self.reached_limit_loss():
-                            return False
+
+                            self.stop = True
+
+                            self.df.loc[i, 'Buy'] = 5
+                            self.df.loc[i, 'buyValue'] = self.orderState.buy_value
+                            self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                            self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
+                            self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+
                         elif self.indicators_predict_buy(i):
                             self.sendBuyOrder()
                             self.orderState.setBuyOrderStatus(True)
+
+                            self.df.loc[i, 'Buy'] = 2
+                            self.df.loc[i, 'buyValue'] = self.orderState.buy_value
+                            self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                            self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
+                            self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
                         else:
                             self.wait(i)
 
@@ -66,24 +80,35 @@ class Trader:
                             self.wallet.exchange(Wallet.BTC, self.orderState.toDigitalCurr,self.orderState.buy_value, self.marketExchange.getActiveBuyFeePerc())
 
                             self.df.loc[i, 'Buy'] = 1
-                            self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'buyValue'] = self.orderState.buy_value
+                            self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                            self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
 
                     elif self.orderState.waitingForSellOpportunity():
 
                         if self.isGaining():
-
                             self.sendSellOrder(True)
                             self.orderState.setSellOrderStatus(True)
+
+                            self.df.loc[i, 'Buy'] = 3
+                            self.df.loc[i, 'buyValue'] = self.orderState.buy_value
+                            self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                            self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
+                            self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
 
                         elif self.isLosing():
 
                             self.sendSellOrder(False)
                             self.orderState.setSellOrderStatus(True)
 
-                        else:
+                            self.df.loc[i, 'Buy'] = 4
+                            self.df.loc[i, 'buyValue'] = self.orderState.buy_value
+                            self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                            self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
+                            self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
 
+                        else:
                             self.wait(i)
 
                     elif self.orderState.waitingForSellOrderToBeExecuted():
@@ -91,18 +116,42 @@ class Trader:
                         if self.sellOrderWasExecuted():
 
                             self.getSellPrice()
-                            self.orderState.setInSellStatus()
-                            self.wallet.exchange(self.orderState.fromDigitalCurr, Wallet.BTC, self.orderState.sell_value, self.marketExchange.getActiveSellFeePerc())
+                            self.orderState.setSoldStatus()
+                            self.wallet.exchange(self.orderState.toDigitalCurr, self.orderState.fromDigitalCurr, self.orderState.sell_value, self.marketExchange.getActiveSellFeePerc())
 
-                            self.df.loc[i, 'perGain'] = (self.orderState.sell_value / self.orderState.buy_value - 1) * 100
-                            self.df.loc[i, 'btc'] = self.wallet.wallet[self.orderState.fromDigitalCurr]
-                            self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                            self.df.loc[i, 'Buy'] = 0
                             self.df.loc[i, 'buyValue'] = self.orderState.buy_value
                             self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                            self.df.loc[i, 'btc'] = self.wallet.wallet[self.orderState.fromDigitalCurr]
+                            self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                            self.df.loc[i, 'perGain'] = (self.orderState.sell_value / self.orderState.buy_value - 1) * 100
                             self.df.loc[i, 'gained'] = True
-                            self.df.loc[i, 'Buy'] = 0
 
                             self.orderState.resetValues()
+
+                        elif self.isGaining():
+                            self.sendSellOrder(True)
+                            self.orderState.setSellOrderStatus(True)
+
+                            self.df.loc[i, 'Buy'] = 3
+                            self.df.loc[i, 'buyValue'] = self.orderState.buy_value
+                            self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                            self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
+                            self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+
+                        elif self.isLosing():
+
+                            self.sendSellOrder(False)
+                            self.orderState.setSellOrderStatus(True)
+
+                            self.df.loc[i, 'Buy'] = 4
+                            self.df.loc[i, 'buyValue'] = self.orderState.buy_value
+                            self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                            self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
+                            self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+
+                        else:
+                            self.wait(i)
 
                 if self.botConfig.printRow:
                     self.printChart(self.df.iloc[i])
@@ -114,14 +163,14 @@ class Trader:
             current_btc = (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) - (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) * self.marketExchange.getActiveSellFeePerc()))
 
             if current_btc / self.wallet.initialDeposit >= self.objective_gain:
-                self.stop = False
+                return False
 
         else:
 
             if self.wallet.getDigitalCurrency(self.orderState.fromDigitalCurr) / self.wallet.initialDeposit >= self.objective_gain:
-                self.stop = True
+                return True
 
-        return self.stop
+        return False
 
     def reached_limit_loss(self):
 
@@ -151,58 +200,23 @@ class Trader:
 
         if self.botConfig.printOrders:
             print 'Buscando preco de compra...'
+            print 'Setando Fake buy value...'
 
-        print 'Setando Fake buy value...'
         self.orderState.buy_value = self.orderState.actual_price
 
     def getSellPrice(self):
 
-
         if self.botConfig.printOrders:
             print 'Buscando preco de venda...'
-
-        print 'Setando Fake sell value...'
-        if self.reached_objective() or self.reached_limit_loss():
-
-            self.orderState.sell_value = self.orderState.actual_price
-
-            if self.botConfig.printOrders:
-                print 'Ordem de venda realizada alcance objetivo ' + str(self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
-
-        elif self.didGain():
-
-            if self.orderState.sell_order_gain_active:
-                self.orderState.sell_value = self.orderState.buy_value * (1 + self.gain)
-
-                if self.botConfig.printOrders:
-                    print 'Ordem de venda de ganho realizada ' + str(self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
-            else:
-                self.orderState.sell_value = self.orderState.actual_price
-
-                if self.botConfig.printOrders:
-                    print 'Ordem de venda realizada ganho emergencial ' + str(self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
-
-        elif self.didLose():
-
-            if self.orderState.sell_order_loss_active:
-                self.orderState.sell_value = self.orderState.buy_value * (1 - self.loss)
-
-                if self.botConfig.printOrders:
-                    print 'Ordem de venda de perda realizada ' + str(self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
-            else:
-                self.orderState.sell_value = self.orderState.actual_price
-
-                if self.botConfig.printOrders:
-                    print 'Ordem de venda realizada perda emergencial ' + str(self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
 
 
 
     def wait(self, i):
 
         self.df.loc[i, 'Buy'] = self.df.iloc[i - 1]['Buy']
-        self.df.loc[i, 'btc'] = self.wallet.wallet[self.orderState.fromDigitalCurr]
         self.df.loc[i, 'buyValue'] = self.orderState.buy_value
         self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+        self.df.loc[i, 'btc'] = self.wallet.wallet[self.orderState.fromDigitalCurr]
         self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
 
 
@@ -227,10 +241,56 @@ class Trader:
 
 
     def sellOrderWasExecuted(self):
+
         if self.botConfig.printOrders:
             print 'Verificando se ordem de venda foi realizada....'
+            print 'Setando Fake sell value...'
 
-        return True
+        if self.reached_objective() or self.reached_limit_loss():
+
+            self.orderState.sell_value = self.orderState.actual_price
+
+            if self.botConfig.printOrders:
+                print 'Ordem de venda realizada alcance objetivo ' + str(
+                    self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
+
+            return True
+
+        elif self.didGain():
+
+            if self.orderState.sell_order_gain_active:
+                self.orderState.sell_value = self.orderState.buy_value * (1 + self.gain)
+
+                if self.botConfig.printOrders:
+                    print 'Ordem de venda de ganho realizada ' + str(
+                        self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
+            else:
+                self.orderState.sell_value = self.orderState.actual_price
+
+                if self.botConfig.printOrders:
+                    print 'Ordem de venda realizada ganho emergencial ' + str(
+                        self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
+
+            return True
+
+        elif self.didLose():
+
+            if self.orderState.sell_order_loss_active:
+                self.orderState.sell_value = self.orderState.buy_value * (1 - self.loss)
+
+                if self.botConfig.printOrders:
+                    print 'Ordem de venda de perda realizada ' + str(
+                        self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
+            else:
+                self.orderState.sell_value = self.orderState.actual_price
+
+                if self.botConfig.printOrders:
+                    print 'Ordem de venda realizada perda emergencial ' + str(
+                        self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
+
+            return True
+
+        return False
 
     def cancelLastSellOrder(self):
         if self.botConfig.printOrders:
@@ -239,7 +299,7 @@ class Trader:
     def sendBuyOrder(self):
 
         if self.botConfig.printOrders:
-            print 'Enviando ordem de comprea...'
+            print 'Enviando ordem de compra...'
 
 
     def sendSellOrder(self, gain):
@@ -259,8 +319,12 @@ class Trader:
         for indicator in self.indicators:
             shouldBuyCount = shouldBuyCount + indicator.predict(self.orderState, self.df, i)
 
+        # len(self.indicators)
         return True if shouldBuyCount > 0 else False
 
+    def train_inidicators(self, i):
+        for indicator in self.indicators:
+            indicator.train(self.orderState, self.df, i)
 
 
     def printChart(self, df):

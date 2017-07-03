@@ -7,9 +7,9 @@ class SupportResistanceIndicator:
     resistance = 0
     support = 0
 
-    def train(self, df, dif_open_close_tolerance_perc):
-        self.df = df
-        self.dif_open_close_tolerance_perc = dif_open_close_tolerance_perc
+    # def train(self, df, dif_open_close_tolerance_perc):
+    #     self.df = df
+    #     self.dif_open_close_tolerance_perc = dif_open_close_tolerance_perc
 
     def calculateMoment(self, i, orderState, df):
 
@@ -36,14 +36,17 @@ class SupportResistanceIndicator:
 
             if orderState.inBuy:
                 if orderState.actual_price < self.support:
-                    self.support = self.actual_price
+                    self.support = orderState.actual_price
 
                 if orderState.actual_price > self.resistance:
-                    self.resistance = self.actual_price
+                    self.resistance = orderState.actual_price
 
         df.loc[i, 'supportQuote'] = self.support
         df.loc[i, 'resistanceQuote'] = self.resistance
 
+
+    def train(self,orderState, df, i):
+        self.calculateMoment(i, orderState, df)
 
     def predict(self, orderState, df, i):
 
