@@ -1,4 +1,10 @@
-import ChartAnalyzer
+import Trader
+import matplotlib.pyplot as plt
+import Poloniex
+import ChartDataAnalyzer
+
+from indicators.KNNIndicator import KNNIndicator
+from indicators.SupportResistanceIndicator import SupportResistanceIndicator
 
 currencyPairList = \
     [
@@ -17,46 +23,48 @@ currencyPairList = \
 # currencyPair = 'BTC_XMR'
 timestamp = \
     [
-        '1496448000',  # 03/6
-        '1496534400',  # 04/6
-        '1496620800',  # 05/6
-        '1496707200',  # 06/6
-        '1496793600',  # 07/6
-        '1496880000',  # 08/6
-        '1496966400',  # 09/6
-        '1497052800',  # 10/6
-        '1497139200',  # 11/6
-        '1497225600',  # 12/6
-        '1497312000',  # 13/6
-        '1497398400',  # 14/6
-        '1497484800',  # 15/6
-        '1497571200',  # 16/6
-        '1497657600',  # 17/6
-        '1497744000',  # 18/6
-        '1497830400',  # 19/6
-        '1497916800',  # 20/6
-        '1498003200',  # 21/6
-        '1498089600',  # 22/6
-        '1498176000',  # 23/6
-        '1498262400',  # 24/6
-        '1498348800',  # 25/6
-        '1498435200',  # 26/6
-        '1498521600',  # 27/6
-        '1498608000',  # 28/6
-        '1498694400',  # 29/6
+        # '1496448000',  # 03/6
+        # '1496534400',  # 04/6
+        # '1496620800',  # 05/6
+        # '1496707200',  # 06/6
+        # '1496793600',  # 07/6
+        # '1496880000',  # 08/6
+        # '1496966400',  # 09/6
+        # '1497052800',  # 10/6
+        # '1497139200',  # 11/6
+        # '1497225600',  # 12/6
+        # '1497312000',  # 13/6
+        # '1497398400',  # 14/6
+        # '1497484800',  # 15/6
+        # '1497571200',  # 16/6
+        # '1497657600',  # 17/6
+        # '1497744000',  # 18/6
+        # '1497830400',  # 19/6
+        # '1497916800',  # 20/6
+        # '1498003200',  # 21/6
+        # '1498089600',  # 22/6
+        # '1498176000',  # 23/6
+        # '1498262400',  # 24/6
+        # '1498348800',  # 25/6
+        # '1498435200',  # 26/6
+        # '1498521600',  # 27/6
+        # '1498608000',  # 28/6
+        # '1498694400',  # 29/6
         '1498780800',  # 30/6
-        '1498867200',  # 31/6
-        '1498867200',  # 01/7
+        # '1498867200',  # 31/6
+        # '1498867200',  # 01/7
         # '9999999999',
 
     ]
 
+
+
 period = '300'
 
-print_chart       = False
+print_chart       = True
 printOrders       = False
 printRow          = False
-printIteration    = True
+printIteration    = False
 
 iterations_per_day = 1
 
@@ -65,10 +73,18 @@ objective_gain = 1.02
 limit_loss = 0.95
 gain = 0.03
 loss = 0.02
-dif_open_close_perc = 1.005
-resistance_tolerance = 1.005 # tem que ser maior q 1
-buy_perc  = 0.0015
-sell_perc = 0.0030
+
+ # tem que ser maior q 1
+
+
+indicators = [\
+
+    KNNIndicator(),
+    SupportResistanceIndicator()
+
+    ]
+
+
 
 total_gain_all_curr_perc = 0.0
 total_bot_gain_all_curr_perc = 0.0
@@ -86,14 +102,22 @@ for y, currencyPair in enumerate(currencyPairList):
 
         for iteration in range(0,iterations_per_day):
 
-            chart_analyzer = ChartAnalyzer.ChartAnalyzer()
             start = int(timestamp[i]) + ((86400 / iterations_per_day) * iteration)
             end   = int(timestamp[i]) + ((86400 / iterations_per_day) * (iteration + 1))
-            chart_analyzer.init(currencyPair, str(start), str(end), period, btc, printOrders, printRow)
-            chart_analyzer.decide_action(objective_gain,limit_loss,  gain , loss, dif_open_close_perc, resistance_tolerance, buy_perc, sell_perc)
+
+            marketExchange = Poloniex(currencyPair, start, end, period)
+
+            trader = Trader.Trader(btc, indicators, marketExchange)
+            trader.startTrading(objective_gain, limit_loss, gain, loss)
 
             if print_chart:
                 chart_analyzer.printChart(chart_analyzer.df)
+
+            plt.plot(chart_analyzer.df['date'][2:],chart_analyzer.df['weightedAverage'][2:])
+            plt.plot(chart_analyzer.df['date'][2:], chart_analyzer.df['resistanceQuote'][2:])
+            plt.plot(chart_analyzer.df['date'][2:], chart_analyzer.df['supportQuote'][2:])
+            plt.show()
+
 
 
             total_trades        = chart_analyzer.df["gained"].sum()
