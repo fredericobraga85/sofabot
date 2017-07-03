@@ -56,5 +56,5 @@ class Poloniex:
     def getActiveSellFeePerc(self):
         return 0.0030
 
-    def getActiveSellFeePerc(self):
+    def getPassiveSellFeePerc(self):
         return 0.0015

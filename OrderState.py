@@ -5,6 +5,8 @@ class OrderState:
 
         self.resetValues()
         self.currencyPair = currencyPair
+        self.fromDigitalCurr = currencyPair.split('_')[0]
+        self.toDigitalCurr  = currencyPair.split('_')[1]
 
     def resetValues(self):
 
@@ -32,25 +34,21 @@ class OrderState:
     def waitingForSellOrderToBeExecuted(self):
         return self.sell_order_active == False
 
-    def setInBuyStatus(self, actual_price):
+    def setInBuyStatus(self):
 
         self.inBuy = True
-        self.buy_value = actual_price
 
-        self.buy_order_active       = False
-        self.sell_order_gain_active = False
-        self.sell_order_loss_active = False
-        self.sell_order_objective_active = False
+        self.buy_order_active  = False
+        self.sell_order_active = False
 
-    def setInSellStatus(self, sell_price):
 
-        self.inBuy = True
-        self.buy_value = self.actual_price
+    def setInSellStatus(self):
 
-        self.buy_order_active       = False
-        self.sell_order_gain_active = False
-        self.sell_order_loss_active = False
-        self.sell_order_objective_active = False
+        self.inBuy = False
+
+        self.buy_order_active  = False
+        self.sell_order_active = False
+
 
     def getGainPerc(self):
         return self.actual_price / self.buy_value

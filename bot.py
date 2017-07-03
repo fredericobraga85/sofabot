@@ -1,10 +1,8 @@
-import Trader
 import matplotlib.pyplot as plt
-import Poloniex
-import ChartDataAnalyzer
-
-from indicators.KNNIndicator import KNNIndicator
-from indicators.SupportResistanceIndicator import SupportResistanceIndicator
+from Poloniex import Poloniex
+from Trader import Trader
+from KNNIndicator import KNNIndicator
+from SupportResistanceIndicator import SupportResistanceIndicator
 
 currencyPairList = \
     [
@@ -57,14 +55,14 @@ timestamp = \
 
     ]
 
-
-
 period = '300'
 
-print_chart       = True
-printOrders       = False
-printRow          = False
-printIteration    = False
+class BotConfig:
+
+    print_chart       = True
+    printOrders       = True
+    printRow          = True
+    printIteration    = True
 
 iterations_per_day = 1
 
@@ -102,43 +100,40 @@ for y, currencyPair in enumerate(currencyPairList):
 
         for iteration in range(0,iterations_per_day):
 
-            start = int(timestamp[i]) + ((86400 / iterations_per_day) * iteration)
-            end   = int(timestamp[i]) + ((86400 / iterations_per_day) * (iteration + 1))
+            start = str(int(timestamp[i]) + ((86400 / iterations_per_day) * iteration))
+            end   = str(int(timestamp[i]) + ((86400 / iterations_per_day) * (iteration + 1)))
 
             marketExchange = Poloniex(currencyPair, start, end, period)
 
-            trader = Trader.Trader(btc, indicators, marketExchange)
-            trader.startTrading(objective_gain, limit_loss, gain, loss)
+            trader = Trader(btc, indicators, marketExchange, BotConfig())
+            trader.startTrading(currencyPair,objective_gain, limit_loss, gain, loss)
 
-            if print_chart:
-                chart_analyzer.printChart(chart_analyzer.df)
+            if BotConfig.print_chart:
+                trader.printChart(trader.df)
 
-            plt.plot(chart_analyzer.df['date'][2:],chart_analyzer.df['weightedAverage'][2:])
-            plt.plot(chart_analyzer.df['date'][2:], chart_analyzer.df['resistanceQuote'][2:])
-            plt.plot(chart_analyzer.df['date'][2:], chart_analyzer.df['supportQuote'][2:])
+            plt.plot(trader.df['date'][2:],trader.df['weightedAverage'][2:])
+            plt.plot(trader.df['date'][2:], trader.df['resistanceQuote'][2:])
+            plt.plot(trader.df['date'][2:], trader.df['supportQuote'][2:])
             plt.show()
 
-
-
-            total_trades        = chart_analyzer.df["gained"].sum()
-            open_quote          = chart_analyzer.df['open'][0]
-            close_quote         = chart_analyzer.df['close'].iloc[-1]
-            support_quote       = chart_analyzer.df['supportQuote'].iloc[1]
+            total_trades        = trader.df["gained"].sum()
+            open_quote          = trader.df['open'][0]
+            close_quote         = trader.df['close'].iloc[-1]
+            support_quote       = trader.df['supportQuote'].iloc[1]
             gain_period         = ((close_quote / open_quote) - 1) * 100
-            ups_downs           = chart_analyzer.df["isUp"].sum()
-            piggy_safe          = chart_analyzer.piggy_safe
-            bot_gain_period_btc = ((chart_analyzer.btc + piggy_safe) / btc - 1) * 100
-            bot_gain_period_cur = ((((chart_analyzer.actual_price * chart_analyzer.actualCurrency) - (chart_analyzer.actual_price * chart_analyzer.actualCurrency * chart_analyzer.sell_perc)) / btc)   - 1) * 100
-            algorithm_gain      = chart_analyzer.df['perGain'].sum()
+            ups_downs           = trader.df["isUp"].sum()
+            bot_gain_period_btc = ((trader.wallet.wallet[trader.orderState.fromDigitalCurr]) / btc - 1) * 100
+            bot_gain_period_cur = ((((trader.orderState.actual_price * trader.wallet.wallet[trader.orderState.toDigitalCurr]) - (trader.orderState.actual_price * trader.wallet.wallet[trader.orderState.toDigitalCurr] * trader.marketExchange.getActiveSellFeePerc())) / btc)   - 1) * 100
+            algorithm_gain      = trader.df['perGain'].sum()
             avg_algo_trade      = ((algorithm_gain / total_trades)) if total_trades != 0 else 0
 
             total_gain_perc = total_gain_perc + gain_period
             total_bot_gain_perc = total_bot_gain_perc + (bot_gain_period_btc if bot_gain_period_btc != -100 else bot_gain_period_cur)
             total_avg_algo_gain = total_avg_algo_gain + avg_algo_trade
 
-            if printIteration:
+            if BotConfig.printIteration:
                 print ' CurrencyPair', currencyPair
-                print ' Date', chart_analyzer.df['date'].iloc[0]
+                print ' Date', trader.df['date'].iloc[0]
                 print ' Numer of trades', total_trades
                 print ' Support Quote', support_quote
                 print ' Open 1st period', open_quote
@@ -146,7 +141,6 @@ for y, currencyPair in enumerate(currencyPairList):
                 print " Ups and Downs period" , ups_downs
                 print ' Gain period', gain_period
                 print ' Bot gain', bot_gain_period_btc if bot_gain_period_btc != -100 else bot_gain_period_cur , '' if bot_gain_period_btc != -100 else '( estimate - no last sell)'
-                print ' Piggy safe', piggy_safe
                 print ' Average Algorithm gain per trade', avg_algo_trade if total_trades != 0 else 'zero trades'
                 print ''
 

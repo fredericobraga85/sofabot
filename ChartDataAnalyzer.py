@@ -1,6 +1,7 @@
 import Converter
+import pandas as pd
 
-class ChartFeatureEngineer:
+class ChartDataAnalyzer:
 
     def calculate_growth(self, series, index=1):
         return (series / series.shift(index) - 1) * 100
