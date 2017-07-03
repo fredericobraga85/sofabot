@@ -6,9 +6,10 @@ class Wallet:
 
     wallet = {}
 
-    def __init__(self, currDeposit, volume):
+    def __init__(self, fromDigitalCurr , toDigitalCurr, volume):
 
-        self.wallet[currDeposit] = volume
+        self.wallet[fromDigitalCurr] = volume
+        self.wallet[toDigitalCurr]   = 0.0
         self.initialDeposit = volume
 
     def exchange(self, fromDigitalCurr , toDigitalCurr, value_btc, fee):

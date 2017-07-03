@@ -77,8 +77,8 @@ loss = 0.02
 
 indicators = [\
 
-    KNNIndicator(),
-    SupportResistanceIndicator()
+    # KNNIndicator(),
+    SupportResistanceIndicator(),
 
     ]
 
@@ -105,16 +105,16 @@ for y, currencyPair in enumerate(currencyPairList):
 
             marketExchange = Poloniex(currencyPair, start, end, period)
 
-            trader = Trader(btc, indicators, marketExchange, BotConfig())
-            trader.startTrading(currencyPair,objective_gain, limit_loss, gain, loss)
+            trader = Trader(indicators, marketExchange, BotConfig())
+            trader.startTrading(btc, currencyPair,objective_gain, limit_loss, gain, loss)
 
             if BotConfig.print_chart:
                 trader.printChart(trader.df)
 
-            plt.plot(trader.df['date'][2:],trader.df['weightedAverage'][2:])
-            plt.plot(trader.df['date'][2:], trader.df['resistanceQuote'][2:])
-            plt.plot(trader.df['date'][2:], trader.df['supportQuote'][2:])
-            plt.show()
+            # plt.plot(trader.df['date'][2:], trader.df['weightedAverage'][2:])
+            # plt.plot(trader.df['date'][2:], trader.df['resistanceQuote'][2:])
+            # plt.plot(trader.df['date'][2:], trader.df['supportQuote'][2:])
+            # plt.show()
 
             total_trades        = trader.df["gained"].sum()
             open_quote          = trader.df['open'][0]

@@ -7,5 +7,5 @@ class KNNIndicator:
         self.clf = neighbors.KNeighborsClassifier(neighbors)
         self.clf.fit(input, output)
 
-    def predict(self, input):
+    def predict(self , orderState, df, i):
         return self.clf.predict(input)

@@ -8,9 +8,8 @@ from Wallet import Wallet
 class Trader:
 
 
-    def __init__(self,btc, indicators, marketExchange , botConfig):
+    def __init__(self, indicators, marketExchange , botConfig):
 
-        self.wallet            = Wallet(Wallet.BTC,btc)
         self.indicators        = indicators
         self.marketExchange    = marketExchange
         self.chartDataAnalyzer = ChartDataAnalyzer()
@@ -20,9 +19,10 @@ class Trader:
         self.df = self.chartDataAnalyzer.run_feature_engineer(self.df)
 
 
-    def startTrading(self, currencyPair, objective_gain, limit_loss, gain, loss):
+    def startTrading(self, btc , currencyPair, objective_gain, limit_loss, gain, loss):
 
         self.orderState = OrderState(currencyPair)
+        self.wallet     = Wallet(self.orderState.fromDigitalCurr, self.orderState.toDigitalCurr, btc)
 
         self.objective_gain = objective_gain
         self.limit_loss     = limit_loss
@@ -51,7 +51,7 @@ class Trader:
 
                         if self.reached_objective() or self.reached_limit_loss():
                             return False
-                        elif self.indicators_predict_buy():
+                        elif self.indicators_predict_buy(i):
                             self.sendBuyOrder()
                             self.orderState.setBuyOrderStatus(True)
                         else:
@@ -63,7 +63,7 @@ class Trader:
 
                             self.getBuyPrice()
                             self.orderState.setInBuyStatus()
-                            self.wallet.exchange(Wallet.BTC, self.orderState.toDigitalCurr,self.orderState.sell_value, self.marketExchange.getActiveBuyFeePerc())
+                            self.wallet.exchange(Wallet.BTC, self.orderState.toDigitalCurr,self.orderState.buy_value, self.marketExchange.getActiveBuyFeePerc())
 
                             self.df.loc[i, 'Buy'] = 1
                             self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
@@ -252,12 +252,12 @@ class Trader:
             else:
                 print 'Enviando ordem de venda perda ' + str(self.orderState.buy_value * (1 - self.loss)) + ' Preco atual ' + str(self.orderState.actual_price)
 
-    def indicators_predict_buy(self):
+    def indicators_predict_buy(self, i):
 
         shouldBuyCount = 0
 
         for indicator in self.indicators:
-            shouldBuyCount = shouldBuyCount + indicator.predict()
+            shouldBuyCount = shouldBuyCount + indicator.predict(self.orderState, self.df, i)
 
         return True if shouldBuyCount > 0 else False
 
