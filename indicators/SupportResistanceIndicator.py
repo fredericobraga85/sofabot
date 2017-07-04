@@ -2,7 +2,7 @@
 
 class SupportResistanceIndicator:
 
-    resistance_tolerance = 1.005
+    resistance_tolerance = 1.05
     dif_open_close_perc = 1.005
     resistance = 0
     support = 0
@@ -56,9 +56,9 @@ class SupportResistanceIndicator:
 
         self.calculateMoment(i , orderState, df)
 
-        if self.resistance != 0 and orderState.actual_price > self.resistance * self.resistance_tolerance:
+        if self.support != 0 and orderState.actual_price > self.support and orderState.actual_price < self.support * self.resistance_tolerance:
 
-            if self.resistance != 0:
+            if self.support != 0:
 
                 return 1
 

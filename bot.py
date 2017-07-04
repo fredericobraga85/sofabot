@@ -1,13 +1,15 @@
-import matplotlib.pyplot as plt
 from Poloniex import Poloniex
 from Trader import Trader
-from KNNIndicator import KNNIndicator
-from SVMIndicator import SVMIndicator
-from LinearRegressionIndicator import  LinearRegressionIndicator
-from SupportResistanceIndicator import SupportResistanceIndicator
-from KMeansIndicator import KMeansIndicator
-from MomentumIndicator import MomentumIndicator
-from RandomForrestIndicator import  RandomForrestIndicator
+from indicators.BollingerBandsIndicator import BollingerBandsIndicator
+from indicators.KMeansIndicator import KMeansIndicator
+from indicators.KNNIndicator import KNNIndicator
+from indicators.LinearRegressionIndicator import LinearRegressionIndicator
+from indicators.MomentumIndicator import MomentumIndicator
+from indicators.RandomForrestIndicator import RandomForrestIndicator
+from indicators.SMAIndicator import SMAIndicator
+from indicators.SVMIndicator import SVMIndicator
+from indicators.SupportResistanceIndicator import SupportResistanceIndicator
+from indicators.UpsAndDownsIndicator import UpsAndDownsIndicators
 
 currencyPairList = \
     [
@@ -21,6 +23,41 @@ currencyPairList = \
         # 'BTC_XMR',
         # 'BTC_ZEC',
         ]
+
+timestampTrain = \
+    [
+        '1496448000',  # 03/6
+        # '1496534400',  # 04/6
+        # '1496620800',  # 05/6
+        # '1496707200',  # 06/6
+        # '1496793600',  # 07/6
+        # '1496880000',  # 08/6
+        # '1496966400',  # 09/6
+        # '1497052800',  # 10/6
+        # '1497139200',  # 11/6
+        # '1497225600',  # 12/6
+        # '1497312000',  # 13/6
+        # '1497398400',  # 14/6
+        # '1497484800',  # 15/6
+        # '1497571200',  # 16/6
+        # '1497657600',  # 17/6
+        '1497744000',  # 18/6
+        # '1497830400',  # 19/6
+        # '1497916800',  # 20/6
+        # '1498003200',  # 21/6
+        # '1498089600',  # 22/6
+        # '1498176000',  # 23/6
+        # '1498262400',  # 24/6
+        # '1498348800',  # 25/6
+        # '1498435200',  # 26/6
+        # '1498521600',  # 27/6
+        # '1498608000',  # 28/6
+        # '1498694400',  # 29/6
+        # '1498780800',  # 30/6
+        # '1498867200',  # 31/6
+        # '1498867200',  # 01/7
+        # '9999999999',
+    ]
 
 
 
@@ -42,20 +79,20 @@ timestamp = \
         # '1497571200',  # 16/6
         # '1497657600',  # 17/6
         # '1497744000',  # 18/6
-        '1497830400',  # 19/6
-        '1497916800',  # 20/6
-        '1498003200',  # 21/6
+        # '1497830400',  # 19/6
+        # '1497916800',  # 20/6
+        # '1498003200',  # 21/6
         '1498089600',  # 22/6
-        '1498176000',  # 23/6
-        '1498262400',  # 24/6
-        '1498348800',  # 25/6
-        '1498435200',  # 26/6
-        '1498521600',  # 27/6
-        '1498608000',  # 28/6
-        '1498694400',  # 29/6
-        '1498780800',  # 30/6
-        '1498867200',  # 31/6
-        '1498867200',  # 01/7
+        # '1498176000',  # 23/6
+        # '1498262400',  # 24/6
+        # '1498348800',  # 25/6
+        # '1498435200',  # 26/6
+        # '1498521600',  # 27/6
+        # '1498608000',  # 28/6
+        # '1498694400',  # 29/6
+        # '1498780800',  # 30/6
+        # '1498867200',  # 31/6
+        # '1498867200',  # 01/7
         # '9999999999',
 
     ]
@@ -64,19 +101,19 @@ period = '300'
 
 class BotConfig:
 
-    shouldBuyAccept   = 2
-    print_chart       = True
+    shouldBuyAccept   = 1
+    print_chart       = False
     printOrders       = False
     printRow          = False
     printIteration    = True
 
-iterations_per_day = 1
+iterations_per_day = 4
 
 btc= 1.0
-objective_gain = 1.03
-limit_loss = 0.95
-gain = 0.03
-loss = 0.015
+objective_gain = 1.02
+limit_loss = 0.97
+gain = 0.02
+loss = 0.02
 
 
 total_gain_all_curr_perc = 0.0
@@ -91,13 +128,16 @@ for y, currencyPair in enumerate(currencyPairList):
 
 
     indicators = [
-        KNNIndicator(currencyPair, period),
-        # SVMIndicator(currencyPair, period),
-        # LinearRegressionIndicator(currencyPair, period),
-        RandomForrestIndicator(currencyPair, period),
-        # KMeansIndicator(currencyPair,period),
-        # MomentumIndicator()
+        # KNNIndicator(currencyPair, period, timestampTrain),
+        # SVMIndicator(currencyPair, period, timestampTrain),
+        # LinearRegressionIndicator(currencyPair, period, timestampTrain),
+        # RandomForrestIndicator(currencyPair, period, timestampTrain),
+        # KMeansIndicator(currencyPair,period, timestampTrain),
+        # MomentumIndicator(),
         # SupportResistanceIndicator(),
+        # SMAIndicator(),
+        BollingerBandsIndicator(),
+        # UpsAndDownsIndicators(),
     ]
 
     for i, val in enumerate(timestamp):

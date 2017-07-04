@@ -62,7 +62,7 @@ class Trader:
                             self.df.loc[i, 'sellValue'] = self.orderState.sell_value
                             self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
-                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
+                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100 if self.orderState.buy_value > 0 else 0
 
                         elif self.indicators_predict_buy(i):
                             self.sendBuyOrder()
@@ -73,7 +73,21 @@ class Trader:
                             self.df.loc[i, 'sellValue'] = self.orderState.sell_value
                             self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
-                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
+                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100 if self.orderState.buy_value > 0 else 0
+
+                            if self.buyOrderWasExecuted():
+                                self.getBuyPrice()
+                                self.orderState.setInBuyStatus()
+                                self.wallet.exchange(Wallet.BTC, self.orderState.toDigitalCurr,
+                                                     self.orderState.buy_value,
+                                                     self.marketExchange.getActiveBuyFeePerc())
+
+                                self.df.loc[i, 'Buy'] = 1
+                                self.df.loc[i, 'buyValue'] = self.orderState.buy_value
+                                self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                                self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
+                                self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                                self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
                         else:
                             self.wait(i)
 
@@ -229,7 +243,7 @@ class Trader:
         self.df.loc[i, 'sellValue'] = self.orderState.sell_value
         self.df.loc[i, 'btc'] = self.wallet.wallet[self.orderState.fromDigitalCurr]
         self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
-        self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
+        self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100 if self.orderState.buy_value > 0 else 0
 
 
     def isGaining(self):
