@@ -14,10 +14,13 @@ class Poloniex:
         self.end = end
         self.period = period
 
+    def get_chart_data_(self):
 
-    def get_chart_data(self):
+        return self.get_chart_data(self.start, self.end)
 
-        file_name = 'history/'+ self.currencyPair + self.start + self.end + self.period + '.csv'
+    def get_chart_data(self, start, end):
+
+        file_name = 'history/'+ self.currencyPair + start + end + self.period + '.csv'
 
         try:
             chart = pd.read_csv(file_name)
@@ -25,7 +28,7 @@ class Poloniex:
         except:
 
             try:
-                params = {'currencyPair': self.currencyPair, 'start': self.start, 'end': self.end, 'period': self.period}
+                params = {'currencyPair': self.currencyPair, 'start': start, 'end': end, 'period': self.period}
                 json = s.get_url('https://poloniex.com/public?command=returnChartData', params)
                 chart = pd.read_json(json)
 
@@ -36,6 +39,8 @@ class Poloniex:
                 return  None
 
         return chart
+
+
 
 
     def get_ticker(self):

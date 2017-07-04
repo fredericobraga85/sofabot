@@ -3,11 +3,21 @@
 class MomentumIndicator:
 
 
+
+
     def calculateMoment(self, i, orderState, df):
 
-        self.momentum = df['weightedAverage'].iloc[i] - df['weightedAverage'].iloc[i - 3]
+        self.iDistance = 4
+        self.momentum_tolerance = 0.98
+        self.momentum = self.momentum_tolerance
 
-        df.loc[i, 'momentum'] = self.momentum
+        if i > self.iDistance:
+            self.momentum = df['weightedAverage'].iloc[i] /  df['weightedAverage'].iloc[i - self.iDistance]
+
+            df.loc[i, 'momentum'] = self.momentum
+
+    def trainML(self, marketExchange, chartDataAnalyzer):
+        doNothing = True
 
     def train(self,orderState, df, i):
         self.calculateMoment(i, orderState, df)
@@ -16,9 +26,10 @@ class MomentumIndicator:
 
         self.calculateMoment(i , orderState, df)
 
-        if self.momentum < 0:
+        if self.momentum < self.momentum_tolerance:
 
                 return 1
+
 
         return 0
 

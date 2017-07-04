@@ -2,13 +2,179 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="988c3d69-1a4a-4de5-8e95-bc31a2ffec0c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MomentumIndicator.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/KMeansIndicator.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LinearRegressionIndicator.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RandomForrestIndicator.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SVMIndicator.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_BTS14977440001497830400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_BTS14979168001498003200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_BTS14980896001498176000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14964480001496491200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14964480001496793600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14964912001496534400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14965344001496577600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14965776001496620800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14966208001496664000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14966640001496707200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14967072001496750400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14967504001496793600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14967936001496836800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14967936001497312000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14967936001497744000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14967936001498089600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14968368001496880000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14968800001496923200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14969232001496966400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14969664001497009600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14970096001497052800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14970528001497096000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14970960001497139200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14971392001497182400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14971824001497225600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14972256001497268800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14972688001497312000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14973120001497355200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14973120001498003200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14973120001498521600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14973120009999999999300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14973552001497398400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14973984001497441600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14974416001497484800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14974848001497528000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14975280001497571200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14975712001497614400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14976144001497657600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14976576001497700800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14977008001497744000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT1497744000149774400014978304001497916800149800320014980896001498176000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14977440001497744000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14977440001497787200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14977872001497830400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14978304001497873600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14978736001497916800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14979168001497960000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14979600001498003200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14980032001498046400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14980464001498089600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14980896001498132800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14981328001498176000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14981760001498219200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14981760001498521600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14982192001498262400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14982624001498291200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14982624001498305600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14982912001498320000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14983056001498348800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14983200001498348800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14983488001498377600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14983488001498392000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14983488001498521600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14983776001498406400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14983920001498435200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14984064001498435200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14984352001498464000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14984352001498478400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14984640001498492800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14984784001498521600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14984928001498521600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14985216001498550400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14985216001498564800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14985216009999999999300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14985504001498579200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14985648001498608000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14985792001498608000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT1498608000149860800086400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14986080001498636800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14986080001498651200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14986368001498665600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14986512001498694400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14986656001498694400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT1498694400149869440086400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14986944001498723200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14986944001498737600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14987232001498752000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14987376001498780800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14987520001498780800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14987808001498809600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14987808001498824000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14987808009999999999300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14988096001498838400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14988240001498867200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT14988384001498867200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_FCT999999999910000086399300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14964480001496534400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14965344001496620800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14966208001496707200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14967072001496793600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14967936001496880000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14968800001496966400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14969664001497052800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14970528001497139200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14971392001497225600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14972256001497312000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14973120001497398400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14973984001497484800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14974848001497571200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14975712001497657600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14976576001497744000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14977440001497830400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14978304001497916800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14979168001498003200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14980032001498089600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14980896001498176000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14981760001498262400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14982624001498348800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14983488001498435200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14984352001498521600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14985216001498608000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14986080001498694400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14986944001498780800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_LTC14987808001498867200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_MAID14977440001497830400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_MAID14979168001498003200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_MAID14980896001498176000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14965344001496620800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14966208001496707200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14967072001496793600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14967936001496880000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14968800001496966400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14969664001497052800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14970528001497139200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14971392001497225600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14972256001497312000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14973120001497398400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14973984001497484800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14974848001497571200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14975712001497657600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14976576001497744000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14977440001497830400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14978304001497916800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14979168001498003200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14980032001498089600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14980896001498176000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14981760001498262400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14982624001498348800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14983488001498435200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14984352001498521600300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14985216001498608000300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14986080001498694400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14986944001498780800300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_XRP14987808001498867200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_ZEC14977440001497830400300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_ZEC14979168001498003200300.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/history/BTC_ZEC14980896001498176000300.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MG10.iml" afterPath="$PROJECT_DIR$/.idea/MG10.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KNNIndicator.py" afterPath="$PROJECT_DIR$/KNNIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OrderState.py" afterPath="$PROJECT_DIR$/OrderState.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MomentumIndicator.py" afterPath="$PROJECT_DIR$/MomentumIndicator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Poloniex.py" afterPath="$PROJECT_DIR$/Poloniex.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SupportResistanceIndicator.py" afterPath="$PROJECT_DIR$/SupportResistanceIndicator.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Trader.py" afterPath="$PROJECT_DIR$/Trader.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bot.py" afterPath="$PROJECT_DIR$/bot.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/history/BTC_FCT14964480009999999999300.csv" afterPath="$PROJECT_DIR$/history/BTC_FCT14964480009999999999300.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/history/BTC_FCT14987808001498867200300.csv" afterPath="$PROJECT_DIR$/history/BTC_FCT14987808001498867200300.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/history/BTC_FCT14988672001498953600300.csv" afterPath="$PROJECT_DIR$/history/BTC_FCT14988672001498953600300.csv" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,21 +186,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Converter.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Converter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Trader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Trader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="349" column="0" lean-forward="false" selection-start-line="349" selection-start-column="0" selection-end-line="349" selection-end-column="0" />
+            <state relative-caret-position="330">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
                 <element signature="e#1#34#0" expanded="true" />
               </folding>
@@ -42,61 +198,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Wallet.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Wallet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SupportResistanceIndicator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SupportResistanceIndicator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MomentumIndicator.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MomentumIndicator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="55" lean-forward="false" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderState.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OrderState.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="44" column="21" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Poloniex.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Poloniex.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="bot.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+            <state relative-caret-position="397">
+              <caret line="75" column="21" lean-forward="false" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -104,21 +210,89 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Service.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Service.py">
+      <file leaf-file-name="SupportResistanceIndicator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SupportResistanceIndicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+            <state relative-caret-position="-348">
+              <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KNNIndicator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KNNIndicator.py">
+      <file leaf-file-name="validation.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/sklearn/utils/validation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="191">
+              <caret line="419" column="0" lean-forward="false" selection-start-line="419" selection-start-column="0" selection-end-line="419" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pydevd.py" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="241">
+              <caret line="1017" column="0" lean-forward="false" selection-start-line="1017" selection-start-column="0" selection-end-line="1017" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SVMIndicator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SVMIndicator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1072">
+              <caret line="124" column="18" lean-forward="false" selection-start-line="124" selection-start-column="18" selection-end-line="124" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LinearRegressionIndicator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LinearRegressionIndicator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="524">
+              <caret line="41" column="9" lean-forward="true" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KMeansIndicator.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/KMeansIndicator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="615">
+              <caret line="41" column="9" lean-forward="true" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RandomForrestIndicator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RandomForrestIndicator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="497">
+              <caret line="46" column="26" lean-forward="false" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="k_means_.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/sklearn/cluster/k_means_.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="803" column="8" lean-forward="false" selection-start-line="803" selection-start-column="8" selection-end-line="803" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -135,11 +309,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>date</find>
-      <find>initial_gain</find>
-      <find>calc</find>
-      <find>rese</find>
-      <find>sellValue</find>
       <find>inBuy</find>
       <find>actualCurrency</find>
       <find>currencyPair</find>
@@ -157,7 +326,6 @@
       <find>sum</find>
       <find>Or</find>
       <find>Order</find>
-      <find>Order</find>
       <find>Ordem de</find>
       <find>Ordem de com</find>
       <find>Ordem de compra</find>
@@ -165,6 +333,12 @@
       <find>buyOrderWasExecuted</find>
       <find>digitalCurrency</find>
       <find>setando</find>
+      <find>knn prediction: [1]</find>
+      <find>perG</find>
+      <find>pred</find>
+      <find>TOTAL gain</find>
+      <find>self.start</find>
+      <find>predict</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -181,23 +355,28 @@
         <option value="$PROJECT_DIR$/indicators/KNNIndicator.py" />
         <option value="$PROJECT_DIR$/ChartFeatureEngineer.py" />
         <option value="$PROJECT_DIR$/ChartDataAnalyzer" />
-        <option value="$PROJECT_DIR$/Poloniex.py" />
         <option value="$PROJECT_DIR$/indicators/SupportResistanceIndicator.py" />
         <option value="$PROJECT_DIR$/ChartDataAnalyzer.py" />
         <option value="$PROJECT_DIR$/Wallet.py" />
-        <option value="$PROJECT_DIR$/KNNIndicator.py" />
-        <option value="$PROJECT_DIR$/SupportResistanceIndicator.py" />
         <option value="$PROJECT_DIR$/OrderState.py" />
+        <option value="$PROJECT_DIR$/Poloniex.py" />
+        <option value="$PROJECT_DIR$/KNNIndicator.py" />
         <option value="$PROJECT_DIR$/Trader.py" />
-        <option value="$PROJECT_DIR$/bot.py" />
         <option value="$PROJECT_DIR$/MomentumIndicator.py" />
+        <option value="$PROJECT_DIR$/SVMIndicator.py" />
+        <option value="$PROJECT_DIR$/KMeans.py" />
+        <option value="$PROJECT_DIR$/SupportResistanceIndicator.py" />
+        <option value="$PROJECT_DIR$/LinearRegressionIndicator.py" />
+        <option value="$PROJECT_DIR$/bot.py" />
+        <option value="$PROJECT_DIR$/RandomForrestIndicator.py" />
+        <option value="$PROJECT_DIR$/KMeansIndicator.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1916" />
-    <option name="height" value="1053" />
+    <option name="width" value="2526" />
+    <option name="height" value="1328" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -214,8 +393,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -238,10 +417,10 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/cinq/Documents/Projetos/MG10/bot.py" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -379,38 +558,27 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1916" height="1053" extended-state="0" />
+    <frame x="0" y="23" width="2526" height="1328" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13152401" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21852732" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29605964" sideWeight="0.50183153" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5294715" sideWeight="0.4981685" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.49642575" sideWeight="0.4981685" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34857723" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40190628" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29605964" sideWeight="0.50183153" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25687352" sideWeight="0.4981685" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11171875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4593496" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -441,144 +609,57 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Trader.py</url>
-          <line>165</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Trader.py</url>
-          <line>170</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Trader.py</url>
-          <line>181</line>
+          <line>192</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Trader.py</url>
-          <line>186</line>
+          <line>197</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Trader.py</url>
-          <line>121</line>
-          <option name="timeStamp" value="65" />
+          <line>141</line>
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Trader.py</url>
-          <line>208</line>
-          <option name="timeStamp" value="66" />
+          <line>97</line>
+          <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Trader.py</url>
-          <line>90</line>
-          <option name="timeStamp" value="67" />
+          <line>126</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Trader.py</url>
+          <line>87</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SVMIndicator.py</url>
+          <line>122</line>
+          <option name="timeStamp" value="102" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/KMeansIndicator.py</url>
+          <line>128</line>
+          <option name="timeStamp" value="106" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="68" />
+      <option name="time" value="107" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/indexing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18120">
-          <caret line="1230" column="0" lean-forward="false" selection-start-line="1230" selection-start-column="0" selection-end-line="1230" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Converter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Poloniex.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/348993582/__builtin__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="1858" column="8" lean-forward="false" selection-start-line="1858" selection-start-column="8" selection-end-line="1858" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Trader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="60" column="16" lean-forward="false" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
-          <folding>
-            <element signature="e#1#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="47" column="11" lean-forward="false" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Converter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Trader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2955">
-          <caret line="199" column="50" lean-forward="false" selection-start-line="199" selection-start-column="50" selection-end-line="199" selection-end-column="50" />
-          <folding>
-            <element signature="e#1#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Poloniex.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -630,7 +711,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-          <folding />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -682,7 +765,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="31" column="18" lean-forward="true" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
-          <folding />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -742,56 +827,10 @@
     <entry file="file:///Library/Python/2.7/site-packages/pandas/io/parsers.py" />
     <entry file="file://$PROJECT_DIR$/BTC_FCT14964480001496793600300.csv" />
     <entry file="file:///Library/Python/2.7/site-packages/pandas/util/_decorators.py" />
-    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/frame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28095">
-          <caret line="1963" column="0" lean-forward="false" selection-start-line="1963" selection-start-column="0" selection-end-line="1963" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/indexing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18120">
-          <caret line="1230" column="0" lean-forward="false" selection-start-line="1230" selection-start-column="0" selection-end-line="1230" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/348993582/__builtin__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27870">
-          <caret line="1858" column="8" lean-forward="false" selection-start-line="1858" selection-start-column="8" selection-end-line="1858" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Udacity/Intro to Machine Learning/k_means/k_means_cluster.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ChartDataAnalyzer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visualizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/frame.py" />
+    <entry file="file:///Library/Python/2.7/site-packages/pandas/core/indexing.py" />
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2017.1/python_stubs/348993582/__builtin__.py" />
+    <entry file="file://$PROJECT_DIR$/../../Udacity/Intro to Machine Learning/k_means/k_means_cluster.py" />
     <entry file="file://$PROJECT_DIR$/Service.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -808,71 +847,180 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KNNIndicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Poloniex.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Wallet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Wallet.py" />
     <entry file="file://$PROJECT_DIR$/OrderState.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
+        <state relative-caret-position="660">
           <caret line="44" column="21" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SupportResistanceIndicator.py">
+    <entry file="file://$PROJECT_DIR$/Visualizer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+        <state relative-caret-position="75">
+          <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bot.py">
+    <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/sklearn/neighbors/classification.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+        <state relative-caret-position="410">
+          <caret line="119" column="8" lean-forward="false" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/pandas/io/parsers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="568" column="0" lean-forward="false" selection-start-line="568" selection-start-column="0" selection-end-line="568" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/pandas/indexes/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="1946" column="0" lean-forward="false" selection-start-line="1946" selection-start-column="0" selection-end-line="1946" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/pandas/core/indexing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="131" column="0" lean-forward="false" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KNNIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="45" column="26" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Trader.py">
+    <entry file="file://$PROJECT_DIR$/Poloniex.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="349" column="0" lean-forward="false" selection-start-line="349" selection-start-column="0" selection-end-line="349" selection-end-column="0" />
+        <state relative-caret-position="155">
+          <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="45" />
           <folding>
-            <element signature="e#1#34#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MomentumIndicator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="55" lean-forward="false" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="55" />
+        <state relative-caret-position="135">
+          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChartDataAnalyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SVMIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1072">
+          <caret line="124" column="18" lean-forward="false" selection-start-line="124" selection-start-column="18" selection-end-line="124" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/sklearn/cluster/k_means_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="803" column="8" lean-forward="false" selection-start-line="803" selection-start-column="8" selection-end-line="803" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="1017" column="0" lean-forward="false" selection-start-line="1017" selection-start-column="0" selection-end-line="1017" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/sklearn/utils/validation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="419" column="0" lean-forward="false" selection-start-line="419" selection-start-column="0" selection-end-line="419" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SupportResistanceIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-348">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Trader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LinearRegressionIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="524">
+          <caret line="41" column="9" lean-forward="true" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="75" column="21" lean-forward="false" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RandomForrestIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="46" column="26" lean-forward="false" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KMeansIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="9" lean-forward="true" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

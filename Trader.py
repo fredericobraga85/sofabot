@@ -15,8 +15,12 @@ class Trader:
         self.chartDataAnalyzer = ChartDataAnalyzer()
         self.botConfig = botConfig
 
-        self.df = self.marketExchange.get_chart_data()
+        self.df = self.marketExchange.get_chart_data_()
         self.df = self.chartDataAnalyzer.run_feature_engineer(self.df)
+
+        for indicator in indicators:
+
+            indicator.trainML(self.marketExchange, self.chartDataAnalyzer)
 
 
     def startTrading(self, btc , currencyPair, objective_gain, limit_loss, gain, loss):
@@ -58,6 +62,7 @@ class Trader:
                             self.df.loc[i, 'sellValue'] = self.orderState.sell_value
                             self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
 
                         elif self.indicators_predict_buy(i):
                             self.sendBuyOrder()
@@ -68,6 +73,7 @@ class Trader:
                             self.df.loc[i, 'sellValue'] = self.orderState.sell_value
                             self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
                         else:
                             self.wait(i)
 
@@ -84,6 +90,7 @@ class Trader:
                             self.df.loc[i, 'sellValue'] = self.orderState.sell_value
                             self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
 
                     elif self.orderState.waitingForSellOpportunity():
 
@@ -96,6 +103,7 @@ class Trader:
                             self.df.loc[i, 'sellValue'] = self.orderState.sell_value
                             self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
 
                         elif self.isLosing():
 
@@ -107,6 +115,7 @@ class Trader:
                             self.df.loc[i, 'sellValue'] = self.orderState.sell_value
                             self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
 
                         else:
                             self.wait(i)
@@ -138,6 +147,7 @@ class Trader:
                             self.df.loc[i, 'sellValue'] = self.orderState.sell_value
                             self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
 
                         elif self.isLosing():
 
@@ -149,6 +159,7 @@ class Trader:
                             self.df.loc[i, 'sellValue'] = self.orderState.sell_value
                             self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
                             self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
 
                         else:
                             self.wait(i)
@@ -163,7 +174,7 @@ class Trader:
             current_btc = (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) - (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) * self.marketExchange.getActiveSellFeePerc()))
 
             if current_btc / self.wallet.initialDeposit >= self.objective_gain:
-                return False
+                return True
 
         else:
 
@@ -218,10 +229,11 @@ class Trader:
         self.df.loc[i, 'sellValue'] = self.orderState.sell_value
         self.df.loc[i, 'btc'] = self.wallet.wallet[self.orderState.fromDigitalCurr]
         self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+        self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100
 
 
     def isGaining(self):
-        return self.orderState.getGainPerc()> 1 and self.orderState.getGainPerc() < 1 + self.gain
+        return self.orderState.getGainPerc() > 1
 
     def didGain(self):
         return self.orderState.getGainPerc() > 1 + self.gain
@@ -317,10 +329,11 @@ class Trader:
         shouldBuyCount = 0
 
         for indicator in self.indicators:
-            shouldBuyCount = shouldBuyCount + indicator.predict(self.orderState, self.df, i)
 
-        # len(self.indicators)
-        return True if shouldBuyCount > 0 else False
+            shouldBuyCount = shouldBuyCount + indicator.predict(self.orderState, self.df, i)
+            self.df.loc[i, 'shouldBuy'] = shouldBuyCount
+
+        return True if shouldBuyCount >= self.botConfig.shouldBuyAccept else False
 
     def train_inidicators(self, i):
         for indicator in self.indicators:
@@ -335,8 +348,8 @@ class Trader:
             # 'high',
             # 'low',
             'open',
-            'supportQuote',
-            'resistanceQuote',
+            # 'supportQuote',
+            # 'resistanceQuote',
             # 'quoteVolume',
             # 'volume',
             'isUp',
@@ -348,5 +361,6 @@ class Trader:
             'btc',
             'actualCurrency',
             'Buy',
+            'shouldBuy'
 
         ]])

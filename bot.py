@@ -2,8 +2,12 @@ import matplotlib.pyplot as plt
 from Poloniex import Poloniex
 from Trader import Trader
 from KNNIndicator import KNNIndicator
+from SVMIndicator import SVMIndicator
+from LinearRegressionIndicator import  LinearRegressionIndicator
 from SupportResistanceIndicator import SupportResistanceIndicator
+from KMeansIndicator import KMeansIndicator
 from MomentumIndicator import MomentumIndicator
+from RandomForrestIndicator import  RandomForrestIndicator
 
 currencyPairList = \
     [
@@ -17,9 +21,9 @@ currencyPairList = \
         # 'BTC_XMR',
         # 'BTC_ZEC',
         ]
-# currencyPair = 'BTC_LTC'
-# currencyPair = 'BTC_XRP'
-# currencyPair = 'BTC_XMR'
+
+
+
 timestamp = \
     [
         # '1496448000',  # 03/6
@@ -30,14 +34,14 @@ timestamp = \
         # '1496880000',  # 08/6
         # '1496966400',  # 09/6
         # '1497052800',  # 10/6
-        '1497139200',  # 11/6
-        '1497225600',  # 12/6
-        '1497312000',  # 13/6
-        '1497398400',  # 14/6
-        '1497484800',  # 15/6
-        '1497571200',  # 16/6
-        '1497657600',  # 17/6
-        '1497744000',  # 18/6
+        # '1497139200',  # 11/6
+        # '1497225600',  # 12/6
+        # '1497312000',  # 13/6
+        # '1497398400',  # 14/6
+        # '1497484800',  # 15/6
+        # '1497571200',  # 16/6
+        # '1497657600',  # 17/6
+        # '1497744000',  # 18/6
         '1497830400',  # 19/6
         '1497916800',  # 20/6
         '1498003200',  # 21/6
@@ -52,7 +56,7 @@ timestamp = \
         '1498780800',  # 30/6
         '1498867200',  # 31/6
         '1498867200',  # 01/7
-        '9999999999',
+        # '9999999999',
 
     ]
 
@@ -60,6 +64,7 @@ period = '300'
 
 class BotConfig:
 
+    shouldBuyAccept   = 2
     print_chart       = True
     printOrders       = False
     printRow          = False
@@ -68,22 +73,10 @@ class BotConfig:
 iterations_per_day = 1
 
 btc= 1.0
-objective_gain = 1.02
+objective_gain = 1.03
 limit_loss = 0.95
 gain = 0.03
-loss = 0.02
-
- # tem que ser maior q 1
-
-
-indicators = [\
-
-    # KNNIndicator(),
-    SupportResistanceIndicator(),
-    MomentumIndicator()
-
-    ]
-
+loss = 0.015
 
 
 total_gain_all_curr_perc = 0.0
@@ -94,8 +87,18 @@ for y, currencyPair in enumerate(currencyPairList):
 
     total_gain_perc = 0.0
     total_bot_gain_perc = 0.0
-    total_avg_algo_gain = 0.0
+    total_trades_all = 0.0
 
+
+    indicators = [
+        KNNIndicator(currencyPair, period),
+        # SVMIndicator(currencyPair, period),
+        # LinearRegressionIndicator(currencyPair, period),
+        RandomForrestIndicator(currencyPair, period),
+        # KMeansIndicator(currencyPair,period),
+        # MomentumIndicator()
+        # SupportResistanceIndicator(),
+    ]
 
     for i, val in enumerate(timestamp):
 
@@ -106,6 +109,7 @@ for y, currencyPair in enumerate(currencyPairList):
             end   = str(int(timestamp[i]) + ((86400 / iterations_per_day) * (iteration + 1)))
 
             marketExchange = Poloniex(currencyPair, start, end, period)
+
 
             trader = Trader(indicators, marketExchange, BotConfig())
             trader.startTrading(btc, currencyPair,objective_gain, limit_loss, gain, loss)
@@ -121,7 +125,7 @@ for y, currencyPair in enumerate(currencyPairList):
             total_trades        = trader.df["gained"].sum()
             open_quote          = trader.df['open'][0]
             close_quote         = trader.df['close'].iloc[-1]
-            support_quote       = trader.df['supportQuote'].iloc[1]
+            # support_quote       = trader.df['supportQuote'].iloc[1]
             gain_period         = ((close_quote / open_quote) - 1) * 100
             ups_downs           = trader.df["isUp"].sum()
             bot_gain_period_btc = ((trader.wallet.wallet[trader.orderState.fromDigitalCurr]) / btc - 1) * 100
@@ -131,13 +135,13 @@ for y, currencyPair in enumerate(currencyPairList):
 
             total_gain_perc = total_gain_perc + gain_period
             total_bot_gain_perc = total_bot_gain_perc + (bot_gain_period_btc if bot_gain_period_btc != -100 else bot_gain_period_cur)
-            total_avg_algo_gain = total_avg_algo_gain + avg_algo_trade
+            total_trades_all = total_trades_all + total_trades
 
             if BotConfig.printIteration:
                 print ' CurrencyPair', currencyPair
                 print ' Date', trader.df['date'].iloc[0]
                 print ' Numer of trades', total_trades
-                print ' Support Quote', support_quote
+                # print ' Support Quote', support_quote
                 print ' Open 1st period', open_quote
                 print ' Close  last period', close_quote
                 print " Ups and Downs period" , ups_downs
@@ -152,7 +156,7 @@ for y, currencyPair in enumerate(currencyPairList):
     print ' CurrencyPair', currencyPair
     print 'TOTAL gain    ', total_gain_perc
     print 'TOTAL bot gain', total_bot_gain_perc
-    print 'TOTAL Algo gain per trade', total_avg_algo_gain / len(timestamp)
+    print 'TOTAL Trade trade', total_trades_all
     print ''
 
 

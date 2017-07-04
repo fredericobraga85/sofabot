@@ -11,6 +11,10 @@ class SupportResistanceIndicator:
     #     self.df = df
     #     self.dif_open_close_tolerance_perc = dif_open_close_tolerance_perc
 
+    def trainML(self, marketExchange, chartDataAnalyzer):
+        doNoting = True
+
+
     def calculateMoment(self, i, orderState, df):
 
         dif_open_close_1 = abs(df['close'].iloc[i - 3] - df['open'].iloc[i - 3])
