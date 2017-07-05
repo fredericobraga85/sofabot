@@ -1,6 +1,7 @@
+from indicators.Indicator import Indicator
 
 
-class MomentumIndicator:
+class MomentumIndicator(Indicator):
 
 
 

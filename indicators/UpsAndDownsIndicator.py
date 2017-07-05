@@ -1,6 +1,7 @@
+from indicators.Indicator import Indicator
 
 
-class UpsAndDownsIndicators:
+class UpsAndDownsIndicators(Indicator):
 
 
     def trainML(self, marketExchange, chartDataAnalyzer):

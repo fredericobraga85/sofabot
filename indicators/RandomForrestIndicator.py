@@ -1,8 +1,10 @@
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 
+from indicators.Indicator import Indicator
 
-class RandomForrestIndicator:
+
+class RandomForrestIndicator(Indicator):
 
     tag = 'randomForrest'
 

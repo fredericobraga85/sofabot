@@ -1,8 +1,10 @@
 from sklearn.cluster import KMeans
 import pandas as pd
 import Service as s
+from indicators.Indicator import Indicator
 
-class KMeansIndicator:
+
+class KMeansIndicator(Indicator):
 
     tag = 'kMeans'
 

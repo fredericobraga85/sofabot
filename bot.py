@@ -1,9 +1,14 @@
+import Converter
 from Poloniex import Poloniex
 from Trader import Trader
+from matplotlib import pyplot as plt
 from indicators.BollingerBandsIndicator import BollingerBandsIndicator
+from indicators.FibonacciIndicator import FibonnaciIndicator
+from indicators.FirstPeriodIndicator import FirstPeriodIndicator
 from indicators.KMeansIndicator import KMeansIndicator
 from indicators.KNNIndicator import KNNIndicator
 from indicators.LinearRegressionIndicator import LinearRegressionIndicator
+from indicators.MACDIndicator import MACDIndicator
 from indicators.MomentumIndicator import MomentumIndicator
 from indicators.RandomForrestIndicator import RandomForrestIndicator
 from indicators.SMAIndicator import SMAIndicator
@@ -83,16 +88,16 @@ timestamp = \
         # '1497916800',  # 20/6
         # '1498003200',  # 21/6
         '1498089600',  # 22/6
-        # '1498176000',  # 23/6
-        # '1498262400',  # 24/6
-        # '1498348800',  # 25/6
-        # '1498435200',  # 26/6
-        # '1498521600',  # 27/6
-        # '1498608000',  # 28/6
-        # '1498694400',  # 29/6
-        # '1498780800',  # 30/6
-        # '1498867200',  # 31/6
-        # '1498867200',  # 01/7
+        '1498176000',  # 23/6
+        '1498262400',  # 24/6
+        '1498348800',  # 25/6
+        '1498435200',  # 26/6
+        '1498521600',  # 27/6
+        '1498608000',  # 28/6
+        '1498694400',  # 29/6
+        '1498780800',  # 30/6
+        '1498867200',  # 31/6
+        '1498867200',  # 01/7
         # '9999999999',
 
     ]
@@ -101,19 +106,19 @@ period = '300'
 
 class BotConfig:
 
-    shouldBuyAccept   = 1
+    shouldBuyAccept   = 2
     print_chart       = False
     printOrders       = False
     printRow          = False
     printIteration    = True
 
-iterations_per_day = 4
+iterations_per_day = 1
 
 btc= 1.0
-objective_gain = 1.02
-limit_loss = 0.97
+objective_gain = 1.03
+limit_loss = 0.94
 gain = 0.02
-loss = 0.02
+loss = 0.01
 
 
 total_gain_all_curr_perc = 0.0
@@ -137,7 +142,10 @@ for y, currencyPair in enumerate(currencyPairList):
         # SupportResistanceIndicator(),
         # SMAIndicator(),
         BollingerBandsIndicator(),
+        FibonnaciIndicator(),
         # UpsAndDownsIndicators(),
+        # FirstPeriodIndicator(),
+        MACDIndicator()
     ]
 
     for i, val in enumerate(timestamp):
@@ -157,10 +165,9 @@ for y, currencyPair in enumerate(currencyPairList):
             if BotConfig.print_chart:
                 trader.printChart(trader.df)
 
-            # plt.plot(trader.df['date'][2:], trader.df['weightedAverage'][2:])
-            # plt.plot(trader.df['date'][2:], trader.df['resistanceQuote'][2:])
-            # plt.plot(trader.df['date'][2:], trader.df['supportQuote'][2:])
-            # plt.show()
+            # for indicator in indicators:
+                # indicator.plot(trader.df, plt)
+
 
             total_trades        = trader.df["gained"].sum()
             open_quote          = trader.df['open'][0]

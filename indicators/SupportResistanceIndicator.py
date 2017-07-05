@@ -1,6 +1,8 @@
+import Converter
+from indicators.Indicator import Indicator
 
 
-class SupportResistanceIndicator:
+class SupportResistanceIndicator(Indicator):
 
     resistance_tolerance = 1.05
     dif_open_close_perc = 1.005
@@ -64,6 +66,12 @@ class SupportResistanceIndicator:
 
         return 0
 
+    def plot(self, df, plt):
+
+        super(SupportResistanceIndicator, self).plot(df, plt)
+
+        plt.plot(df['timestamp'] - df['timestamp'][0],df['supportQuote'].apply(Converter.convert_zero_to_none))
+        plt.plotdf['timestamp'] - df['timestamp'][0],df['resistanceQuote'].apply(Converter.convert_zero_to_none)
 
 
 

@@ -12,3 +12,9 @@ def convert_to_up_or_down(isUp):
         return 1
     else:
         return -1
+
+def convert_zero_to_none(value):
+    if value == 0:
+        return None
+
+    return value

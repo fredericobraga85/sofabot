@@ -1,8 +1,10 @@
 from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 import Service as s
+from indicators.Indicator import Indicator
 
-class KNNIndicator:
+
+class KNNIndicator(Indicator):
 
     def __init__(self, currencyPair, period, timestamp):
 

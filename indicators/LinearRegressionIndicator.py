@@ -1,8 +1,10 @@
 from sklearn import  linear_model
 import pandas as pd
 import Service as s
+from indicators.Indicator import Indicator
 
-class LinearRegressionIndicator:
+
+class LinearRegressionIndicator(Indicator):
 
     tag = 'linearReg'
 

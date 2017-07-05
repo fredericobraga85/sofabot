@@ -1,8 +1,10 @@
 from sklearn import svm
 import pandas as pd
 import Service as s
+from indicators.Indicator import Indicator
 
-class SMAIndicator:
+
+class SMAIndicator(Indicator):
 
     def __init__(self):
 
