@@ -6,7 +6,10 @@ from indicators.Indicator import Indicator
 
 class SVMIndicator(Indicator):
 
-    def __init__(self, currencyPair, period, timestamp):
+
+    def __init__(self, currencyPair, period, timestamp, printPlot=False, buyCode=1):
+        self.printPlot = printPlot
+        self.buyCode = buyCode
 
         self.iDistance = 4
         self.gainLimit = 1.015
@@ -75,7 +78,7 @@ class SVMIndicator(Indicator):
             if i > self.iDistance:
 
                 if  df['weightedAverage'].iloc[i] / df['weightedAverage'].iloc[i - self.iDistance] > self.gainLimit:
-                    df.loc[i - self.iDistance, 'svm'] = 1
+                    df.loc[i - self.iDistance, 'svm'] = self.buyCode
                 else:
                     df.loc[i - self.iDistance, 'svm'] = 0
 
@@ -90,3 +93,11 @@ class SVMIndicator(Indicator):
 
 
         return pred
+
+    def plot(self, df, plt):
+
+        if self.printPlot:
+            super(SVMIndicator, self).plot(df, plt)
+
+
+            plt.show()

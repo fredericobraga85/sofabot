@@ -8,8 +8,10 @@ class KMeansIndicator(Indicator):
 
     tag = 'kMeans'
 
-    def __init__(self, currencyPair, period, timestamp):
 
+    def __init__(self, currencyPair, period, timestamp, printPlot=False, buyCode=1):
+        self.printPlot = printPlot
+        self.buyCode = buyCode
 
 
         self.iDistance = 4
@@ -79,7 +81,7 @@ class KMeansIndicator(Indicator):
             if i > self.iDistance:
 
                 if  df['weightedAverage'].iloc[i] / df['weightedAverage'].iloc[i - self.iDistance] > self.gainLimit:
-                    df.loc[i - self.iDistance, self.tag] = 1
+                    df.loc[i - self.iDistance, self.tag] = self.buyCode
                 else:
                     df.loc[i - self.iDistance, self.tag] = 0
 
@@ -94,3 +96,10 @@ class KMeansIndicator(Indicator):
         pred = self.clf.predict(self.getInput(df.loc[i]).reshape(1, -1))
 
         return pred
+
+    def plot(self, df, plt):
+
+        if self.printPlot:
+            super(KMeansIndicator, self).plot(df, plt)
+
+            plt.show()

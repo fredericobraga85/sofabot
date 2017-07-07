@@ -3,7 +3,9 @@ from indicators.Indicator import Indicator
 
 class MomentumIndicator(Indicator):
 
-
+    def __init__(self, printPlot=False, buyCode=1):
+        self.printPlot = printPlot
+        self.buyCode = buyCode
 
 
     def calculateMoment(self, i, orderState, df):
@@ -28,12 +30,16 @@ class MomentumIndicator(Indicator):
         self.calculateMoment(i , orderState, df)
 
         if self.momentum < self.momentum_tolerance:
-
-                return 1
+            return self.buyCode
 
 
         return 0
 
+    def plot(self, df, plt):
 
+        if self.printPlot:
+            super(MomentumIndicator, self).plot(df, plt)
+
+            plt.show()
 
 

@@ -4,9 +4,11 @@ from indicators.Indicator import Indicator
 class BigFallIndicator(Indicator):
 
 
-    def __init__(self):
-        self.fall_perc = 0.97
+    def __init__(self, printPlot=False, buyCode=1):
+        self.fall_perc = 0.96
         self.last_max_index = 0
+        self.printPlot = printPlot
+        self.buyCode = buyCode
 
 
     def preSetup(self):
@@ -16,12 +18,19 @@ class BigFallIndicator(Indicator):
 
     def predict(self, orderState, df, i):
 
-        if orderState.actual_price / df[self.last_max_index:i + 1]['weightedAverage'].max() < self.fall_perc:
+        max_price =  df[self.last_max_index:i]['weightedAverage'].max()
+        df.loc[i, 'max_price'] = max_price
 
-            df.loc[i, 'bigFall'] = df.iloc[i - 1]['weightedAverage']
+        if df['timestamp'][i] - df['timestamp'][0] >= 25000:
+            stop = True
+
+        if orderState.actual_price / max_price < self.fall_perc:
+
             self.count = 0
             self.big_fall = True
-            self.last_max_index = i
+
+
+            # return self.buyCode
 
         if self.big_fall == True:
 
@@ -30,10 +39,11 @@ class BigFallIndicator(Indicator):
             if self.count <= 3:
                 if orderState.actual_price >  df.iloc[i - 1]['weightedAverage'] or  orderState.actual_price >  df.iloc[i - 2]['weightedAverage'] :
 
+                    df.loc[i, 'bigFall'] = df.iloc[i - 1]['weightedAverage']
                     # if df.iloc[i - 1]['weightedAverage'] > df.iloc[i - 2]['weightedAverage']:
 
-
-                    return 1
+                    self.last_max_index = i
+                    return self.buyCode
                 else:
                     return 0
             else:
@@ -45,12 +55,15 @@ class BigFallIndicator(Indicator):
 
     def plot(self, df, plt):
 
-        super(BigFallIndicator, self).plot(df ,plt)
+        if self.printPlot:
+            super(BigFallIndicator, self).plot(df ,plt)
 
-        if 'bigFall' in df.columns:
-            plt.plot(df['timestamp'] - df['timestamp'][0], df['bigFall'])
+            if 'bigFall' in df.columns:
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['bigFall'])
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['max_price'])
 
-        plt.show()
+
+            plt.show()
 
 
 

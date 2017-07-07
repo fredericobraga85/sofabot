@@ -300,7 +300,7 @@ class Trader:
                     print 'Ordem de venda realizada ganho emergencial ' + str(
                         self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
 
-            self.gain = self.initial_gain
+            # self.gain = self.initial_gain
 
             return True
 
@@ -322,7 +322,7 @@ class Trader:
                         self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
 
 
-            self.gain = abs(1 - self.orderState.sell_value/self.orderState.buy_value) + self.gain
+            # self.gain = abs(1 - self.orderState.sell_value/self.orderState.buy_value) + self.gain
 
             return True
 

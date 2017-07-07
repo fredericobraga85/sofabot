@@ -9,9 +9,10 @@ class SupportResistanceIndicator(Indicator):
     resistance = 0
     support = 0
 
-    # def train(self, df, dif_open_close_tolerance_perc):
-    #     self.df = df
-    #     self.dif_open_close_tolerance_perc = dif_open_close_tolerance_perc
+    def __init__(self, printPlot=False, buyCode=1):
+        self.printPlot = printPlot
+        self.buyCode = buyCode
+
 
     def trainML(self, marketExchange, chartDataAnalyzer):
         doNoting = True
@@ -65,21 +66,21 @@ class SupportResistanceIndicator(Indicator):
                     if orderState.actual_price > self.support and orderState.actual_price < self.support * self.resistance_tolerance:
 
                         if self.support != 0:
-
-                            return 1
+                            return self.buyCode
 
         return 0
 
     def plot(self, df, plt):
 
-        super(SupportResistanceIndicator, self).plot(df, plt)
+        if self.printPlot:
+            super(SupportResistanceIndicator, self).plot(df, plt)
 
-        # plt.plot(df['timestamp'] - df['timestamp'][0], df['high'].apply(Converter.convert_zero_to_none))
-        # plt.plot(df['timestamp'] - df['timestamp'][0], df['low'].apply(Converter.convert_zero_to_none))
-        # plt.plot(df['timestamp'] - df['timestamp'][0],df['supportQuote'].apply(Converter.convert_zero_to_none))
-        # plt.plot(df['timestamp'] - df['timestamp'][0],df['resistanceQuote'].apply(Converter.convert_zero_to_none))
+            # plt.plot(df['timestamp'] - df['timestamp'][0], df['high'].apply(Converter.convert_zero_to_none))
+            # plt.plot(df['timestamp'] - df['timestamp'][0], df['low'].apply(Converter.convert_zero_to_none))
+            plt.plot(df['timestamp'] - df['timestamp'][0],df['supportQuote'].apply(Converter.convert_zero_to_none))
+            plt.plot(df['timestamp'] - df['timestamp'][0],df['resistanceQuote'].apply(Converter.convert_zero_to_none))
 
-        plt.show()
+            plt.show()
 
 
 

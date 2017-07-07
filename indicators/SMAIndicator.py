@@ -6,7 +6,10 @@ from indicators.Indicator import Indicator
 
 class SMAIndicator(Indicator):
 
-    def __init__(self):
+    def __init__(self, printPlot=False, buyCode=1):
+        self.printPlot = printPlot
+        self.buyCode = buyCode
+
 
         self.iDistance = 5
         self.gainLimit = 1.01
@@ -37,7 +40,14 @@ class SMAIndicator(Indicator):
 
             if df.iloc[i-self.iDistance]['sva']  > 0 :
                 if self.sva / df.iloc[i-self.iDistance]['sva'] > self.gainLimit:
-                    return 1
+                    return self.buyCode
                 elif self.sva / df.iloc[i-self.iDistance]['sva'] < self.lossLimit:
-                    return 1
+                    return self.buyCode
         return 0
+
+    def plot(self, df, plt):
+
+        if self.printPlot:
+            super(SMAIndicator, self).plot(df, plt)
+
+            plt.show()

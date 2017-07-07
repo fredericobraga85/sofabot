@@ -6,11 +6,14 @@ from indicators.Indicator import Indicator
 
 class KNNIndicator(Indicator):
 
-    def __init__(self, currencyPair, period, timestamp):
 
+
+    def __init__(self, currencyPair, period, timestamp, printPlot=False, buyCode=1):
+        self.printPlot = printPlot
+        self.buyCode = buyCode
 
         self.nNeigbors = 3
-        self.iDistance = 2
+        self.iDistance = 4
         self.gainLimit = 1.015
 
         self.trained = False
@@ -77,9 +80,10 @@ class KNNIndicator(Indicator):
             if i > self.iDistance:
 
                 if  df['weightedAverage'].iloc[i] / df['weightedAverage'].iloc[i - self.iDistance] > self.gainLimit:
-                    df.loc[i - self.iDistance, 'knn'] = 1
-                else:
-                    df.loc[i - self.iDistance, 'knn'] = 0
+
+                    df.loc[i - self.iDistance, 'knn'] = self.buyCode
+                # else:
+                    # df.loc[i - self.iDistance, 'knn'] = 0
 
         return df
 
@@ -92,3 +96,13 @@ class KNNIndicator(Indicator):
 
 
         return pred
+
+    def plot(self, df, plt):
+
+        if self.printPlot:
+            super(KNNIndicator, self).plot(df, plt)
+
+            if 'knn' in df.columns:
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['knn'], color='r')
+
+            plt.show()

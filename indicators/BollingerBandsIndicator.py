@@ -8,10 +8,14 @@ from indicators.Indicator import Indicator
 
 class BollingerBandsIndicator(Indicator):
 
-    def __init__(self):
+
+    def __init__(self, printPlot=False, buyCode=1):
+        self.printPlot = printPlot
+        self.buyCode = buyCode
 
         self.iDistance = 10
-        self.latency_perc = 1.02
+        self.latency_perc = 1.015
+
 
     def calculateMoment(self, i, orderState, df):
 
@@ -46,20 +50,29 @@ class BollingerBandsIndicator(Indicator):
             #
             #             if df.iloc[i - 1]['weightedAverage'] < orderState.actual_price:
 
-            if df.iloc[i]['lowerbb'] > orderState.actual_price * 0.99:
+            if df.iloc[i - 1]['upperbb'] / df.iloc[i - 1]['lowerbb'] > self.latency_perc:
 
-                if df.iloc[i]['upperbb'] / df.iloc[i]['lowerbb'] > self.latency_perc:
-                    return 1
+                if df.iloc[i]['lowerbb'] > orderState.actual_price:
+
+                    # if df.iloc[i]['upperbb'] / df.iloc[i]['lowerbb'] > self.latency_perc:
+                    df.loc[i, 'bbBuyZone'] = orderState.actual_price
+                    return self.buyCode
 
         return 0
 
     def plot(self, df, plt):
 
-        super(BollingerBandsIndicator, self).plot(df ,plt)
-        #
-        # if 'bb' in df.columns:
-        #     plt.plot(df['timestamp'] - df['timestamp'][0], df['bb'])
-        #     plt.plot(df['timestamp'] - df['timestamp'][0], df['upperbb'])
-        #     plt.plot(df['timestamp'] - df['timestamp'][0], df['lowerbb'])
-        #
-        # plt.show()
+
+        if self.printPlot:
+            super(BollingerBandsIndicator, self).plot(df ,plt)
+
+            # if 'bb' in df.columns:
+            #     plt.plot(df['timestamp'] - df['timestamp'][0], df['bb'])
+            #     plt.plot(df['timestamp'] - df['timestamp'][0], df['upperbb'])
+            #     plt.plot(df['timestamp'] - df['timestamp'][0], df['lowerbb'])
+
+            if 'bbBuyZone' in df.columns:
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['bbBuyZone'])
+
+
+            plt.show()

@@ -4,6 +4,7 @@ from Trader import Trader
 from matplotlib import pyplot as plt
 
 from indicators.BigFallIndicator import BigFallIndicator
+from indicators.BigFallRecoverIndicator import BigFallRecoverIndicator
 from indicators.BollingerBandsIndicator import BollingerBandsIndicator
 from indicators.FibonacciIndicator import FibonnaciIndicator
 from indicators.FirstPeriodIndicator import FirstPeriodIndicator
@@ -70,28 +71,28 @@ timestampTrain = \
 
 timestamp = \
     [
-        '1496448000',  # 03/6
-        '1496534400',  # 04/6
-        '1496620800',  # 05/6
-        '1496707200',  # 06/6
-        '1496793600',  # 07/6
-        '1496880000',  # 08/6
-        '1496966400',  # 09/6
-        '1497052800',  # 10/6
-        '1497139200',  # 11/6
-        '1497225600',  # 12/6
-        '1497312000',  # 13/6
-        '1497398400',  # 14/6
-        '1497484800',  # 15/6
-        '1497571200',  # 16/6
-        '1497657600',  # 17/6
-        '1497744000',  # 18/6
-        '1497830400',  # 19/6
-        '1497916800',  # 20/6
-        '1498003200',  # 21/6
-        '1498089600',  # 22/6
-        '1498176000',  # 23/6
-        '1498262400',  # 24/6
+        # '1496448000',  # 03/6
+        # '1496534400',  # 04/6
+        # '1496620800',  # 05/6
+        # '1496707200',  # 06/6
+        # '1496793600',  # 07/6
+        # '1496880000',  # 08/6
+        # '1496966400',  # 09/6
+        # '1497052800',  # 10/6
+        # '1497139200',  # 11/6
+        # '1497225600',  # 12/6
+        # '1497312000',  # 13/6
+        # '1497398400',  # 14/6
+        # '1497484800',  # 15/6
+        # '1497571200',  # 16/6
+        # '1497657600',  # 17/6
+        # '1497744000',  # 18/6
+        # '1497830400',  # 19/6
+        # '1497916800',  # 20/6
+        # '1498003200',  # 21/6
+        # '1498089600',  # 22/6
+        # '1498176000',  # 23/6
+        # '1498262400',  # 24/6
         '1498348800',  # 25/6
         '1498435200',  # 26/6
         '1498521600',  # 27/6
@@ -99,7 +100,7 @@ timestamp = \
         '1498694400',  # 29/6
         '1498780800',  # 30/6
         '1498867200',  # 01/7
-        # '9999999999',
+        # # '9999999999',
 
     ]
 
@@ -109,9 +110,9 @@ period = '300'
 iterations_per_day = 2
 
 btc= 1.0
-objective_gain = 1.01
+objective_gain = 1.02
 limit_loss = 0.98
-gain = 0.01
+gain = 0.03
 loss = 0.01
 
 
@@ -127,23 +128,24 @@ for y, currencyPair in enumerate(currencyPairList):
     first_open = 0.0
     last_close = 0.0
 
-
     indicators = [
-        # KNNIndicator(currencyPair, period, timestampTrain),
-        # SVMIndicator(currencyPair, period, timestampTrain),
-        # LinearRegressionIndicator(currencyPair, period, timestampTrain),
-        # RandomForrestIndicator(currencyPair, period, timestampTrain),
-        # KMeansIndicator(currencyPair,period, timestampTrain),
-        # MomentumIndicator(),
-        SupportResistanceIndicator(),
-        # SMAIndicator(),
-        BollingerBandsIndicator(),
-        # FibonnaciIndicator(),
-        # UpsAndDownsIndicators(),
-        # FirstPeriodIndicator(),
-        BigFallIndicator(),
-        # MACDIndicator()
+        # KNNIndicator(currencyPair, period, timestampTrain,True, 1),
+        # SVMIndicator(currencyPair, period, timestampTrain,True, 1),
+        # LinearRegressionIndicator(currencyPair, period, timestampTrain,True, 1),
+        # RandomForrestIndicator(currencyPair, period, timestampTrain,False, 1),
+        # KMeansIndicator(currencyPair,period, timestampTrain,True, 1),
+        # MomentumIndicator(True, 1),
+        # SupportResistanceIndicator(True, 1),
+        # SMAIndicator(True, 1),
+        # FibonnaciIndicator(True, 1),
+        # UpsAndDownsIndicators(True, 1),
+        # FirstPeriodIndicator(True, 1),
+        # BigFallIndicator(True, 1),
+        BigFallRecoverIndicator(False, 1),
+        # BollingerBandsIndicator(False, 1),
+        MACDIndicator(False, 1)
     ]
+
 
 
     class BotConfig:
@@ -153,7 +155,7 @@ for y, currencyPair in enumerate(currencyPairList):
         printOrders = False
         printRow = False
         printIteration = True
-        printPlot = False
+        printPlot = True
 
     for i, val in enumerate(timestamp):
 
@@ -166,10 +168,7 @@ for y, currencyPair in enumerate(currencyPairList):
                 start = str(int(timestamp[i]) + (dif * iteration))
                 end   = str(int(timestamp[i]) + (dif * (iteration + 1)))
 
-
-
                 marketExchange = Poloniex(currencyPair, start, end, period)
-
 
                 trader = Trader(indicators, marketExchange, BotConfig())
                 trader.startTrading(btc, currencyPair,objective_gain, limit_loss, gain, loss)
