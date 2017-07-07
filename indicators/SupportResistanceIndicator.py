@@ -58,11 +58,15 @@ class SupportResistanceIndicator(Indicator):
 
         self.calculateMoment(i , orderState, df)
 
-        if self.support != 0 and orderState.actual_price > self.support and orderState.actual_price < self.support * self.resistance_tolerance:
+        if self.support != 0 and self.resistance !=0 :
 
-            if self.support != 0:
+                if df['weightedAverage'].iloc[i - 1] > orderState.actual_price :
 
-                return 1
+                    if orderState.actual_price > self.support and orderState.actual_price < self.support * self.resistance_tolerance:
+
+                        if self.support != 0:
+
+                            return 1
 
         return 0
 
@@ -70,8 +74,12 @@ class SupportResistanceIndicator(Indicator):
 
         super(SupportResistanceIndicator, self).plot(df, plt)
 
-        plt.plot(df['timestamp'] - df['timestamp'][0],df['supportQuote'].apply(Converter.convert_zero_to_none))
-        plt.plotdf['timestamp'] - df['timestamp'][0],df['resistanceQuote'].apply(Converter.convert_zero_to_none)
+        # plt.plot(df['timestamp'] - df['timestamp'][0], df['high'].apply(Converter.convert_zero_to_none))
+        # plt.plot(df['timestamp'] - df['timestamp'][0], df['low'].apply(Converter.convert_zero_to_none))
+        # plt.plot(df['timestamp'] - df['timestamp'][0],df['supportQuote'].apply(Converter.convert_zero_to_none))
+        # plt.plot(df['timestamp'] - df['timestamp'][0],df['resistanceQuote'].apply(Converter.convert_zero_to_none))
+
+        plt.show()
 
 
 

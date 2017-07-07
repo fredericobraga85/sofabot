@@ -36,28 +36,30 @@ class BollingerBandsIndicator(Indicator):
 
 
         if i > self.iDistance:
-            self.calculateMoment(i , orderState, df)
+            # self.calculateMoment(i , orderState, df)
+            #
+            # if df.iloc[i]['bb']  > 0 :
+            #
+            #     if df.iloc[i - 1]['lowerbb'] > df.iloc[i - 1]['weightedAverage']:
+            #
+                    # if df.iloc[i]['lowerbb'] <= orderState.actual_price:
+            #
+            #             if df.iloc[i - 1]['weightedAverage'] < orderState.actual_price:
 
-            if df.iloc[i]['bb']  > 0 :
+            if df.iloc[i]['lowerbb'] > orderState.actual_price * 0.99:
 
-                if df.iloc[i - 1]['lowerbb'] > df.iloc[i - 1]['weightedAverage']:
-
-                    if df.iloc[i]['lowerbb'] <= orderState.actual_price:
-
-                        if df.iloc[i - 1]['weightedAverage'] < orderState.actual_price:
-
-                            if df.iloc[i]['upperbb'] / df.iloc[i]['lowerbb'] > self.latency_perc:
-                                return 1
+                if df.iloc[i]['upperbb'] / df.iloc[i]['lowerbb'] > self.latency_perc:
+                    return 1
 
         return 0
 
     def plot(self, df, plt):
 
         super(BollingerBandsIndicator, self).plot(df ,plt)
-
-        if 'bb' in df.columns:
-            plt.plot(df['timestamp'] - df['timestamp'][0], df['bb'])
-            plt.plot(df['timestamp'] - df['timestamp'][0], df['upperbb'])
-            plt.plot(df['timestamp'] - df['timestamp'][0], df['lowerbb'])
-
-        plt.show()
+        #
+        # if 'bb' in df.columns:
+        #     plt.plot(df['timestamp'] - df['timestamp'][0], df['bb'])
+        #     plt.plot(df['timestamp'] - df['timestamp'][0], df['upperbb'])
+        #     plt.plot(df['timestamp'] - df['timestamp'][0], df['lowerbb'])
+        #
+        # plt.show()

@@ -41,3 +41,11 @@ class FibonnaciIndicator(Indicator):
 
 
 
+    def plot(self, df, plt):
+
+        super(FibonnaciIndicator, self).plot(df ,plt)
+
+        # if 'bigFall' in df.columns:
+        #     plt.plot(df['timestamp'] - df['timestamp'][0], df['bigFall'])
+
+        plt.show()

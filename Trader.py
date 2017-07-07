@@ -31,6 +31,7 @@ class Trader:
         self.objective_gain = objective_gain
         self.limit_loss     = limit_loss
         self.gain           = gain
+        self.initial_gain   = gain
         self.loss           = loss
         self.stop = False
 
@@ -40,6 +41,8 @@ class Trader:
         self.df['sellValue'] = 0
         self.df['gained'] = False
         self.df['Buy'] = 0
+
+        self.pre_setup_indicators()
 
         for i, row in self.df.iterrows():
 
@@ -297,9 +300,13 @@ class Trader:
                     print 'Ordem de venda realizada ganho emergencial ' + str(
                         self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
 
+            self.gain = self.initial_gain
+
             return True
 
         elif self.didLose():
+
+
 
             if self.orderState.sell_order_loss_active:
                 self.orderState.sell_value = self.orderState.buy_value * (1 - self.loss)
@@ -313,6 +320,9 @@ class Trader:
                 if self.botConfig.printOrders:
                     print 'Ordem de venda realizada perda emergencial ' + str(
                         self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
+
+
+            self.gain = abs(1 - self.orderState.sell_value/self.orderState.buy_value) + self.gain
 
             return True
 
@@ -348,6 +358,10 @@ class Trader:
             self.df.loc[i, 'shouldBuy'] = shouldBuyCount
 
         return True if shouldBuyCount >= self.botConfig.shouldBuyAccept else False
+
+    def pre_setup_indicators(self):
+        for indicator in self.indicators:
+            indicator.preSetup()
 
     def train_inidicators(self, i):
         for indicator in self.indicators:

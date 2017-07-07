@@ -5,11 +5,11 @@ class FirstPeriodIndicator(Indicator):
 
 
     def __init__(self):
-        self.latency_perc = 1.02
+        self.latency_perc = 1
 
     def predict(self, orderState, df, i):
 
-        if orderState.actual_price > df.iloc[0]['weightedAverage'] * self.latency_perc:
+        if orderState.actual_price < df.iloc[0]['weightedAverage'] * self.latency_perc:
             return 1
 
         return 0
