@@ -2,26 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="988c3d69-1a4a-4de5-8e95-bc31a2ffec0c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/indicators/BigFallRecoverIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MG10.iml" afterPath="$PROJECT_DIR$/.idea/MG10.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/indicators/VolumeIndicator.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Trader.py" afterPath="$PROJECT_DIR$/Trader.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bot.py" afterPath="$PROJECT_DIR$/bot.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/BigFallIndicator.py" afterPath="$PROJECT_DIR$/indicators/BigFallIndicator.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/BollingerBandsIndicator.py" afterPath="$PROJECT_DIR$/indicators/BollingerBandsIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/FibonacciIndicator.py" afterPath="$PROJECT_DIR$/indicators/FibonacciIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/FirstPeriodIndicator.py" afterPath="$PROJECT_DIR$/indicators/FirstPeriodIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/KMeansIndicator.py" afterPath="$PROJECT_DIR$/indicators/KMeansIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/KNNIndicator.py" afterPath="$PROJECT_DIR$/indicators/KNNIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/LinearRegressionIndicator.py" afterPath="$PROJECT_DIR$/indicators/LinearRegressionIndicator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/Indicator.py" afterPath="$PROJECT_DIR$/indicators/Indicator.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/MACDIndicator.py" afterPath="$PROJECT_DIR$/indicators/MACDIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/MomentumIndicator.py" afterPath="$PROJECT_DIR$/indicators/MomentumIndicator.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/RandomForrestIndicator.py" afterPath="$PROJECT_DIR$/indicators/RandomForrestIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/SMAIndicator.py" afterPath="$PROJECT_DIR$/indicators/SMAIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/SVMIndicator.py" afterPath="$PROJECT_DIR$/indicators/SVMIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/SupportResistanceIndicator.py" afterPath="$PROJECT_DIR$/indicators/SupportResistanceIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/UpsAndDownsIndicator.py" afterPath="$PROJECT_DIR$/indicators/UpsAndDownsIndicator.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,8 +24,8 @@
       <file leaf-file-name="Trader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Trader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1923">
-              <caret line="325" column="0" lean-forward="true" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
+            <state relative-caret-position="4815">
+              <caret line="325" column="0" lean-forward="false" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
               <folding>
                 <marker date="1499451761000" expanded="true" signature="750:1040" ph="..." />
               </folding>
@@ -48,19 +36,33 @@
       <file leaf-file-name="MACDIndicator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators/MACDIndicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="25" column="45" lean-forward="true" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+            <state relative-caret-position="75">
+              <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bot.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bot.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="906">
-              <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="310">
+              <caret line="150" column="22" lean-forward="false" selection-start-line="150" selection-start-column="22" selection-end-line="150" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BollingerBandsIndicator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/indicators/BollingerBandsIndicator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="402">
+              <caret line="55" column="19" lean-forward="false" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -68,18 +70,8 @@
       <file leaf-file-name="LinearRegressionIndicator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators/LinearRegressionIndicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-768">
-              <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KNNIndicator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/indicators/KNNIndicator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+            <state relative-caret-position="93">
+              <caret line="82" column="59" lean-forward="false" selection-start-line="82" selection-start-column="59" selection-end-line="82" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -88,18 +80,8 @@
       <file leaf-file-name="RandomForrestIndicator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators/RandomForrestIndicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="764">
-              <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="106" selection-end-column="88" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FibonacciIndicator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/indicators/FibonacciIndicator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="46" column="24" lean-forward="false" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="77" />
+            <state relative-caret-position="631">
+              <caret line="95" column="12" lean-forward="false" selection-start-line="95" selection-start-column="12" selection-end-line="95" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -108,8 +90,28 @@
       <file leaf-file-name="BigFallIndicator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators/BigFallIndicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="41" column="20" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="76" />
+            <state relative-caret-position="0">
+              <caret line="0" column="36" lean-forward="true" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VolumeIndicator.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/indicators/VolumeIndicator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Indicator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/indicators/Indicator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="321">
+              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -118,21 +120,9 @@
       <file leaf-file-name="BigFallRecoverIndicator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators/BigFallRecoverIndicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
+            <state relative-caret-position="315">
               <caret line="21" column="52" lean-forward="false" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SupportResistanceIndicator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/indicators/SupportResistanceIndicator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="77" column="8" lean-forward="false" selection-start-line="77" selection-start-column="8" selection-end-line="78" selection-end-column="109" />
-              <folding>
-                <element signature="e#0#16#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -205,24 +195,25 @@
         <option value="$PROJECT_DIR$/KNNIndicator.py" />
         <option value="$PROJECT_DIR$/indicators/BollingerBands.py" />
         <option value="$PROJECT_DIR$/Converter.py" />
-        <option value="$PROJECT_DIR$/indicators/Indicator.py" />
         <option value="$PROJECT_DIR$/indicators/FirstPeriodIndicator.py" />
         <option value="$PROJECT_DIR$/indicators/KMeansIndicator.py" />
-        <option value="$PROJECT_DIR$/indicators/LinearRegressionIndicator.py" />
         <option value="$PROJECT_DIR$/indicators/MomentumIndicator.py" />
         <option value="$PROJECT_DIR$/indicators/SMAIndicator.py" />
         <option value="$PROJECT_DIR$/indicators/SVMIndicator.py" />
         <option value="$PROJECT_DIR$/indicators/UpsAndDownsIndicator.py" />
-        <option value="$PROJECT_DIR$/indicators/BollingerBandsIndicator.py" />
         <option value="$PROJECT_DIR$/indicators/FibonacciIndicator.py" />
         <option value="$PROJECT_DIR$/indicators/SupportResistanceIndicator.py" />
-        <option value="$PROJECT_DIR$/indicators/RandomForrestIndicator.py" />
         <option value="$PROJECT_DIR$/indicators/KNNIndicator.py" />
         <option value="$PROJECT_DIR$/Trader.py" />
-        <option value="$PROJECT_DIR$/indicators/BigFallIndicator.py" />
-        <option value="$PROJECT_DIR$/indicators/MACDIndicator.py" />
         <option value="$PROJECT_DIR$/indicators/BigFallRecoverIndicator.py" />
+        <option value="$PROJECT_DIR$/indicators/MACDIndicator.py" />
+        <option value="$PROJECT_DIR$/indicators/LinearRegressionIndicator.py" />
+        <option value="$PROJECT_DIR$/indicators/RandomForrestIndicator.py" />
+        <option value="$PROJECT_DIR$/indicators/BigFallIndicator.py" />
+        <option value="$PROJECT_DIR$/indicators/Indicator.py" />
+        <option value="$PROJECT_DIR$/indicators/BollingerBandsIndicator.py" />
         <option value="$PROJECT_DIR$/bot.py" />
+        <option value="$PROJECT_DIR$/indicators/VolumeIndicator.py" />
       </list>
     </option>
   </component>
@@ -284,11 +275,11 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/cinq/Documents/Projetos/MG10/bot.py" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/indicators" />
       <recent name="$PROJECT_DIR$" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/indicators" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -433,10 +424,10 @@
     <frame x="0" y="23" width="1920" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23375931" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23588924" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29605964" sideWeight="0.50183153" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3372591" sideWeight="0.4981685" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38222697" sideWeight="0.4981685" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -499,6 +490,16 @@
           <line>40</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/indicators/MACDIndicator.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="138" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/indicators/MACDIndicator.py</url>
+          <line>48</line>
+          <option name="timeStamp" value="139" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -507,21 +508,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="138" />
+      <option name="time" value="142" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Trader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1950">
-          <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-          <folding>
-            <marker date="1499451761000" expanded="true" signature="750:1040" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Poloniex.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -535,7 +526,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -543,7 +536,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1350">
           <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -561,7 +556,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -650,15 +647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="14" column="31" lean-forward="false" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/indicators/Indicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -676,7 +664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
           <caret line="32" column="31" lean-forward="false" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -702,7 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -710,69 +696,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="954" column="0" lean-forward="false" selection-start-line="954" selection-start-column="0" selection-end-line="954" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/indicators/BollingerBandsIndicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/indicators/SupportResistanceIndicator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
+        <state relative-caret-position="1140">
           <caret line="77" column="8" lean-forward="false" selection-start-line="77" selection-start-column="8" selection-end-line="78" selection-end-column="109" />
           <folding>
-            <element signature="e#0#16#0" expanded="true" />
+            <element signature="e#0#16#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/indicators/KNNIndicator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
+        <state relative-caret-position="1200">
           <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/indicators/RandomForrestIndicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="764">
-          <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="106" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/indicators/LinearRegressionIndicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-768">
-          <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/indicators/MACDIndicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="25" column="45" lean-forward="true" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Trader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1923">
-          <caret line="325" column="0" lean-forward="true" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
-          <folding>
-            <marker date="1499451761000" expanded="true" signature="750:1040" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -784,26 +725,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/indicators/BigFallIndicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="41" column="20" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/indicators/BigFallRecoverIndicator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
+        <state relative-caret-position="315">
           <caret line="21" column="52" lean-forward="false" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/indicators/LinearRegressionIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="82" column="59" lean-forward="false" selection-start-line="82" selection-start-column="59" selection-end-line="82" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Trader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4815">
+          <caret line="325" column="0" lean-forward="false" selection-start-line="325" selection-start-column="0" selection-end-line="325" selection-end-column="0" />
+          <folding>
+            <marker date="1499451761000" expanded="true" signature="750:1040" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators/MACDIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators/RandomForrestIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="95" column="12" lean-forward="false" selection-start-line="95" selection-start-column="12" selection-end-line="95" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators/BigFallIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="36" lean-forward="true" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators/Indicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators/BollingerBandsIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="55" column="19" lean-forward="false" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="906">
-          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        <state relative-caret-position="310">
+          <caret line="150" column="22" lean-forward="false" selection-start-line="150" selection-start-column="22" selection-end-line="150" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/indicators/VolumeIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
           <folding />
         </state>
       </provider>

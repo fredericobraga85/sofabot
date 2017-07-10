@@ -19,7 +19,7 @@ class BigFallIndicator(Indicator):
     def predict(self, orderState, df, i):
 
         max_price =  df[self.last_max_index:i]['weightedAverage'].max()
-        df.loc[i, 'max_price'] = max_price
+        df.loc[i, 'max_price'] = max_price / df.iloc[0]['weightedAverage']
 
         if df['timestamp'][i] - df['timestamp'][0] >= 25000:
             stop = True
@@ -39,7 +39,7 @@ class BigFallIndicator(Indicator):
             if self.count <= 3:
                 if orderState.actual_price >  df.iloc[i - 1]['weightedAverage'] or  orderState.actual_price >  df.iloc[i - 2]['weightedAverage'] :
 
-                    df.loc[i, 'bigFall'] = df.iloc[i - 1]['weightedAverage']
+                    df.loc[i, 'bigFall'] = df.iloc[i - 1]['weightedAverage']/df.iloc[0]['weightedAverage']
                     # if df.iloc[i - 1]['weightedAverage'] > df.iloc[i - 2]['weightedAverage']:
 
                     self.last_max_index = i

@@ -42,7 +42,6 @@ class RandomForrestIndicator(Indicator):
 
             self.clf.fit(self.getInput(self.train_df), self.train_df[self.tag])
 
-            # self.knn_df.to_csv(file_name, index=False)
 
             self.trained = True
 

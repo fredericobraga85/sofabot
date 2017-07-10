@@ -18,6 +18,7 @@ from indicators.SMAIndicator import SMAIndicator
 from indicators.SVMIndicator import SVMIndicator
 from indicators.SupportResistanceIndicator import SupportResistanceIndicator
 from indicators.UpsAndDownsIndicator import UpsAndDownsIndicators
+from indicators.VolumeIndicator import VolumeIndicator
 
 currencyPairList = \
     [
@@ -88,11 +89,11 @@ timestamp = \
         # '1497657600',  # 17/6
         # '1497744000',  # 18/6
         # '1497830400',  # 19/6
-        # '1497916800',  # 20/6
-        # '1498003200',  # 21/6
-        # '1498089600',  # 22/6
-        # '1498176000',  # 23/6
-        # '1498262400',  # 24/6
+        '1497916800',  # 20/6
+        '1498003200',  # 21/6
+        '1498089600',  # 22/6
+        '1498176000',  # 23/6
+        '1498262400',  # 24/6
         '1498348800',  # 25/6
         '1498435200',  # 26/6
         '1498521600',  # 27/6
@@ -100,7 +101,10 @@ timestamp = \
         '1498694400',  # 29/6
         '1498780800',  # 30/6
         '1498867200',  # 01/7
-        # # '9999999999',
+        # '1499472000', # 08/7
+        # '1499644800', # 10/7
+        # '1499731200', # 11/7
+        # '9999999999',
 
     ]
 
@@ -112,7 +116,7 @@ iterations_per_day = 2
 btc= 1.0
 objective_gain = 1.02
 limit_loss = 0.98
-gain = 0.03
+gain = 0.01
 loss = 0.01
 
 
@@ -140,17 +144,19 @@ for y, currencyPair in enumerate(currencyPairList):
         # FibonnaciIndicator(True, 1),
         # UpsAndDownsIndicators(True, 1),
         # FirstPeriodIndicator(True, 1),
-        # BigFallIndicator(True, 1),
-        BigFallRecoverIndicator(False, 1),
-        # BollingerBandsIndicator(False, 1),
-        MACDIndicator(False, 1)
+        BigFallIndicator(False, 1),
+        # BigFallRecoverIndicator(True, 1),
+        BollingerBandsIndicator(False, 1),
+        # MACDIndicator(False, 1)
+        VolumeIndicator(True, 1)
+
     ]
 
 
 
     class BotConfig:
 
-        shouldBuyAccept = 2
+        shouldBuyAccept = 3
         print_chart = False
         printOrders = False
         printRow = False
@@ -162,6 +168,7 @@ for y, currencyPair in enumerate(currencyPairList):
         if i < len(timestamp) - 1 :
 
             for iteration in range(0,iterations_per_day):
+
 
                 dif = (int(timestamp[i + 1]) - int(timestamp[i])) / (iterations_per_day)
 
