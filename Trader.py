@@ -1,6 +1,5 @@
 
 from OrderState import OrderState
-from Poloniex import Poloniex
 import Visualizer
 from ChartDataAnalyzer import ChartDataAnalyzer
 from Wallet import Wallet
@@ -28,8 +27,8 @@ class Trader:
         self.orderState = OrderState(currencyPair)
         self.wallet     = Wallet(self.orderState.fromDigitalCurr, self.orderState.toDigitalCurr, btc)
 
-        self.objective_gain = objective_gain
-        self.limit_loss     = limit_loss
+        # self.objective_gain = objective_gain
+        # self.limit_loss     = limit_loss
         self.gain           = gain
         self.initial_gain   = gain
         self.loss           = loss
@@ -42,7 +41,7 @@ class Trader:
         self.df['gained'] = False
         self.df['Buy'] = 0
 
-        self.pre_setup_indicators()
+        self.pre_setup_indicators(self.df)
 
         for i, row in self.df.iterrows():
 
@@ -56,18 +55,20 @@ class Trader:
 
                     if self.orderState.waitingForBuyOpportunity():
 
-                        if self.reached_objective() or self.reached_limit_loss():
-
-                            self.stop = True
-
-                            self.df.loc[i, 'Buy'] = 5
-                            self.df.loc[i, 'buyValue'] = self.orderState.buy_value
-                            self.df.loc[i, 'sellValue'] = self.orderState.sell_value
-                            self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
-                            self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
-                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100 if self.orderState.buy_value > 0 else 0
-
-                        elif self.indicators_predict_buy(i):
+                        # if self.reached_objective() or self.reached_limit_loss():
+                        #
+                        #     self.stop = True
+                        #
+                        #     self.df.loc[i, 'Buy'] = 5
+                        #     self.df.loc[i, 'buyValue'] = self.orderState.buy_value
+                        #     self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                        #     self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
+                        #     self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                        #     self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100 if self.orderState.buy_value > 0 else 0
+                        #
+                        # el
+                        #
+                        if self.indicators_predict_buy(i):
                             self.sendBuyOrder()
                             self.orderState.setBuyOrderStatus(True)
 
@@ -184,37 +185,37 @@ class Trader:
                 if self.botConfig.printRow:
                     self.printChart(self.df.iloc[i])
 
-    def reached_objective(self):
-
-        if self.orderState.inBuy == True:
-
-            current_btc = (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) - (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) * self.marketExchange.getActiveSellFeePerc()))
-
-            if current_btc / self.wallet.initialDeposit >= self.objective_gain:
-                return True
-
-        else:
-
-            if self.wallet.getDigitalCurrency(self.orderState.fromDigitalCurr) / self.wallet.initialDeposit >= self.objective_gain:
-                return True
-
-        return False
-
-    def reached_limit_loss(self):
-
-        if self.orderState.inBuy:
-
-            current_btc = (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr)) - (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) * self.marketExchange.getActiveSellFeePerc())
-
-            if current_btc / self.wallet.initialDeposit <= self.limit_loss:
-                return True
-
-        else:
-
-            if self.wallet.getDigitalCurrency(self.orderState.fromDigitalCurr)  / self.wallet.initialDeposit <= self.limit_loss:
-                return True
-
-        return False
+    # def reached_objective(self):
+    #
+    #     if self.orderState.inBuy == True:
+    #
+    #         current_btc = (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) - (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) * self.marketExchange.getActiveSellFeePerc()))
+    #
+    #         if current_btc / self.wallet.initialDeposit >= self.objective_gain:
+    #             return True
+    #
+    #     else:
+    #
+    #         if self.wallet.getDigitalCurrency(self.orderState.fromDigitalCurr) / self.wallet.initialDeposit >= self.objective_gain:
+    #             return True
+    #
+    #     return False
+    #
+    # def reached_limit_loss(self):
+    #
+    #     if self.orderState.inBuy:
+    #
+    #         current_btc = (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr)) - (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) * self.marketExchange.getActiveSellFeePerc())
+    #
+    #         if current_btc / self.wallet.initialDeposit <= self.limit_loss:
+    #             return True
+    #
+    #     else:
+    #
+    #         if self.wallet.getDigitalCurrency(self.orderState.fromDigitalCurr)  / self.wallet.initialDeposit <= self.limit_loss:
+    #             return True
+    #
+    #     return False
 
     def getActualPrice(self, i):
 
@@ -250,17 +251,17 @@ class Trader:
 
 
     def isGaining(self):
-        return self.orderState.getGainPerc() > 1
+        return self.orderState.getGainPerc() >= 1 + self.gain
 
     def didGain(self):
-        return self.orderState.getGainPerc() > 1 + self.gain
+        return self.orderState.getGainPerc() >= 1 + self.gain
 
 
     def isLosing(self):
-        return self.orderState.getGainPerc() < 1 and  self.orderState.getGainPerc() > 1 - self.loss
+        return self.orderState.getGainPerc() <= 1 - self.loss
 
     def didLose(self):
-        return self.orderState.getGainPerc() < 1 - self.loss
+        return self.orderState.getGainPerc() <= 1 - self.loss
 
     def buyOrderWasExecuted(self):
         if self.botConfig.printOrders:
@@ -275,17 +276,19 @@ class Trader:
             print 'Verificando se ordem de venda foi realizada....'
             print 'Setando Fake sell value...'
 
-        if self.reached_objective() or self.reached_limit_loss():
+        # if self.reached_objective() or self.reached_limit_loss():
+        #
+        #     self.orderState.sell_value = self.orderState.actual_price
+        #
+        #     if self.botConfig.printOrders:
+        #         print 'Ordem de venda realizada alcance objetivo ' + str(
+        #             self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
+        #
+        #     return True
+        #
+        # el
 
-            self.orderState.sell_value = self.orderState.actual_price
-
-            if self.botConfig.printOrders:
-                print 'Ordem de venda realizada alcance objetivo ' + str(
-                    self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
-
-            return True
-
-        elif self.didGain():
+        if self.didGain():
 
             if self.orderState.sell_order_gain_active:
                 self.orderState.sell_value = self.orderState.buy_value * (1 + self.gain)
@@ -355,13 +358,13 @@ class Trader:
         for indicator in self.indicators:
 
             shouldBuyCount = shouldBuyCount + indicator.predict(self.orderState, self.df, i)
-            self.df.loc[i, 'shouldBuy'] = shouldBuyCount
 
+        self.df.loc[i, 'shouldBuy'] = shouldBuyCount
         return True if shouldBuyCount >= self.botConfig.shouldBuyAccept else False
 
-    def pre_setup_indicators(self):
+    def pre_setup_indicators(self, df):
         for indicator in self.indicators:
-            indicator.preSetup()
+            indicator.preSetup(df)
 
     def train_inidicators(self, i):
         for indicator in self.indicators:

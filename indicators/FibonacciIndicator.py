@@ -58,6 +58,6 @@ class FibonnaciIndicator(Indicator):
             super(FibonnaciIndicator, self).plot(df ,plt)
 
             if 'fibo' in df.columns:
-                plt.plot(df['timestamp'] - df['timestamp'][0], df['fibo'], color='r')
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['fibo']/df.iloc[0]['weightedAverage'], color='r')
 
             plt.show()

@@ -44,8 +44,8 @@ class MACDIndicator(Indicator):
             super(MACDIndicator, self).plot(df ,plt)
 
             if 'macd_long' in df.columns:
-                plt.plot(df['timestamp'] - df['timestamp'][0], df['macd_long'])
-                plt.plot(df['timestamp'] - df['timestamp'][0], df['macd_short'])
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['macd_long'] / df.iloc[0]['weightedAverage'])
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['macd_short']/ df.iloc[0]['weightedAverage'])
 
 
             plt.show()

@@ -10,7 +10,7 @@ class Indicator(object):
 
         doNothing = True
 
-    def preSetup(self):
+    def preSetup(self, df):
         doNothing = True
 
     def calculateMoment(self, i, orderState, df):

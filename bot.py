@@ -19,6 +19,7 @@ from indicators.SVMIndicator import SVMIndicator
 from indicators.SupportResistanceIndicator import SupportResistanceIndicator
 from indicators.UpsAndDownsIndicator import UpsAndDownsIndicators
 from indicators.VolumeIndicator import VolumeIndicator
+from indicators.WinAndLoseIndicator import WinAndLoseIndicator
 
 currencyPairList = \
     [
@@ -79,7 +80,7 @@ timestamp = \
         # '1496793600',  # 07/6
         # '1496880000',  # 08/6
         # '1496966400',  # 09/6
-        # '1497052800',  # 10/6
+        '1497052800',  # 10/6
         # '1497139200',  # 11/6
         # '1497225600',  # 12/6
         # '1497312000',  # 13/6
@@ -89,21 +90,21 @@ timestamp = \
         # '1497657600',  # 17/6
         # '1497744000',  # 18/6
         # '1497830400',  # 19/6
-        '1497916800',  # 20/6
-        '1498003200',  # 21/6
-        '1498089600',  # 22/6
-        '1498176000',  # 23/6
-        '1498262400',  # 24/6
-        '1498348800',  # 25/6
-        '1498435200',  # 26/6
-        '1498521600',  # 27/6
-        '1498608000',  # 28/6
-        '1498694400',  # 29/6
-        '1498780800',  # 30/6
-        '1498867200',  # 01/7
+        # '1497916800',  # 20/6
+        # '1498003200',  # 21/6
+        # '1498089600',  # 22/6
+        # '1498176000',  # 23/6
+        # '1498262400',  # 24/6
+        # '1498348800',  # 25/6
+        # '1498435200',  # 26/6
+        # '1498521600',  # 27/6
+        # '1498608000',  # 28/6
+        # '1498694400',  # 29/6
+        # '1498780800',  # 30/6
+        # '1498867200',  # 01/7
         # '1499472000', # 08/7
         # '1499644800', # 10/7
-        # '1499731200', # 11/7
+        '1499731200', # 11/7
         # '9999999999',
 
     ]
@@ -111,10 +112,10 @@ timestamp = \
 period = '300'
 
 
-iterations_per_day = 2
+iterations_per_day = 1
 
 btc= 1.0
-objective_gain = 1.02
+objective_gain = 1.03
 limit_loss = 0.98
 gain = 0.01
 loss = 0.01
@@ -145,19 +146,19 @@ for y, currencyPair in enumerate(currencyPairList):
         # UpsAndDownsIndicators(True, 1),
         # FirstPeriodIndicator(True, 1),
         BigFallIndicator(False, 1),
-        # BigFallRecoverIndicator(True, 1),
-        BollingerBandsIndicator(False, 1),
-        # MACDIndicator(False, 1)
-        VolumeIndicator(True, 1)
-
+        # BigFallRecoverIndicator(False, 1),
+        # BollingerBandsIndicator(False, 1),
+        # MACDIndicator(False, 1),
+        VolumeIndicator(False, 1),
+        WinAndLoseIndicator(True,0)
     ]
 
 
 
     class BotConfig:
 
-        shouldBuyAccept = 3
-        print_chart = False
+        shouldBuyAccept = 2
+        print_chart = True
         printOrders = False
         printRow = False
         printIteration = True
