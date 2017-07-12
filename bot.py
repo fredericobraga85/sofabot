@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 
 from indicators.BigFallIndicator import BigFallIndicator
 from indicators.BigFallRecoverIndicator import BigFallRecoverIndicator
+from indicators.BigUpIndicator import BigUpIndicator
 from indicators.BollingerBandsIndicator import BollingerBandsIndicator
 from indicators.FibonacciIndicator import FibonnaciIndicator
 from indicators.FirstPeriodIndicator import FirstPeriodIndicator
@@ -80,7 +81,7 @@ timestamp = \
         # '1496793600',  # 07/6
         # '1496880000',  # 08/6
         # '1496966400',  # 09/6
-        '1497052800',  # 10/6
+        # '1497052800',  # 10/6
         # '1497139200',  # 11/6
         # '1497225600',  # 12/6
         # '1497312000',  # 13/6
@@ -90,8 +91,8 @@ timestamp = \
         # '1497657600',  # 17/6
         # '1497744000',  # 18/6
         # '1497830400',  # 19/6
-        # '1497916800',  # 20/6
-        # '1498003200',  # 21/6
+        '1497916800',  # 20/6
+        '1498003200',  # 21/6
         # '1498089600',  # 22/6
         # '1498176000',  # 23/6
         # '1498262400',  # 24/6
@@ -104,7 +105,7 @@ timestamp = \
         # '1498867200',  # 01/7
         # '1499472000', # 08/7
         # '1499644800', # 10/7
-        '1499731200', # 11/7
+        # '1499731200', # 11/7
         # '9999999999',
 
     ]
@@ -145,12 +146,13 @@ for y, currencyPair in enumerate(currencyPairList):
         # FibonnaciIndicator(True, 1),
         # UpsAndDownsIndicators(True, 1),
         # FirstPeriodIndicator(True, 1),
-        BigFallIndicator(False, 1),
+        # BigFallIndicator(False, 1),
+        BigUpIndicator(True, 1),
         # BigFallRecoverIndicator(False, 1),
-        # BollingerBandsIndicator(False, 1),
+        # BollingerBandsIndicator(True, 1),
         # MACDIndicator(False, 1),
-        VolumeIndicator(False, 1),
-        WinAndLoseIndicator(True,0)
+        # VolumeIndicator(False, 1),
+        # WinAndLoseIndicator(True,0)
     ]
 
 
