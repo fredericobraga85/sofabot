@@ -51,7 +51,7 @@ class Trader:
 
                 self.train_inidicators(i)
 
-                if i >= 3 and self.stop == False:
+                if self.stop == False:
 
                     if self.orderState.waitingForBuyOpportunity():
 

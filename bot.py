@@ -27,9 +27,9 @@ currencyPairList = \
         # 'BTC_BTS',
         # 'BTC_DASH',
         # 'BTC_ETH',
-        'BTC_FCT',
+        # 'BTC_FCT',
         # 'BTC_MAID',
-        # 'BTC_LTC',
+        'BTC_LTC',
         # 'BTC_XRP',
         # 'BTC_XMR',
         # 'BTC_ZEC',
@@ -74,7 +74,7 @@ timestampTrain = \
 
 timestamp = \
     [
-        # '1496448000',  # 03/6
+        '1496448000',  # 03/6
         # '1496534400',  # 04/6
         # '1496620800',  # 05/6
         # '1496707200',  # 06/6
@@ -91,8 +91,8 @@ timestamp = \
         # '1497657600',  # 17/6
         # '1497744000',  # 18/6
         # '1497830400',  # 19/6
-        '1497916800',  # 20/6
-        '1498003200',  # 21/6
+        # '1497916800',  # 20/6
+        # '1498003200',  # 21/6
         # '1498089600',  # 22/6
         # '1498176000',  # 23/6
         # '1498262400',  # 24/6
@@ -106,6 +106,7 @@ timestamp = \
         # '1499472000', # 08/7
         # '1499644800', # 10/7
         # '1499731200', # 11/7
+        '1500940800', # 25/7
         # '9999999999',
 
     ]
@@ -113,13 +114,13 @@ timestamp = \
 period = '300'
 
 
-iterations_per_day = 1
+iterations_per_day = 52
 
 btc= 1.0
 objective_gain = 1.03
-limit_loss = 0.98
-gain = 0.01
-loss = 0.01
+limit_loss = 0.0
+gain = 0.02
+loss = 0.03
 
 
 total_gain_all_curr_perc = 0.0
@@ -147,20 +148,20 @@ for y, currencyPair in enumerate(currencyPairList):
         # UpsAndDownsIndicators(True, 1),
         # FirstPeriodIndicator(True, 1),
         # BigFallIndicator(False, 1),
-        BigUpIndicator(True, 1),
+        # BigUpIndicator(True, 1),
         # BigFallRecoverIndicator(False, 1),
         # BollingerBandsIndicator(True, 1),
         # MACDIndicator(False, 1),
         # VolumeIndicator(False, 1),
-        # WinAndLoseIndicator(True,0)
+        WinAndLoseIndicator(False,1)
     ]
 
 
 
     class BotConfig:
 
-        shouldBuyAccept = 2
-        print_chart = True
+        shouldBuyAccept = 1
+        print_chart = False
         printOrders = False
         printRow = False
         printIteration = True

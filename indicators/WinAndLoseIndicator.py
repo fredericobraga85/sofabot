@@ -1,5 +1,5 @@
 from indicators.Indicator import Indicator
-import numpy as np
+import pandas as pd
 
 class WinAndLoseIndicator(Indicator):
 
@@ -9,6 +9,8 @@ class WinAndLoseIndicator(Indicator):
         self.iDistance = 5
         self.printPlot = printPlot
         self.buyCode = buyCode
+        self.mean_series = pd.Series()
+        self.mean_index = 2
 
     def preSetup(self, df):
         for i, row in df.iterrows():
@@ -21,6 +23,21 @@ class WinAndLoseIndicator(Indicator):
 
 
     def predict(self, orderState, df, i):
+
+        if i == 0:
+
+            if len(self.mean_series) > self.mean_index + 1:
+
+
+                mean1 = self.mean_series.iloc[(self.mean_index * -1 ):].mean()
+                mean2 = self.mean_series.iloc[(self.mean_index * -1 - 1):-1].mean()
+
+                print 'mean1',mean1
+                print 'mean2',mean2
+                print 'mean dif ', mean1 - mean2
+
+                if mean1 - mean2 < -0.06:
+                        return 1
 
 
         return 0
@@ -39,32 +56,27 @@ class WinAndLoseIndicator(Indicator):
 
     def plot(self, df, plt):
 
+        s = df['win_lose_max_indicator'].fillna(0)
+        rslt =  ((df['sellValue'].fillna(0) / df['buyValue'].fillna(0) ) - 1 ) * 100
+
+
+        self.mean_series.set_value(len(self.mean_series), s.mean())
+
+
+        range = 8
+
+        n, bins, patches = plt.hist(s, bins=range * 2 * 4, range=(range * - 1,range), rwidth='scalar')
+        n, bins, patches = plt.hist(rslt, bins=range * 2 * 4, range=(range * - 1, range), rwidth='scalar')
+
+        print 'higher than zedro:', len(s.apply(self.higherThanZero).dropna())
+        print 'lower  than zedro:', len(s.apply(self.lowerThanZero).dropna())
+        print 'std :',              s.std()
+        print 'mean:', s.mean()
+
+
+
+
         if self.printPlot:
-            # super(WinAndLoseIndicator, self).plot(df ,plt)
-
-            # if 'win_lose_indicator' in df.columns:
-            #     plt.plot(df['timestamp'] - df['timestamp'][0], df['volume_indicator']/ df.iloc[0]['weightedAverage'], color='r')
-            #     # plt.plot(df['timestamp'] - df['timestamp'][0], df['volume'])
-
-
-            s = df['win_lose_max_indicator'].fillna(0)
-            rslt =  ((df['sellValue'].fillna(0) / df['buyValue'].fillna(0) ) - 1 ) * 100
-
-            # s_min = df['win_lose_min_indicator'].fillna(0)
-            # s = s_max.append(s_min,ignore_index=True)
-
-            range = 8
-
-            n, bins, patches = plt.hist(s, bins=range * 2 * 4, range=(range * - 1,range), rwidth='scalar')
-            n, bins, patches = plt.hist(rslt, bins=range * 2 * 4, range=(range * - 1, range), rwidth='scalar')
-
-            print 'higher than zedro:', len(s.apply(self.higherThanZero).dropna())
-            print 'lower  than zedro:', len(s.apply(self.lowerThanZero).dropna())
-            print 'std :',              s.std()
-            print 'mean:',              s.mean()
-
-
-
             plt.xlabel('% Gain')
             plt.ylabel('Qtde')
             # plt.title(r'$\mathrm{Histogram\ of\ IQ:}\ \mu=100,\ \sigma=15$')
