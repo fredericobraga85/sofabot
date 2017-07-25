@@ -27,8 +27,8 @@ class Trader:
         self.orderState = OrderState(currencyPair)
         self.wallet     = Wallet(self.orderState.fromDigitalCurr, self.orderState.toDigitalCurr, btc)
 
-        # self.objective_gain = objective_gain
-        # self.limit_loss     = limit_loss
+        self.objective_gain = objective_gain
+        self.limit_loss     = limit_loss
         self.gain           = gain
         self.initial_gain   = gain
         self.loss           = loss
@@ -55,20 +55,18 @@ class Trader:
 
                     if self.orderState.waitingForBuyOpportunity():
 
-                        # if self.reached_objective() or self.reached_limit_loss():
-                        #
-                        #     self.stop = True
-                        #
-                        #     self.df.loc[i, 'Buy'] = 5
-                        #     self.df.loc[i, 'buyValue'] = self.orderState.buy_value
-                        #     self.df.loc[i, 'sellValue'] = self.orderState.sell_value
-                        #     self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
-                        #     self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
-                        #     self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100 if self.orderState.buy_value > 0 else 0
-                        #
-                        # el
-                        #
-                        if self.indicators_predict_buy(i):
+                        if self.reached_objective() or self.reached_limit_loss():
+
+                            self.stop = True
+
+                            self.df.loc[i, 'Buy'] = 5
+                            self.df.loc[i, 'buyValue'] = self.orderState.buy_value
+                            self.df.loc[i, 'sellValue'] = self.orderState.sell_value
+                            self.df.loc[i, 'btc'] = self.wallet.wallet[Wallet.BTC]
+                            self.df.loc[i, 'actualCurrency'] = self.wallet.wallet[self.orderState.toDigitalCurr]
+                            self.df.loc[i, 'perGain'] = (self.orderState.actual_price / self.orderState.buy_value - 1) * 100 if self.orderState.buy_value > 0 else 0
+
+                        elif self.indicators_predict_buy(i):
                             self.sendBuyOrder()
                             self.orderState.setBuyOrderStatus(True)
 
@@ -185,37 +183,37 @@ class Trader:
                 if self.botConfig.printRow:
                     self.printChart(self.df.iloc[i])
 
-    # def reached_objective(self):
-    #
-    #     if self.orderState.inBuy == True:
-    #
-    #         current_btc = (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) - (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) * self.marketExchange.getActiveSellFeePerc()))
-    #
-    #         if current_btc / self.wallet.initialDeposit >= self.objective_gain:
-    #             return True
-    #
-    #     else:
-    #
-    #         if self.wallet.getDigitalCurrency(self.orderState.fromDigitalCurr) / self.wallet.initialDeposit >= self.objective_gain:
-    #             return True
-    #
-    #     return False
-    #
-    # def reached_limit_loss(self):
-    #
-    #     if self.orderState.inBuy:
-    #
-    #         current_btc = (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr)) - (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) * self.marketExchange.getActiveSellFeePerc())
-    #
-    #         if current_btc / self.wallet.initialDeposit <= self.limit_loss:
-    #             return True
-    #
-    #     else:
-    #
-    #         if self.wallet.getDigitalCurrency(self.orderState.fromDigitalCurr)  / self.wallet.initialDeposit <= self.limit_loss:
-    #             return True
-    #
-    #     return False
+    def reached_objective(self):
+
+        if self.orderState.inBuy == True:
+
+            current_btc = (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) - (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) * self.marketExchange.getActiveSellFeePerc()))
+
+            if current_btc / self.wallet.initialDeposit >= self.objective_gain:
+                return True
+
+        else:
+
+            if self.wallet.getDigitalCurrency(self.orderState.fromDigitalCurr) / self.wallet.initialDeposit >= self.objective_gain:
+                return True
+
+        return False
+
+    def reached_limit_loss(self):
+
+        if self.orderState.inBuy:
+
+            current_btc = (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr)) - (self.orderState.actual_price * self.wallet.getDigitalCurrency(self.orderState.toDigitalCurr) * self.marketExchange.getActiveSellFeePerc())
+
+            if current_btc / self.wallet.initialDeposit <= self.limit_loss:
+                return True
+
+        else:
+
+            if self.wallet.getDigitalCurrency(self.orderState.fromDigitalCurr)  / self.wallet.initialDeposit <= self.limit_loss:
+                return True
+
+        return False
 
     def getActualPrice(self, i):
 

@@ -34,3 +34,6 @@ class Indicator(object):
                 plt.plot(df['timestamp'] - df['timestamp'][0], (df['buyValue']/df.iloc[0]['weightedAverage']).apply(Converter.convert_zero_to_none))
 
         doNothing = True
+
+    def plot_value(self, df, plt, vlw):
+        doNothing = True

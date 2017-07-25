@@ -27,9 +27,9 @@ currencyPairList = \
         # 'BTC_BTS',
         # 'BTC_DASH',
         # 'BTC_ETH',
-        # 'BTC_FCT',
+        'BTC_FCT',
         # 'BTC_MAID',
-        'BTC_LTC',
+        # 'BTC_LTC',
         # 'BTC_XRP',
         # 'BTC_XMR',
         # 'BTC_ZEC',
@@ -117,9 +117,9 @@ period = '300'
 iterations_per_day = 52
 
 btc= 1.0
-objective_gain = 1.03
-limit_loss = 0.0
-gain = 0.02
+objective_gain = 1.02
+limit_loss = 0.98
+gain = 0.03
 loss = 0.03
 
 
@@ -170,6 +170,10 @@ for y, currencyPair in enumerate(currencyPairList):
     for i, val in enumerate(timestamp):
 
         if i < len(timestamp) - 1 :
+
+            list_gain = []
+            list_mean = []
+
 
             for iteration in range(0,iterations_per_day):
 
@@ -223,6 +227,12 @@ for y, currencyPair in enumerate(currencyPairList):
                     print ' Bot gain', bot_gain_period_btc if bot_gain_period_btc != -100 else bot_gain_period_cur , '' if bot_gain_period_btc != -100 else '( estimate - no last sell)'
                     print ' Average Algorithm gain per trade', avg_algo_trade if total_trades != 0 else 'zero trades'
                     print ''
+
+                list_gain.append(gain_period)
+
+                if BotConfig.printPlot:
+                    for indicator in indicators:
+                        indicator.plot_value(list_gain, plt)
 
     total_gain_all_curr_perc = total_gain_all_curr_perc + total_gain_perc
     total_bot_gain_all_curr_perc = total_bot_gain_all_curr_perc + total_bot_gain_perc
