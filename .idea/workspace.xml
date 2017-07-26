@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="988c3d69-1a4a-4de5-8e95-bc31a2ffec0c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MG10.iml" afterPath="$PROJECT_DIR$/.idea/MG10.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Trader.py" afterPath="$PROJECT_DIR$/Trader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Wallet.py" afterPath="$PROJECT_DIR$/Wallet.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bot.py" afterPath="$PROJECT_DIR$/bot.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/indicators/WinAndLoseIndicator.py" afterPath="$PROJECT_DIR$/indicators/WinAndLoseIndicator.py" />
     </list>
@@ -20,11 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Trader.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Trader.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Trader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="154" column="50" lean-forward="false" selection-start-line="154" selection-start-column="50" selection-end-line="154" selection-end-column="50" />
+            <state relative-caret-position="2310">
+              <caret line="154" column="40" lean-forward="false" selection-start-line="154" selection-start-column="40" selection-end-line="154" selection-end-column="40" />
               <folding>
                 <element signature="e#1#34#0" expanded="true" />
               </folding>
@@ -45,8 +40,8 @@
       <file leaf-file-name="Wallet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Wallet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="38" lean-forward="false" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
+            <state relative-caret-position="465">
+              <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -62,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bot.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bot.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+            <state relative-caret-position="90">
+              <caret line="28" column="24" lean-forward="false" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -85,8 +80,8 @@
       <file leaf-file-name="WinAndLoseIndicator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators/WinAndLoseIndicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="59" column="18" lean-forward="false" selection-start-line="59" selection-start-column="15" selection-end-line="59" selection-end-column="18" />
+            <state relative-caret-position="885">
+              <caret line="60" column="68" lean-forward="false" selection-start-line="60" selection-start-column="68" selection-end-line="60" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -135,7 +130,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>resistance_tolerance</find>
       <find>resistance</find>
       <find>support</find>
       <find>perGain</find>
@@ -165,6 +159,7 @@
       <find>initial_gain</find>
       <find>shoul</find>
       <find>shouldBuy</find>
+      <find>0.000080</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -216,7 +211,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="701" />
+    <option name="x" value="704" />
     <option name="y" value="23" />
     <option name="width" value="1853" />
     <option name="height" value="1340" />
@@ -420,7 +415,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="701" y="23" width="1853" height="1340" extended-state="0" />
+    <frame x="704" y="23" width="1853" height="1340" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16135995" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -795,37 +790,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Trader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="154" column="50" lean-forward="false" selection-start-line="154" selection-start-column="50" selection-end-line="154" selection-end-column="50" />
-          <folding>
-            <element signature="e#1#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Wallet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="38" lean-forward="false" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/indicators/WinAndLoseIndicator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="59" column="18" lean-forward="false" selection-start-line="59" selection-start-column="15" selection-end-line="59" selection-end-column="18" />
+        <state relative-caret-position="885">
+          <caret line="60" column="68" lean-forward="false" selection-start-line="60" selection-start-column="68" selection-end-line="60" selection-end-column="68" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+        <state relative-caret-position="90">
+          <caret line="28" column="24" lean-forward="false" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Wallet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Trader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2310">
+          <caret line="154" column="40" lean-forward="false" selection-start-line="154" selection-start-column="40" selection-end-line="154" selection-end-column="40" />
+          <folding>
+            <element signature="e#1#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

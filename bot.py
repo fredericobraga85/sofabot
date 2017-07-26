@@ -24,15 +24,15 @@ from indicators.WinAndLoseIndicator import WinAndLoseIndicator
 
 currencyPairList = \
     [
-        # 'BTC_BTS',
-        # 'BTC_DASH',
-        'BTC_ETH',
-        # 'BTC_FCT',
-        # 'BTC_MAID',
-        # 'BTC_LTC',
-        # 'BTC_XRP',
-        # 'BTC_XMR',
-        # 'BTC_ZEC',
+        # 'BTC_BTS', #1.35
+        # 'BTC_DASH', #1.013
+        'BTC_ETH', #1.35
+        # 'BTC_FCT', #1.42
+        # 'BTC_MAID', # 1.007
+        # 'BTC_LTC', #1.23
+        # 'BTC_XRP', #1.34
+        # 'BTC_XMR',#1.17
+        # 'BTC_ZEC',#1.21
         ]
 
 timestampTrain = \

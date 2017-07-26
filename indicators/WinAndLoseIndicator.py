@@ -58,7 +58,7 @@ class WinAndLoseIndicator(Indicator):
 
     def train(self,orderState, df, i):
         if i > 144:
-            if df['close'].iloc[i-1]/df['close'].iloc[i-144] <  0.90 :
+            if df['close'].iloc[i-1]/df['close'].iloc[i-144] <  0.92 :
                 self.buy = 1
 
             else:
