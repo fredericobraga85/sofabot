@@ -26,8 +26,8 @@ currencyPairList = \
     [
         # 'BTC_BTS',
         # 'BTC_DASH',
-        # 'BTC_ETH',
-        'BTC_FCT',
+        'BTC_ETH',
+        # 'BTC_FCT',
         # 'BTC_MAID',
         # 'BTC_LTC',
         # 'BTC_XRP',
@@ -114,13 +114,13 @@ timestamp = \
 period = '300'
 
 
-iterations_per_day = 52
+iterations_per_day = 1
 
 btc= 1.0
-objective_gain = 1.02
-limit_loss = 0.98
+objective_gain = 10
+limit_loss = 0
 gain = 0.03
-loss = 0.03
+loss = 0.1
 
 
 total_gain_all_curr_perc = 0.0
@@ -161,11 +161,11 @@ for y, currencyPair in enumerate(currencyPairList):
     class BotConfig:
 
         shouldBuyAccept = 1
-        print_chart = False
+        print_chart = True
         printOrders = False
         printRow = False
         printIteration = True
-        printPlot = True
+        printPlot = False
 
     for i, val in enumerate(timestamp):
 
@@ -199,7 +199,7 @@ for y, currencyPair in enumerate(currencyPairList):
                     first_open = trader.df.iloc[0]["open"]
                 last_close = trader.df.iloc[len(trader.df) - 1]["close"]
 
-                total_trades        = trader.df["gained"].sum()
+
                 open_quote          = trader.df['open'][0]
                 close_quote         = trader.df['close'].iloc[-1]
                 # support_quote       = trader.df['supportQuote'].iloc[1]
@@ -208,9 +208,11 @@ for y, currencyPair in enumerate(currencyPairList):
                 bot_gain_period_btc = ((trader.wallet.wallet[trader.orderState.fromDigitalCurr]) / btc - 1) * 100
                 bot_gain_period_cur = ((((trader.orderState.actual_price * trader.wallet.wallet[trader.orderState.toDigitalCurr]) - (trader.orderState.actual_price * trader.wallet.wallet[trader.orderState.toDigitalCurr] * trader.marketExchange.getActiveSellFeePerc())) / btc)   - 1) * 100
                 algorithm_gain      = trader.df['perGain'].sum()
-                avg_algo_trade      = ((algorithm_gain / total_trades)) if total_trades != 0 else 0
-
+                total_trades        = trader.df["gained"].sum()
+                total_trades        = total_trades if bot_gain_period_btc != -100 else total_trades + 1
+                avg_algo_trade = ((algorithm_gain / total_trades)) if total_trades != 0 else 0
                 total_gain_perc = total_gain_perc + gain_period
+
                 total_bot_gain_perc = total_bot_gain_perc + (bot_gain_period_btc if bot_gain_period_btc != -100 else bot_gain_period_cur)
                 total_trades_all = total_trades_all + total_trades
 
@@ -225,7 +227,9 @@ for y, currencyPair in enumerate(currencyPairList):
                     print " Ups and Downs period" , ups_downs
                     print ' Gain period', gain_period
                     print ' Bot gain', bot_gain_period_btc if bot_gain_period_btc != -100 else bot_gain_period_cur , '' if bot_gain_period_btc != -100 else '( estimate - no last sell)'
-                    print ' Average Algorithm gain per trade', avg_algo_trade if total_trades != 0 else 'zero trades'
+                    print ' Piggy', trader.wallet.piggy
+                    print ' BTC' , trader.wallet.wallet['BTC']
+                    print ' Dif piggy / BTC ' ,(trader.wallet.piggy +  trader.wallet.wallet['BTC']) / trader.wallet.initialDeposit
                     print ''
 
                 list_gain.append(gain_period)

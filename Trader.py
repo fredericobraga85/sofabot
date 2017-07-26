@@ -152,6 +152,8 @@ class Trader:
                             self.df.loc[i, 'perGain'] = (self.orderState.sell_value / self.orderState.buy_value - 1) * 100
                             self.df.loc[i, 'gained'] = True
 
+                            self.wallet.transferToPiggy()
+
                             self.orderState.resetValues()
 
                         elif self.isGaining():

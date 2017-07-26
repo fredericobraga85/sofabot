@@ -13,6 +13,7 @@ class WinAndLoseIndicator(Indicator):
         self.mean_index = 2
         self.list_mean = []
         self.df_list_gain = pd.DataFrame([])
+        self.buy = 0
 
     def preSetup(self, df):
         for i, row in df.iterrows():
@@ -26,30 +27,43 @@ class WinAndLoseIndicator(Indicator):
 
     def predict(self, orderState, df, i):
 
-        if i == 0:
+        if i > 288:
 
-            if len(self.df_list_gain) > 3:
-
-                # if len(self.mean_series) > self.mean_index + 1:
-                #
-                #
-                #     mean1 = self.mean_series.iloc[(self.mean_index * -1 ):].mean()
-                #     mean2 = self.mean_series.iloc[(self.mean_index * -1 - 1):-1].mean()
-                #
-                #     print 'mean1',mean1
-                #     print 'mean2',mean2
-                #     print 'mean dif ', mean1 - mean2
-                #
-                #     if mean1 - mean2 < -0.06:
-                #             return 1
-
-                # if (self.df_list_gain.iloc[-1] < self.df_list_gain.iloc[-2]).bool() and (self.df_list_gain.iloc[-2] < self.df_list_gain.iloc[-3]).bool():
-                #         return 1
-
-                if (self.df_list_gain.iloc[-1] < 0).bool() and (self.df_list_gain.iloc[-2] > 0).bool():
-                    return 1
+            # if len(self.df_list_gain) > 1:
+        #
+        #         # if len(self.mean_series) > self.mean_index + 1:
+        #         #
+        #         #
+        #         #     mean1 = self.mean_series.iloc[(self.mean_index * -1 ):].mean()
+        #         #     mean2 = self.mean_series.iloc[(self.mean_index * -1 - 1):-1].mean()
+        #         #
+        #         #     print 'mean1',mean1
+        #         #     print 'mean2',mean2
+        #         #     print 'mean dif ', mean1 - mean2
+        #         #
+        #         #     if mean1 - mean2 < -0.06:
+        #         #             return 1
+        #
+        #         # if (self.df_list_gain.iloc[-1] < self.df_list_gain.iloc[-2]).bool() and (self.df_list_gain.iloc[-2] < self.df_list_gain.iloc[-3]).bool():
+        #         #         return 1
+        #
+        #         if (self.df_list_gain.iloc[-1] < -10).bool() :
+        #             return 1
+        #
+        #
+        # return 0
+            return self.buy
 
         return 0
+
+    def train(self,orderState, df, i):
+        if i > 144:
+            if df['close'].iloc[i-1]/df['close'].iloc[i-144] <  0.90 :
+                self.buy = 1
+
+            else:
+                self.buy = 0
+
 
     def higherThanZero (self,value):
         if value > 0:
@@ -84,15 +98,15 @@ class WinAndLoseIndicator(Indicator):
 
         self.list_mean.append(self.mean)
 
-        if self.printPlot:
-            plt.xlabel('% Gain')
-            plt.ylabel('Qtde')
-            # plt.title(r'$\mathrm{Histogram\ of\ IQ:}\ \mu=100,\ \sigma=15$')
-            # plt.axis([-5.0, 5.0, 0,200 ])
-            # plt.xticks(range(-5,5))
-            plt.grid(True)
-
-            plt.show()
+        # if self.printPlot:
+        #     plt.xlabel('% Gain')
+        #     plt.ylabel('Qtde')
+        #     # plt.title(r'$\mathrm{Histogram\ of\ IQ:}\ \mu=100,\ \sigma=15$')
+        #     # plt.axis([-5.0, 5.0, 0,200 ])
+        #     # plt.xticks(range(-5,5))
+        #     plt.grid(True)
+        #
+        #     plt.show()
 
     def plot_value(self, list, plt):
 
