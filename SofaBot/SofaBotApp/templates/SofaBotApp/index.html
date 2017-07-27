@@ -1,9 +1,95 @@
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'SofaBotApp:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static "SofaBotApp/css/bootstrap.min.css" %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script>
+        var append_increment = 0;
+        setInterval(function() {
+
+
+            $.ajax({
+              url: "{% url 'SofaBotApp:updateActualValue' %}",
+              success: function(json) {
+                $('#BTC_FCT').html(json.actualValue);
+              }
+            });
+        }, 2000)
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="#">SofaBot</a>
+            <img src="{% static "SofaBotApp/img/sofa_icon.png" %}" />
+        </div>
+    </div>
+</nav>
+
+<div class="container theme-showcase" role="main">
+
+    <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Wallet</h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+    </div>
+
+    <div >
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Exchange</th>
+                <th>Buy Value</th>
+                <th>Actual Value</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if latest_question_list %}
+            <tr>
+                {% for question in latest_question_list %}
+                <td><a href="{% url 'SofaBotApp:detail' question.id %}">{{ question.question_text }}</a></td>
+                <td><a href="{% url 'SofaBotApp:detail' question.id %}">{{ question.question_text }}</a></td>
+                <td><a href="{% url 'SofaBotApp:detail' question.id %}">{{ question.question_text }}</a></td>
+                <td><a id='BTC_FCT' href="{% url 'SofaBotApp:detail' question.id %}"></a></td>
+                <td><a href="{% url 'SofaBotApp:detail' question.id %}">{{ question.question_text }}</a></td>
+                <td>
+                    <button type="button" class="btn btn-success">Comprar</button>
+                </td>
+                {% endfor %}
+            </tr>
+            {% else %}
+            <p>No polls are available.</p>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static "SofaBotApp/js/bootstrap.min.js" %}"></script>
+</body>
+</html>
+
+

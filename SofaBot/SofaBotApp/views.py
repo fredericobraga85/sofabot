@@ -2,10 +2,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
-
+from django.shortcuts import render_to_response
+from django.http import JsonResponse
 from .models import Choice, Question
+from utils import TickerThread
+import json
 
 class IndexView(generic.ListView):
+
     template_name = 'SofaBotApp/index.html'
     context_object_name = 'latest_question_list'
 
@@ -42,3 +46,10 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('results', args=(question.id,)))
+
+
+def updateActualValue(request):
+
+    data = {}
+    data['actualValue'] = TickerThread.thread1.df['last']
+    return JsonResponse(data)

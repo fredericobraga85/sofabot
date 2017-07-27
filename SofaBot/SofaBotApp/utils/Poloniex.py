@@ -1,8 +1,5 @@
-import json
 import pandas as pd
 import Service as s
-import Converter
-from time import sleep
 
 class Poloniex:
 

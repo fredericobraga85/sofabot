@@ -6,3 +6,8 @@ from django.apps import AppConfig
 
 class SofabotappConfig(AppConfig):
     name = 'SofaBotApp'
+
+
+
+
+
