@@ -61,22 +61,3 @@ class OrderState:
     def setSellOrderStatus(self, activate):
         self.buy_order_active = False
         self.sell_order_active = activate
-
-
-    def setSellOrderGain(self, activate):
-        self.buy_order_active            = False
-        self.sell_order_gain_active      = activate
-        self.sell_order_loss_active      = False
-        self.sell_order_objective_active = False
-
-    def setSellOrderLoss(self, activate):
-        self.buy_order_active = False
-        self.sell_order_gain_active = False
-        self.sell_order_loss_active = activate
-        self.sell_order_objective_active = False
-
-    def setSellOrderObjective(self, activate):
-        self.buy_order_active = False
-        self.sell_order_gain_active = False
-        self.sell_order_loss_active = False
-        self.sell_order_objective_active = activate

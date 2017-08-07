@@ -4,8 +4,11 @@ import pandas as pd
 class WinAndLoseIndicator(Indicator):
 
 
+
     def __init__(self, printPlot=False, buyCode=1):
 
+        self.index_to_predict = 144
+        self.percentage_loss = 0.92
         self.iDistance = 5
         self.printPlot = printPlot
         self.buyCode = buyCode
@@ -27,38 +30,15 @@ class WinAndLoseIndicator(Indicator):
 
     def predict(self, orderState, df, i):
 
-        if i > 288:
+        if i > self.index_to_predict:
 
-            # if len(self.df_list_gain) > 1:
-        #
-        #         # if len(self.mean_series) > self.mean_index + 1:
-        #         #
-        #         #
-        #         #     mean1 = self.mean_series.iloc[(self.mean_index * -1 ):].mean()
-        #         #     mean2 = self.mean_series.iloc[(self.mean_index * -1 - 1):-1].mean()
-        #         #
-        #         #     print 'mean1',mean1
-        #         #     print 'mean2',mean2
-        #         #     print 'mean dif ', mean1 - mean2
-        #         #
-        #         #     if mean1 - mean2 < -0.06:
-        #         #             return 1
-        #
-        #         # if (self.df_list_gain.iloc[-1] < self.df_list_gain.iloc[-2]).bool() and (self.df_list_gain.iloc[-2] < self.df_list_gain.iloc[-3]).bool():
-        #         #         return 1
-        #
-        #         if (self.df_list_gain.iloc[-1] < -10).bool() :
-        #             return 1
-        #
-        #
-        # return 0
             return self.buy
 
         return 0
 
     def train(self,orderState, df, i):
-        if i > 144:
-            if df['close'].iloc[i-1]/df['close'].iloc[i-144] <  0.92 :
+        if i > self.index_to_predict:
+            if df['close'].iloc[i-1]/df['close'].iloc[i-self.index_to_predict] <  self.percentage_loss :
                 self.buy = 1
 
             else:

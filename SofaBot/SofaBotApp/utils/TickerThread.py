@@ -1,11 +1,14 @@
 from thread import start_new_thread
-import Poloniex
+import Poloniex2
 import sched, time
 import threading
 import time
 import pandas as pd
+import json
 
 exitFlag = 0
+
+
 
 class TickerThread (threading.Thread):
    def __init__(self, threadID, name, counter):
@@ -14,6 +17,8 @@ class TickerThread (threading.Thread):
       self.name = name
       self.counter = counter
       self.df = pd.DataFrame()
+      self.resp_dict = ""
+      self.p = Poloniex2.Poloniex2(key, secret)
 
    def run(self):
       print "Starting " + self.name
@@ -22,18 +27,15 @@ class TickerThread (threading.Thread):
 
 
 def startTicker(t):
-    p = Poloniex.Poloniex("BTC_LTC")
 
     s = sched.scheduler(time.time, time.sleep)
 
     def execute(sc):
-        t.df = p.get_ticker()
+        t.resp_dict = t.p.returnTicker()
 
-        print t.df
+        s.enter(20, 0, execute, (sc,))
 
-        s.enter(5, 0, execute, (sc,))
-
-    s.enter(5, 0, execute, (s,))
+    s.enter(20, 0, execute, (s,))
     s.run()
 
 
