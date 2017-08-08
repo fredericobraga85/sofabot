@@ -7,6 +7,7 @@ from Wallet import Wallet
 class Trader:
 
 
+
     def __init__(self, indicators, marketExchange , botConfig):
 
         self.indicators        = indicators

@@ -18,7 +18,7 @@ class TickerThread (threading.Thread):
       self.counter = counter
       self.df = pd.DataFrame()
       self.resp_dict = ""
-      self.p = Poloniex2.Poloniex2(key, secret)
+      self.marketExchange = Poloniex2.Poloniex2(key, secret)
 
    def run(self):
       print "Starting " + self.name
@@ -31,7 +31,7 @@ def startTicker(t):
     s = sched.scheduler(time.time, time.sleep)
 
     def execute(sc):
-        t.resp_dict = t.p.returnTicker()
+        t.resp_dict = t.marketExchange.returnTicker()
 
         s.enter(20, 0, execute, (sc,))
 
@@ -39,11 +39,12 @@ def startTicker(t):
     s.run()
 
 
+
 # Create new threads
-thread1 = TickerThread(1, "Thread-1", 1)
+thread = TickerThread(1, "Thread-1", 1)
 
 # Start new Threads
-thread1.start()
+thread.start()
 
 
 print "Exiting Main Thread"

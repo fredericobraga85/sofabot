@@ -4,8 +4,9 @@ from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.shortcuts import render_to_response, redirect
 from django.http import JsonResponse
+
 from .models import Exchange, OrderState, Question, Choice
-from utils import TickerThread
+from utils import TickerThread, Trader
 from django.utils import timezone
 from django.contrib import messages
 import json
@@ -27,7 +28,7 @@ class IndexView(generic.ListView):
         context = super(IndexView, self).get_context_data(**kwargs)
 
         dict = {}
-        for key, value in TickerThread.thread1.p.returnBalances().iteritems():
+        for key, value in TickerThread.thread.marketExchange.returnBalances().iteritems():
 
             if key == "BTC":
                 context['btc_max'] = value
@@ -38,7 +39,7 @@ class IndexView(generic.ListView):
         context['wallets'] = dict
 
         dict_coin = {}
-        for key, value in TickerThread.thread1.p.returnTicker().iteritems():
+        for key, value in TickerThread.thread.marketExchange.returnTicker().iteritems():
 
             if  "BTC" in key:
                 dict_coin[key] = value
@@ -84,7 +85,7 @@ def vote(request, question_id):
 
 def updateActualValue(request):
 
-    return JsonResponse(TickerThread.thread1.resp_dict)
+    return JsonResponse(TickerThread.thread.resp_dict)
 
 def addBot(request):
 
@@ -120,6 +121,9 @@ def startExchange(request, exchange_id):
         e.isActive = True
         e.save()
 
+        trader = Trader.Trader(TickerThread.thread.marketExchange, exchange_id)
+        trader.start()
+
         request.session['success_message'] = e.currency_pair + " iniciado com sucesso."
         return redirect("/SofaBotApp/")
 
@@ -143,3 +147,16 @@ def stopExchange(request, exchange_id):
         request.session['error_message'] = "Ocorreu um erro ao parar"
         return redirect("/SofaBotApp/")
 
+def getOrderStateList(request):
+
+    try:
+        exchangeId = int(request.GET['exchangeId'])
+        e = get_object_or_404(Exchange, pk=exchangeId)
+
+        return render(request, 'SofaBotApp/getOrderStateList.html', {'exchange': e})
+
+    except Exception as ex:
+
+        print ex
+        request.session['error_message'] = "Ocorreu um buscar detalhes de exchange"
+        return redirect("/SofaBotApp/")

@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^addBot/$', views.addBot, name='addBot'),
     url(r'^(?P<exchange_id>[0-9]+)/startExchange/$', views.startExchange, name='startExchange'),
     url(r'^(?P<exchange_id>[0-9]+)/stopExchange/$', views.stopExchange, name='stopExchange'),
+    url(r'^getOrderStateList/$', views.getOrderStateList, name='getOrderStateList'),
 ]

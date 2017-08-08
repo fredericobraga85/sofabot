@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="{% static "SofaBotApp/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "SofaBotApp/css/sofabot.css" %}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -27,6 +28,19 @@
                }
             });
         }, 5000)
+
+        function getOrderStateList(exchangeId)
+        {
+            $.ajax({
+                  type: "GET",
+                  url: "{% url 'SofaBotApp:getOrderStateList' %}",
+                  data: {'exchangeId': exchangeId},
+                  success: function(response) {
+
+                       $('#orderStateListDiv').html(response);
+                   }
+                });
+        }
 
     </script>
 </head>
@@ -102,6 +116,25 @@
         </div>
       </div>
 
+     <!-- Modal -->
+          <div class="modal fade" id="orderListModal" role="dialog">
+            <div class="modal-dialog modal-xl">
+
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Detalhes</h4>
+                </div>
+                <div id="orderStateListDiv">
+
+                </div>
+
+                </div>
+            </div>
+          </div>
+
 
     <div class="row">
 
@@ -144,16 +177,18 @@
                     <a
                         class="btn btn-danger"
                         href="{% url 'SofaBotApp:stopExchange' exchange.id %}">
-                        Parar
+                        <span class="glyphicon glyphicon-ban-circle"></span>
                     </a>
                     {% else %}
                     <a
                         class="btn btn-success"
                         href="{% url 'SofaBotApp:startExchange' exchange.id %}">
-                        Iniciar
+                        <span class="glyphicon glyphicon-play-circle"></span>
                     </a>
 
                     {% endif %}
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#orderListModal" onclick="getOrderStateList({{exchange.id}})"> <span class="glyphicon glyphicon-list-alt"></span> </button>
+
                 </td>
             </tr>
             {% endfor %}
@@ -202,6 +237,7 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static "SofaBotApp/js/bootstrap.min.js" %}"></script>
+
 </body>
 </html>
 

@@ -3,6 +3,7 @@ import urllib2
 import json
 import time
 import hmac, hashlib
+import pandas as pd
 
 
 def createTimeStamp(datestr, format="%Y-%m-%d %H:%M:%S"):
@@ -64,7 +65,24 @@ class Poloniex2:
         return {}
 
     def returnTicker(self):
-        return self.api_query("returnTicker")
+        self.lastTicker = self.api_query("returnTicker")
+        return self.lastTicker
+
+    def returnLastPrice(self, currencyPair):
+        df_last_ticker = pd.DataFrame(self.lastTicker)
+        return float(df_last_ticker[currencyPair].loc['last'])
+
+    def returnChartData(self, currencyPair, start, end, period):
+        param = {'currencyPair': currencyPair, 'start': start, 'end': end, 'period': period}
+        ret = urllib2.urlopen(urllib2.Request(
+            'https://poloniex.com/public?command=' + "returnChartData" +
+            '&currencyPair=' + currencyPair +
+            '&start='        + start +
+            '&end='          + end +
+            '&period='       + period))
+        list = json.loads(ret.read())
+        df_chart = pd.DataFrame(list)
+        return df_chart
 
     def return24Volume(self):
         return self.api_query("return24Volume")
