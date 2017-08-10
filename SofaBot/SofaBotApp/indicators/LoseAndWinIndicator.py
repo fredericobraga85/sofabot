@@ -11,19 +11,18 @@ class LoseAndWinIndicator:
         self.df_list_gain = pd.DataFrame([])
         self.buy = 0
 
-    def predict(self, df):
+    def predict(self, actualPrice , df):
 
-        # pdb.set_trace()
+        if actualPrice > 0:
+            if len(df) > self.index_to_predict:
 
-        if len(df) > self.index_to_predict:
+                shouldBuy = actualPrice / df['close'].iloc[len(df) - self.index_to_predict]
 
-            shouldBuy = df['close'].iloc[len(df) - 1] / df['close'].iloc[len(df) - self.index_to_predict]
+                if shouldBuy < self.percentage_loss:
+                    self.buy = 1
 
-            if shouldBuy < self.percentage_loss:
-                self.buy = 1
-
-            else:
-                self.buy = 0
+                else:
+                    self.buy = 0
 
 
         return self.buy

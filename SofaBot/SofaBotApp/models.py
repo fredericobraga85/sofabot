@@ -39,6 +39,7 @@ class Exchange(models.Model):
 @python_2_unicode_compatible
 class OrderState(models.Model):
     exchange = models.ForeignKey(Exchange, on_delete=models.CASCADE)
+    orderNumber = models.BigIntegerField(default=0)
     statusCode = models.IntegerField(default=0)
     perGain = models.FloatField(default=0)
     actual_price = models.FloatField(default=0)
@@ -48,6 +49,7 @@ class OrderState(models.Model):
     current_coin = models.FloatField(default=0)
     piggy       = models.FloatField(default=0)
     state_date = models.DateTimeField('date state')
+    currency_pair = models.CharField(max_length=20)
 
     def __str__(self):
         return str(self.statusCode)

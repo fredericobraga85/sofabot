@@ -10,10 +10,11 @@ def createTimeStamp(datestr, format="%Y-%m-%d %H:%M:%S"):
     return time.mktime(time.strptime(datestr, format))
 
 
+
 class Poloniex2:
-    def __init__(self, APIKey, Secret):
-        self.APIKey = APIKey
-        self.Secret = Secret
+    def __init__(self):
+        self.APIKey = key
+        self.Secret = secret
 
     def post_process(self, before):
         after = before
@@ -58,7 +59,9 @@ class Poloniex2:
 
                 ret = urllib2.urlopen(urllib2.Request('https://poloniex.com/tradingApi', post_data, headers))
                 jsonRet = json.loads(ret.read())
-                return self.post_process(jsonRet)
+                jsonResp =  self.post_process(jsonRet)
+                # print jsonResp
+                return jsonResp
         except Exception as ex:
             print ex
 
@@ -68,9 +71,7 @@ class Poloniex2:
         self.lastTicker = self.api_query("returnTicker")
         return self.lastTicker
 
-    def returnLastPrice(self, currencyPair):
-        df_last_ticker = pd.DataFrame(self.lastTicker)
-        return float(df_last_ticker[currencyPair].loc['last'])
+
 
     def returnChartData(self, currencyPair, start, end, period):
         param = {'currencyPair': currencyPair, 'start': start, 'end': end, 'period': period}
@@ -87,8 +88,9 @@ class Poloniex2:
     def return24Volume(self):
         return self.api_query("return24Volume")
 
-    def returnOrderBook(self, currencyPair):
-        return self.api_query("returnOrderBook", {'currencyPair': currencyPair})
+    def returnOrderBook(self, currencyPair, depth):
+        self.lastOrderBook = self.api_query("returnOrderBook", {'currencyPair': currencyPair, "depth": depth})
+        return self.lastOrderBook
 
     def returnMarketTradeHistory(self, currencyPair):
         return self.api_query("returnMarketTradeHistory", {'currencyPair': currencyPair})
@@ -131,7 +133,13 @@ class Poloniex2:
     # Outputs:
     # orderNumber   The order number
     def buy(self, currencyPair, rate, amount):
-        return self.api_query('buy', {"currencyPair": currencyPair, "rate": rate, "amount": amount})
+        buy = self.api_query('buy', {"currencyPair": currencyPair, "rate": rate, "amount": amount})
+
+        try:
+            orderNumber =  buy['orderNumber']
+            return orderNumber
+        except:
+            return None
 
     # Places a sell order in a given market. Required POST parameters are "currencyPair", "rate", and "amount". If successful, the method will return the order number.
     # Inputs:

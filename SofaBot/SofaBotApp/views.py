@@ -5,12 +5,16 @@ from django.views import generic
 from django.shortcuts import render_to_response, redirect
 from django.http import JsonResponse
 
+from .utils.Trader import Trader
+from .utils.Poloniex2 import Poloniex2
 from .models import Exchange, OrderState, Question, Choice
-from utils import TickerThread, Trader
+
 from django.utils import timezone
+from django.core import serializers
 from django.contrib import messages
 import json
 import pdb;
+from django.core.serializers.json import DjangoJSONEncoder
 
 class IndexView(generic.ListView):
 
@@ -27,8 +31,10 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
 
+        market = Poloniex2()
+
         dict = {}
-        for key, value in TickerThread.thread.marketExchange.returnBalances().iteritems():
+        for key, value in market.returnBalances().iteritems():
 
             if key == "BTC":
                 context['btc_max'] = value
@@ -39,7 +45,7 @@ class IndexView(generic.ListView):
         context['wallets'] = dict
 
         dict_coin = {}
-        for key, value in TickerThread.thread.marketExchange.returnTicker().iteritems():
+        for key, value in market.returnTicker().iteritems():
 
             if  "BTC" in key:
                 dict_coin[key] = value
@@ -83,9 +89,17 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('results', args=(question.id,)))
 
 
-def updateActualValue(request):
+def updateExchange(request):
 
-    return JsonResponse(TickerThread.thread.resp_dict)
+    listOrders = []
+
+    for e in Exchange.objects.all():
+        o = e.orderstate_set.last()
+        listOrders.append(o)
+
+    json = serializers.serialize('json', listOrders)
+
+    return HttpResponse(json, 'application/json')
 
 def addBot(request):
 
@@ -121,7 +135,7 @@ def startExchange(request, exchange_id):
         e.isActive = True
         e.save()
 
-        trader = Trader.Trader(TickerThread.thread.marketExchange, exchange_id)
+        trader = Trader(exchange_id)
         trader.start()
 
         request.session['success_message'] = e.currency_pair + " iniciado com sucesso."
@@ -130,6 +144,20 @@ def startExchange(request, exchange_id):
     except Exception as ex:
 
         request.session['error_message'] = "Ocorreu um erro ao iniciar"
+        return redirect("/SofaBotApp/")
+
+def deleteExchange(request, exchange_id):
+
+    try:
+        e = get_object_or_404(Exchange, pk=exchange_id)
+        e.delete()
+
+        request.session['success_message'] = e.currency_pair + " deletado com sucesso."
+        return redirect("/SofaBotApp/")
+
+    except Exception as ex:
+
+        request.session['error_message'] = "Ocorreu um erro ao deletar"
         return redirect("/SofaBotApp/")
 
 def stopExchange(request, exchange_id):

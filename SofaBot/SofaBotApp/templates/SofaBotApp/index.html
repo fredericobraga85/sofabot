@@ -18,12 +18,19 @@
         setInterval(function() {
 
             $.ajax({
-              url: "{% url 'SofaBotApp:updateActualValue' %}",
+              url: "{% url 'SofaBotApp:updateExchange' %}",
               success: function(json) {
 
                     for(var i in json)
                     {
-                       $('#' + i).html(json[i].last);
+                       $('#' + i + '_buy_value').html(json[i].buy_value);
+                       $('#' + i + '_sell_value').html(json[i].sell_value);
+                       $('#' + i + '_actual_value').html(json[i].actual_value);
+                       $('#' + i + '_statusCode').html(json[i].statusCode);
+                       $('#' + i + '_current_btc').html(json[i].current_btc);
+                       $('#' + i + '_current_coin').html(json[i].current_coin);
+                       $('#' + i + '_piggy').html(json[i].piggy);
+
                     }
                }
             });
@@ -144,11 +151,11 @@
             <tr>
                 <th>#</th>
                 <th>Exchange</th>
+                <th>Initial BTC</th>
                 <th>Buy Value</th>
                 <th>Sell Value</th>
                 <th>Actual Value</th>
                 <th>Status</th>
-                <th>Initial BTC</th>
                 <th>Current BTC</th>
                 <th>Current Coin</th>
                 <th>Piggy</th>
@@ -163,14 +170,14 @@
 
                 <td><label>{{ exchange.id }}</label></td>
                 <td><label>{{ exchange.currency_pair }}</label></td>
-                <td><label>{{ exchange.orderstate_set.last.buy_value }}</label></td>
-                <td><label>{{ exchange.orderstate_set.last.sell_value }}</label></td>
-                <td><label id='{{exchange.currency_pair}}'></label></td>
-                <td><label>{{ exchange.orderstate_set.last.statusCode  }}</label></td>
-                <td><label>{{ exchange.initial_btc   }}</label></td>
-                <td><label>{{ exchange.orderstate_set.last.current_btc   }}</label></td>
-                <td><label>{{ exchange.orderstate_set.last.current_coin   }}</label></td>
-                <td><label>{{ exchange.orderstate_set.last.piggy }}</label></td>
+                <td><label >{{ exchange.initial_btc   }}</label></td>
+                <td><label id='{{exchange.currency_pair}}_buy_value'>{{ exchange.orderstate_set.last.buy_value }}</label></td>
+                <td><label id='{{exchange.currency_pair}}_sell_value'>{{ exchange.orderstate_set.last.sell_value }}</label></td>
+                <td><label id='{{exchange.currency_pair}}_actual_value'></label></td>
+                <td><label id='{{exchange.currency_pair}}_statusCode'>{{ exchange.orderstate_set.last.statusCode  }}</label></td>
+                <td><label id='{{exchange.currency_pair}}_current_btc'>{{ exchange.orderstate_set.last.current_btc   }}</label></td>
+                <td><label id='{{exchange.currency_pair}}_current_coin'>{{ exchange.orderstate_set.last.current_coin   }}</label></td>
+                <td><label id='{{exchange.currency_pair}}_piggy'>{{ exchange.orderstate_set.last.piggy }}</label></td>
                 <td><label>{{ exchange.isActive }}</label></td>
                 <td>
                     {% if exchange.isActive %}
@@ -188,7 +195,11 @@
 
                     {% endif %}
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#orderListModal" onclick="getOrderStateList({{exchange.id}})"> <span class="glyphicon glyphicon-list-alt"></span> </button>
-
+                    <a
+                        class="btn btn-danger"
+                        href="{% url 'SofaBotApp:deleteExchange' exchange.id %}">
+                        <span class="glyphicon glyphicon-play-circle"></span>
+                    </a>
                 </td>
             </tr>
             {% endfor %}
