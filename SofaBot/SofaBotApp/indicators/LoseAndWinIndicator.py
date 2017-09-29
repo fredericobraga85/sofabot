@@ -13,10 +13,12 @@ class LoseAndWinIndicator:
 
     def predict(self, actualPrice , df):
 
+        # pdb.set_trace()
+
         if actualPrice > 0:
             if len(df) > self.index_to_predict:
 
-                shouldBuy = actualPrice / df['close'].iloc[len(df) - self.index_to_predict]
+                shouldBuy = actualPrice / df.iloc[len(df) - self.index_to_predict]
 
                 if shouldBuy < self.percentage_loss:
                     self.buy = 1

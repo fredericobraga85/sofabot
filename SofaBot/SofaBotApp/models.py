@@ -28,6 +28,8 @@ class Choice(models.Model):
 @python_2_unicode_compatible
 class Exchange(models.Model):
     currency_pair = models.CharField(max_length=20)
+    currency_default = models.CharField(max_length=20)
+    currency_investing = models.CharField(max_length=20)
     initial_btc = models.FloatField(default=0)
     isActive    = models.BooleanField(default=False)
 

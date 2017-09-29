@@ -5,6 +5,7 @@ from ..models import Exchange
 from django.utils import timezone
 from ..indicators.LoseAndWinIndicator import LoseAndWinIndicator
 import time
+import pandas as pd
 import pdb;
 
 
@@ -12,23 +13,26 @@ class Trader(threading.Thread):
   
     # objective_gain = 10
     # limit_loss = 0
-    gain = 0.03
-    loss = 0.10
     
     indicators = [
         LoseAndWinIndicator(False, 1)
     ]
 
+    test = True
+
     class BotConfig:
 
-        shouldBuyAccept = 1
         printOrders = True
+        gain = 0.03
+        loss = 0.10
+        periodStart = 144
 
 
-    def __init__(self, exchange_id):
+    def __init__(self, exchange_id, marketExchange):
         threading.Thread.__init__(self)
         self.exchange_id = exchange_id
         self.botConfig = Trader.BotConfig()
+        self.marketExchange = marketExchange
 
 
     def run(self):
@@ -37,334 +41,317 @@ class Trader(threading.Thread):
         print "Exiting Trading" + self.name
    
 
+
+
     def startTrading(self):
 
         e = Exchange.objects.get(id=self.exchange_id)
 
-        market = MarketThread(1, "Thread-" + e.currency_pair, e.currency_pair)
-        market.start()
+        self.marketThread = MarketThread(1, "Thread-" + e.currency_pair, e.currency_pair, self.marketExchange)
+        self.marketThread.start()
 
         self.isActive = True
 
-        testcont = 144
+        actualPeriod = 0
+        lastPriceHistory = []
 
         try:
             while self.isActive :
-
 
                 e = Exchange.objects.get(id=self.exchange_id)
                 orderState = e.orderstate_set.last()
 
                 self.isActive = e.isActive
+                lastPriceHistory.append(self.marketThread.getLastPrice())
 
-                if testcont == 144:
-                    self.test_df = market.marketExchange.returnChartData(e.currency_pair, "1500940800", "1501977600", "300")
-                    e.initial_btc = 1.0
-                    orderState.current_btc = 1.0
+                if self.isActive and len(lastPriceHistory) > self.botConfig.periodStart:
 
-                if self.isActive and len(self.test_df) > testcont:
+                    lastPriceHistory.pop(0)
 
-
-                    testcont = testcont + 1
-                    self.df =  self.test_df[:testcont]
-
+                    self.df_history_price =  pd.DataFrame(lastPriceHistory)
 
                     if orderState.statusCode == OrderStatus.waiting_buying_opportunity :
 
-                        print "waiting_buying_opportunity"
-
-                        if self.indicators_predict_buy(market):
-
-                            print "indicators_predict_buy"
-
-                            orderNumber = self.sendBuyOrder(market, e, orderState)
-
-                            if orderNumber != None:
-
-                                e.orderstate_set.create(orderNumber = orderNumber,
-                                                        buy_value=0.0,
-                                                        sell_value=0.0,
-                                                        actual_price = market.getLastAskPrice(),
-                                                        perGain=0.0,
-                                                        statusCode=OrderStatus.sent_buy_order,
-                                                        state_date=timezone.now(),
-                                                        current_btc=orderState.current_btc,
-                                                        current_coin=0.0,
-                                                        piggy=orderState.piggy,
-                                                        currency_pair=e.currency_pair)
-                                e.save()
-
-
-
-                        else:
-                            e.orderstate_set.create(
-                                                    orderNumber=0,
-                                                    buy_value=0.0,
-                                                    sell_value=0.0,
-                                                    actual_price=market.getLastAskPrice(),
-                                                    perGain=0.0,
-                                                    statusCode=orderState.statusCode,
-                                                    state_date=timezone.now(),
-                                                    current_btc=orderState.current_btc,
-                                                    current_coin=orderState.current_coin,
-                                                    piggy=orderState.piggy,
-                                                    currency_pair=e.currency_pair)
-                            e.save()
+                        self.waitingBuyingOpportunity(e, orderState)
 
                     elif orderState.statusCode == OrderStatus.sent_buy_order:
 
-                        print "sent_buy_order"
+                        self.waitingSellingOpportunity(e, orderState)
 
-                        actual_price = market.getLastAskPrice()
+                    elif orderState.statusCode == OrderStatus.sent_sell_order_is_gaining:
 
-                        if self.buyOrderWasExecuted():
+                        self.waitingGainingSellExecution(e, orderState)
 
-                            print "buyOrderWasExecuted"
+                    elif orderState.statusCode == OrderStatus.sent_sell_order_is_losing:
 
-                            buy_value = self.getBuyPrice(e.currency_pair)
-                            current_coin = self.getCurrentCoin(market)
+                        self.waitingLosingSellExecution(e, orderState)
 
-                            orderNumber = self.sendSellOrder(True, market, buy_value * (1 + self.gain))
+                else:
+                    self.wait(e, orderState)
 
-                            e.orderstate_set.create(orderNumber=orderState.orderNumber,
-                                                    buy_value=buy_value,
-                                                    sell_value=0.0,
-                                                    actual_price=actual_price,
-                                                    perGain=((actual_price / buy_value - 1) * 100),
-                                                    statusCode=OrderStatus.waiting_sell_opporuntity,
-                                                    state_date=timezone.now(),
-                                                    current_btc=0.0,
-                                                    current_coin=orderState.current_btc / buy_value,
-                                                    piggy=orderState.piggy,
-                                                    currency_pair=e.currency_pair)
-                            e.save()
-                        else:
+                actualPeriod = actualPeriod + 1
 
-                            market.marketExchange.cancel(e, orderState.orderNumber)
+                print 'waiting 5 minutes...actual Period', actualPeriod
+                time.sleep(60 * 5)
 
-                            e.orderstate_set.create(orderNumber=0,
-                                                    buy_value=0.0,
-                                                    sell_value=0.0,
-                                                    actual_price=actual_price,
-                                                    perGain=0.0,
-                                                    statusCode=OrderStatus.waiting_buying_opportunity,
-                                                    state_date=timezone.now(),
-                                                    current_btc=orderState.current_btc,
-                                                    current_coin=0.0,
-                                                    piggy=orderState.piggy,
-                                                    currency_pair=e.currency_pair)
-                            e.save()
+        except Exception as ex:
+            print 'Error Trader:', ex
 
-                    elif orderState.statusCode == OrderStatus.waiting_sell_opporuntity:
-
-                        print "waiting_sell_opporuntity"
-
-                        if self.isLosing(orderState, market):
-
-                            print "isLosing"
-
-                            orderNumber = self.sendSellOrder(False, market, market.getLastBidPrice() * 0.99995)
-                            actual_price = market.getLastAskPrice()
-
-                            e.orderstate_set.create(orderNumber = orderNumber,
-                                                    buy_value=orderState.buy_value,
-                                                    sell_value=0.0,
-                                                    actual_price=actual_price,
-                                                    perGain=((actual_price / orderState.buy_value - 1) * 100),
-                                                    statusCode=OrderStatus.sent_sell_order_is_losing,
-                                                    state_date=timezone.now(),
-                                                    current_btc=0.0,
-                                                    current_coin=orderState.current_coin,
-                                                    piggy=orderState.piggy,
-                                                    currency_pair=e.currency_pair)
-                            e.save()
-
-                        else:
-                            self.wait(e, orderState)
-
-                    elif orderState.statusCode == OrderStatus.sent_sell_order_is_gaining or orderState.statusCode == OrderStatus.sent_sell_order_is_losing:
-
-                        print "sent_sell_order_is_gaining || sent_sell_order_is_losing"
-
-                        if self.sellOrderWasExecuted(orderState):
-
-                            print "sellOrderWasExecuted"
-
-                            current_btc = self.getCurrentBtc()
-                            sell_value = self.getSellPrice()
-
-                            result = sell_value * orderState.current_coin
-                            piggy = orderState.piggy
-
-                            if result > e.initial_btc:
-                                piggy = orderState.piggy + (result - e.initial_btc)
-                                result = e.initial_btc
-
-
-                            e.orderstate_set.create(orderNumber = orderState.orderNumber,
-                                                    buy_value=orderState.buy_value,
-                                                    sell_value=sell_value,
-                                                    actual_price=market.getLastAskPrice(),
-                                                    perGain = (( sell_value/orderState.buy_value - 1) * 100),
-                                                    statusCode=OrderStatus.waiting_buying_opportunity,
-                                                    state_date=timezone.now(),
-                                                    current_btc= result,
-                                                    current_coin=0.0,
-                                                    piggy=piggy,
-                                                    currency_pair=e.currency_pair)
-                            e.save()
-
-                        else:
-                            self.wait(e, orderState)
-
-
-                    time.sleep(1)
-
-            market.stopTicker()
-        except:
-            market.stopTicker()
             e = Exchange.objects.get(id=self.exchange_id)
             e.isActive = False
-            e.save
+            e.save()
 
 
-    def wait(self, e, orderState, market):
+
+
+
+    def waitingBuyingOpportunity(self, e, orderState):
+        print "waiting_buying_opportunity"
+        if self.indicators_predict_buy():
+
+            print "Indicators predict SHOULD buy"
+
+            try:
+
+                orderNumber = self.marketThread.sendBuyOrder(e, orderState)
+
+                if orderNumber != None:
+
+                    e.orderstate_set.create(orderNumber=orderNumber,
+                                            buy_value     = 0.0,
+                                            sell_value    = 0.0,
+                                            actual_price  = self.marketThread.getLastPrice(),
+                                            perGain       = 0.0,
+                                            statusCode    = OrderStatus.sent_buy_order,
+                                            state_date    = timezone.now(),
+                                            current_btc   = orderState.current_btc,
+                                            current_coin  = 0.0,
+                                            piggy         = orderState.piggy,
+                                            currency_pair = e.currency_pair)
+                    e.save()
+
+
+
+            except Exception as ex:
+                print 'Error Sending Buy Order:', ex
+                self.wait(e, orderState)
+
+
+        else:
+            print "Indicators predict NOT TO buy"
+            self.wait(e, orderState)
+
+
+
+
+    def waitingSellingOpportunity(self, e, orderState):
+        print "waitingSellingOpportunity"
+        actual_price = self.marketThread.getLastPrice()
+        if self.marketThread.buyOrderWasExecuted(orderState.orderNumber):
+
+            print "buy Order Was Executed"
+
+            buy_value = self.marketThread.getBuyPrice(orderState.orderNumber)
+            amount_buy = self.marketThread.getBuyAmount(orderState.orderNumber)
+
+            try:
+                orderNumber = self.marketThread.sendGainingSellOrder(e, self.getGainingSellPrice(buy_value))
+
+                e.orderstate_set.create(orderNumber=orderNumber,
+                                        buy_value     = buy_value,
+                                        sell_value    = 0.0,
+                                        actual_price  = actual_price,
+                                        perGain       = ((actual_price / buy_value - 1) * 100),
+                                        statusCode    = OrderStatus.sent_sell_order_is_gaining,
+                                        state_date    = timezone.now(),
+                                        current_btc   = orderState.current_btc - (amount_buy * buy_value),
+                                        current_coin  = amount_buy,
+                                        piggy         = orderState.piggy,
+                                        currency_pair = e.currency_pair)
+                e.save()
+
+            except Exception as ex:
+                print 'Error Sending Gainig Sell Order:', ex
+                self.wait(e, orderState)
+        else:
+
+            print "buy Order was not executed"
+
+            try:
+                self.marketThread.cancelOrder(orderState.orderNumber)
+
+                e.orderstate_set.create(orderNumber   = 0,
+                                        buy_value     = 0.0,
+                                        sell_value    = 0.0,
+                                        actual_price  = actual_price,
+                                        perGain       = 0.0,
+                                        statusCode    = OrderStatus.waiting_buying_opportunity,
+                                        state_date    = timezone.now(),
+                                        current_btc   = orderState.current_btc,
+                                        current_coin  = 0.0,
+                                        piggy         = orderState.piggy,
+                                        currency_pair = e.currency_pair)
+                e.save()
+
+            except Exception as ex:
+                print 'Error cancelling Gaining Buy Order:', ex
+                self.wait(e, orderState)
+
+
+
+
+    def waitingGainingSellExecution(self, e, orderState):
+
+        print "sent_sell_order_is_gaining"
+
+        if self.marketThread.sellOrderWasExecuted(orderState.orderNumber):
+
+            print "sell Gaining Order Was Executed"
+
+            sell_value = self.marketThread.getSellPrice(orderState.orderNumber)
+
+            result = sell_value * orderState.current_coin
+            piggy = orderState.piggy
+
+            if result > e.initial_btc:
+                piggy = orderState.piggy + (result - e.initial_btc)
+                result = e.initial_btc
+                # self.marketThread.transferPiggy(piggy)
+
+            e.orderstate_set.create(orderNumber   = orderState.orderNumber,
+                                    buy_value     = orderState.buy_value,
+                                    sell_value    = sell_value,
+                                    actual_price  = self.marketThread.getLastPrice(),
+                                    perGain       = ((sell_value / orderState.buy_value - 1) * 100),
+                                    statusCode    = OrderStatus.waiting_buying_opportunity,
+                                    state_date    = timezone.now(),
+                                    current_btc   = result,
+                                    current_coin  = 0.0,
+                                    piggy         = piggy,
+                                    currency_pair = e.currency_pair)
+            e.save()
+
+
+        elif self.isLosing(orderState):
+
+            print "Limite de perda excedido..."
+
+            self.marketThread.cancelOrder(orderState.orderNumber)
+
+            try:
+                actual_price = self.marketThread.getLastPrice()
+                orderNumber = self.marketThread.sendLosingSellOrder(e, actual_price)
+
+                e.orderstate_set.create(orderNumber   = orderNumber,
+                                        buy_value     = orderState.buy_value,
+                                        sell_value    = 0.0,
+                                        actual_price  = actual_price,
+                                        perGain       = ((actual_price / orderState.buy_value - 1) * 100),
+                                        statusCode    = OrderStatus.sent_sell_order_is_losing,
+                                        state_date    = timezone.now(),
+                                        current_btc   = orderState.current_btc,
+                                        current_coin  = orderState.current_coin,
+                                        piggy         = orderState.piggy,
+                                        currency_pair = e.currency_pair)
+                e.save()
+            except Exception as ex:
+                print 'Error sending Losing Sell Order:', ex
+                self.wait(e, orderState)
+
+        else:
+            print 'Ordem de venda com ganho nao realizado...'
+            self.wait(e, orderState)
+
+
+
+
+
+    def waitingLosingSellExecution(self, e, orderState):
+
+        print "sent_sell_order_is_losing"
+
+        if self.marketThread.sellOrderWasExecuted(orderState.orderNumber):
+
+            print "sell Losing Order Was Executed"
+
+            sell_value = self.marketThread.getSellPrice(orderState.orderNumber)
+
+            result = sell_value * orderState.current_coin
+            piggy = orderState.piggy
+
+            if result > e.initial_btc:
+                piggy = orderState.piggy + (result - e.initial_btc)
+                result = e.initial_btc
+                self.marketThread.transferPiggy(piggy)
+
+            e.orderstate_set.create(orderNumber   = orderState.orderNumber,
+                                    buy_value     = orderState.buy_value,
+                                    sell_value    = sell_value,
+                                    actual_price  = self.marketThread.getLastPrice(),
+                                    perGain       = ((sell_value / orderState.buy_value - 1) * 100),
+                                    statusCode    = OrderStatus.waiting_buying_opportunity,
+                                    state_date    = timezone.now(),
+                                    current_btc   = result,
+                                    current_coin  = 0.0,
+                                    piggy         = piggy,
+                                    currency_pair = e.currency_pair)
+            e.save()
+
+        else:
+            print 'Ordem de venda com perda nao realizado...'
+            self.wait(e, orderState)
+
+
+
+
+    def wait(self, e, orderState):
 
         print "wait"
 
-        actual_price = market.getLastAskPrice()
+        actual_price = self.marketThread.getLastPrice()
+        perGain = ((actual_price / orderState.buy_value - 1) * 100) if orderState.buy_value > 0 else 0.0
 
-        e.orderstate_set.create(orderNumber=orderState.orderNumber,
-                                buy_value=orderState.buy_value,
-                                sell_value=orderState.sell_value,
-                                actual_price=actual_price,
-                                perGain=((actual_price / orderState.buy_value - 1) * 100),
-                                statusCode=orderState.statusCode,
-                                state_date=timezone.now(),
-                                current_btc=orderState.current_btc,
-                                current_coin=orderState.current_coin,
-                                piggy=orderState.piggy,
-                                currency_pair=e.currency_pair)
+        e.orderstate_set.create(orderNumber   = orderState.orderNumber,
+                                buy_value     = orderState.buy_value,
+                                sell_value    = orderState.sell_value,
+                                actual_price  = actual_price,
+                                perGain       = perGain,
+                                statusCode    = orderState.statusCode,
+                                state_date    = timezone.now(),
+                                current_btc   = orderState.current_btc,
+                                current_coin  = orderState.current_coin,
+                                piggy         = orderState.piggy,
+                                currency_pair = e.currency_pair)
         e.save()
 
 
-
-    def getBuyPrice(self, currency_pair):
-
-        if self.botConfig.printOrders:
-            print 'Buscando preco de compra...'
-            print 'Setando Fake buy value...'
-
-        # return self.marketExchange.returnLastPrice(currency_pair)
-
-        print 'fake buy price'
-        return self.df.iloc[-1]['close']
-
-    def getCurrentCoin(self, market):
-
-        if self.botConfig.printOrders:
-            print 'Buscando current coin...'
-
-        print 'fake crrent price'
-        return market.getLastAskPrice()
-
-    def getCurrentBtc(self):
-
-        if self.botConfig.printOrders:
-            print 'Buscando current btc ...'
-
-        print 'fake current btc'
-        return 0.0
-
-    def getSellPrice(self):
-
-        if self.botConfig.printOrders:
-            print 'Buscando preco de venda...'
-
-        print 'fake sell price'
-        return self.df.iloc[-1]['close']
-
-    # def isGaining(self, orderState, market):
-    #
-    #     return market.getLastAskPrice()/ orderState.buy_value >= 1 + self.gain
-
-    def didGain(self, orderState):
-        return orderState.sell_value / orderState.buy_value >= 1 + self.gain
+    def getGainingSellPrice(self, buy_value):
+        return buy_value * ( 1 + self.botConfig.gain)
 
 
-    def isLosing(self, orderState, market):
-        return market.getLastAskPrice() / orderState.buy_value  <= 1 - self.loss
+    def isLosing(self, orderState):
 
-    def didLose(self, orderState):
-        return orderState.sell_value / orderState.buy_value <= 1 - self.loss
+        print 'Verificando se excedeu limite de perda...'
 
-    def buyOrderWasExecuted(self):
-        if self.botConfig.printOrders:
-            print 'Verificando se ordem de compra foi realizada....'
-
+        # return self.marketThread.getLastPrice() / orderState.buy_value  <= 1 - self.botConfig.loss
+        print 'teste'
         return True
 
 
-    def sellOrderWasExecuted(self, orderState):
 
-        if self.botConfig.printOrders:
-            print 'Verificando se ordem de venda foi realizada....'
-            print 'Setando Fake sell value...'
+    def indicators_predict_buy(self):
 
-        if self.didGain(orderState):
-
-            if self.botConfig.printOrders:
-                print 'Ordem de venda de ganho realizada'
-
-
-            return True
-
-        elif self.didLose(orderState):
-
-            if self.botConfig.printOrders:
-                print 'Ordem de venda de perda realizada '
-
-            return True
-
-        return False
-
-    def cancelLastSellOrder(self):
-        if self.botConfig.printOrders:
-            print 'Ordem de venda anterior cancelada'
-
-    def sendBuyOrder(self,market,  exchange, orderState):
-
-        if self.botConfig.printOrders:
-            print 'Enviando ordem de compra...'
-
-        # orderNumber = market.marketExchange.buy(exchange.currency_pair, market.getLastAskPrice() * 1.00005, orderState.current_btc)
-        # return orderNumber
-
-        print 'fake buy orderNumber'
-        return 123
-
-    def sendSellOrder(self,isGain, market, rate):
-
-        self.cancelLastSellOrder()
-
-        if self.botConfig.printOrders:
-            if isGain:
-                print 'Enviando ordem de venda ganho '
-            else:
-                print 'Enviando ordem de venda perda '
-
-        print 'fake sell orderNumber'
-        return 321
-
-    def indicators_predict_buy(self, market):
+        print 'Predicting buy...'
 
         shouldBuyCount = 0
 
-        actualPrice = market.getLastAskPrice()
+        actualPrice = self.marketThread.getLastPrice()
 
         for indicator in self.indicators:
 
-            shouldBuyCount = shouldBuyCount + indicator.predict(actualPrice, self.df)
+            shouldBuyCount = shouldBuyCount + indicator.predict(actualPrice, self.df_history_price)
 
         return True if shouldBuyCount >= 1 else False
+
+
 

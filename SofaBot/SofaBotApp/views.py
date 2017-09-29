@@ -6,7 +6,7 @@ from django.shortcuts import render_to_response, redirect
 from django.http import JsonResponse
 
 from .utils.Trader import Trader
-from .utils.Poloniex2 import Poloniex2
+from .utils.Bitfinex import BitFinex
 from .models import Exchange, OrderState, Question, Choice
 
 from django.utils import timezone
@@ -16,6 +16,8 @@ import json
 import pdb;
 from django.core.serializers.json import DjangoJSONEncoder
 
+market = BitFinex()
+
 class IndexView(generic.ListView):
 
     template_name = 'SofaBotApp/index.html'
@@ -24,31 +26,18 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
 
-
-
         return Exchange.objects.order_by('id')[:]
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
 
-        market = Poloniex2()
-
-        dict = {}
-        for key, value in market.returnBalances().iteritems():
-
-            if key == "BTC":
-                context['btc_max'] = value
-                dict[key] = value
-            elif float(value) > 0:
-                dict[key] = value
-
-        context['wallets'] = dict
+        context['max_default_currency'] = market.parseMaxDefaultCurrency()
+        context['wallets'] = market.parseWalletsToDict()
 
         dict_coin = {}
-        for key, value in market.returnTicker().iteritems():
+        for idx , pairCurrency in enumerate(market.getPairCurrencies()):
 
-            if  "BTC" in key:
-                dict_coin[key] = value
+                dict_coin[idx] = pairCurrency
 
         context['coins'] = dict_coin
         context['success_message'] = self.request.session.get('success_message')  # get the value from session
@@ -135,7 +124,7 @@ def startExchange(request, exchange_id):
         e.isActive = True
         e.save()
 
-        trader = Trader(exchange_id)
+        trader = Trader(exchange_id, market)
         trader.start()
 
         request.session['success_message'] = e.currency_pair + " iniciado com sucesso."

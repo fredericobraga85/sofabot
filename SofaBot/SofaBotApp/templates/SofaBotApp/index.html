@@ -21,20 +21,23 @@
               url: "{% url 'SofaBotApp:updateExchange' %}",
               success: function(json) {
 
+
                     for(var i in json)
                     {
-                       $('#' + i + '_buy_value').html(json[i].buy_value);
-                       $('#' + i + '_sell_value').html(json[i].sell_value);
-                       $('#' + i + '_actual_value').html(json[i].actual_value);
-                       $('#' + i + '_statusCode').html(json[i].statusCode);
-                       $('#' + i + '_current_btc').html(json[i].current_btc);
-                       $('#' + i + '_current_coin').html(json[i].current_coin);
-                       $('#' + i + '_piggy').html(json[i].piggy);
+                       var orderState = json[i]['fields']
+
+                       $('#' + orderState['exchange'] + '_buy_value').html(orderState['buy_value']);
+                       $('#' + orderState['exchange'] + '_sell_value').html(orderState['sell_value']);
+                       $('#' + orderState['exchange'] + '_actual_price').html(orderState['actual_price']);
+                       $('#' + orderState['exchange'] + '_statusCode').html(orderState['statusCode']);
+                       $('#' + orderState['exchange'] + '_current_btc').html(orderState['current_btc']);
+                       $('#' + orderState['exchange'] + '_current_coin').html(orderState['current_coin']);
+                       $('#' + orderState['exchange'] + '_piggy').html(orderState['piggy']);
 
                     }
                }
             });
-        }, 5000)
+        }, 30000)
 
         function getOrderStateList(exchangeId)
         {
@@ -94,7 +97,7 @@
                   <label for="currency_pair">Select exchange:</label>
                   <select class="form-control" name="currency_pair" id="currency_pair" title="currency_pair">
                        {% for k, v in coins.items %}
-                        <option>{{k}}</option>
+                        <option>{{v}}</option>
                       {% endfor %}
                   </select>
                   <br>
@@ -102,10 +105,10 @@
                   <div class="container">
                     <div class="row">
                         <div class="col-sm-1">
-                            <input type="number" name="initial_btc" id="initial_btc" min="0" max={{btc_max}} step="0.001" data-bind="value:initial_btc" />
+                            <input type="number" name="initial_btc" id="initial_btc" min="0" max={{max_default_currency}} step="0.001" data-bind="value:initial_btc" />
                         </div>
                         <div class="col-sm-3">
-                            <label>BTC: <span class="label label-default">{{btc_max}}</span></label>
+                            <label>BTC: <span class="label label-default">{{max_default_currency}}</span></label>
                         </div>
                     </div>
                   </div>
@@ -171,13 +174,13 @@
                 <td><label>{{ exchange.id }}</label></td>
                 <td><label>{{ exchange.currency_pair }}</label></td>
                 <td><label >{{ exchange.initial_btc   }}</label></td>
-                <td><label id='{{exchange.currency_pair}}_buy_value'>{{ exchange.orderstate_set.last.buy_value }}</label></td>
-                <td><label id='{{exchange.currency_pair}}_sell_value'>{{ exchange.orderstate_set.last.sell_value }}</label></td>
-                <td><label id='{{exchange.currency_pair}}_actual_value'></label></td>
-                <td><label id='{{exchange.currency_pair}}_statusCode'>{{ exchange.orderstate_set.last.statusCode  }}</label></td>
-                <td><label id='{{exchange.currency_pair}}_current_btc'>{{ exchange.orderstate_set.last.current_btc   }}</label></td>
-                <td><label id='{{exchange.currency_pair}}_current_coin'>{{ exchange.orderstate_set.last.current_coin   }}</label></td>
-                <td><label id='{{exchange.currency_pair}}_piggy'>{{ exchange.orderstate_set.last.piggy }}</label></td>
+                <td><label id='{{exchange.id}}_buy_value'>{{ exchange.orderstate_set.last.buy_value }}</label></td>
+                <td><label id='{{exchange.id}}_sell_value'>{{ exchange.orderstate_set.last.sell_value }}</label></td>
+                <td><label id='{{exchange.id}}_actual_price'></label></td>
+                <td><label id='{{exchange.id}}_statusCode'>{{ exchange.orderstate_set.last.statusCode  }}</label></td>
+                <td><label id='{{exchange.id}}_current_btc'>{{ exchange.orderstate_set.last.current_btc   }}</label></td>
+                <td><label id='{{exchange.id}}_current_coin'>{{ exchange.orderstate_set.last.current_coin   }}</label></td>
+                <td><label id='{{exchange.id}}_piggy'>{{ exchange.orderstate_set.last.piggy }}</label></td>
                 <td><label>{{ exchange.isActive }}</label></td>
                 <td>
                     {% if exchange.isActive %}
@@ -204,7 +207,9 @@
             </tr>
             {% endfor %}
             {% else %}
-            <p>No polls are available.</p>
+            <tr>
+                <td colspan="12"><center>No bots available.</center></td>
+            </tr>
             {% endif %}
             </tbody>
             </table>

@@ -10,6 +10,8 @@ def createTimeStamp(datestr, format="%Y-%m-%d %H:%M:%S"):
     return time.mktime(time.strptime(datestr, format))
 
 
+secret = "c74f025e8ef4c1d50d01a1183bf5b0763629962e8c9a928fb2cb195efbe557b433b78a11deaa5356747e70aef25a2102560b9f8a67bed957a849dce4b09568eb"
+key = "D5EMET5T-PMFS2UOQ-RWE8NF66-DRGRXAA0"
 
 class Poloniex2:
     def __init__(self):
