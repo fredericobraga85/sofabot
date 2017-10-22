@@ -13,8 +13,8 @@ class BollingerBandsIndicator(Indicator):
         self.printPlot = printPlot
         self.buyCode = buyCode
 
-        self.iDistance = 10
-        self.latency_perc = 1.015
+        self.iDistance = 7
+        self.latency_perc = 1
 
 
     def calculateMoment(self, i, orderState, df):
@@ -52,7 +52,8 @@ class BollingerBandsIndicator(Indicator):
 
             if df.iloc[i - 1]['upperbb'] / df.iloc[i - 1]['lowerbb'] > self.latency_perc:
 
-                if df.iloc[i]['lowerbb'] > orderState.actual_price:
+                # df.iloc[i]['lowerbb'] > orderState.actual_price or
+                if (df.iloc[i-1]['lowerbb'] > df.iloc[i - 1]['weightedAverage'] and orderState.actual_price > df.iloc[i - 1]['weightedAverage']):
 
                     # if df.iloc[i]['upperbb'] / df.iloc[i]['lowerbb'] > self.latency_perc:
                     df.loc[i, 'bbBuyZone'] = orderState.actual_price
@@ -72,7 +73,7 @@ class BollingerBandsIndicator(Indicator):
             #     plt.plot(df['timestamp'] - df['timestamp'][0], df['lowerbb'])
 
             if 'bbBuyZone' in df.columns:
-                plt.plot(df['timestamp'] - df['timestamp'][0], df['bbBuyZone'])
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['bbBuyZone'] / df.iloc[0]['weightedAverage'], color='r')
 
 
             plt.show()

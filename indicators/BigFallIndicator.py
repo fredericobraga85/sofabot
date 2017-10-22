@@ -5,13 +5,13 @@ class BigFallIndicator(Indicator):
 
 
     def __init__(self, printPlot=False, buyCode=1):
-        self.fall_perc = 0.96
+        self.fall_perc = 0.97
         self.last_max_index = 0
         self.printPlot = printPlot
         self.buyCode = buyCode
 
 
-    def preSetup(self):
+    def preSetup(self, df):
         self.last_max_index = 0
         self.big_fall = False
         self.count = 0
@@ -59,8 +59,8 @@ class BigFallIndicator(Indicator):
             super(BigFallIndicator, self).plot(df ,plt)
 
             if 'bigFall' in df.columns:
-                plt.plot(df['timestamp'] - df['timestamp'][0], df['bigFall'])
-                plt.plot(df['timestamp'] - df['timestamp'][0], df['max_price'])
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['bigFall']  / df.iloc[0]['weightedAverage'])
+                # plt.plot(df['timestamp'] - df['timestamp'][0], df['max_price']/ df.iloc[0]['weightedAverage'])
 
 
             plt.show()

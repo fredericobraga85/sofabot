@@ -12,7 +12,7 @@ class BigFallRecoverIndicator(Indicator):
         self.dif_price_perc = 1.03
 
 
-    def preSetup(self):
+    def preSetup(self, df):
         self.last_max_index = 0
         self.count = 0
 

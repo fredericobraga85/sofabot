@@ -14,7 +14,7 @@ class RandomForrestIndicator(Indicator):
         self.buyCode = buyCode
 
         self.iDistance = 5
-        self.gainLimit = 1.015
+        self.gainLimit = 1.02
 
         self.trained = False
         self.currencyPair = currencyPair
@@ -42,7 +42,6 @@ class RandomForrestIndicator(Indicator):
 
             self.clf.fit(self.getInput(self.train_df), self.train_df[self.tag])
 
-            # self.knn_df.to_csv(file_name, index=False)
 
             self.trained = True
 
@@ -79,7 +78,7 @@ class RandomForrestIndicator(Indicator):
 
             if i > self.iDistance:
 
-                if  df['weightedAverage'].iloc[i] / df['weightedAverage'].iloc[i - self.iDistance] > self.gainLimit:
+                if  df['weightedAverage'].iloc[i] / df[i-self.iDistance:i]['weightedAverage'].min() > self.gainLimit:
                     df.loc[i - self.iDistance, self.tag] = self.buyCode
                 else:
                     df.loc[i - self.iDistance, self.tag] = 0
@@ -104,6 +103,6 @@ class RandomForrestIndicator(Indicator):
             super(RandomForrestIndicator, self).plot(df, plt)
 
             if 'randomF' in df.columns:
-                plt.plot(df['timestamp'] - df['timestamp'][0], df['randomF'], color='r')
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['randomF']/df.iloc[0]['weightedAverage'], color='r')
 
             plt.show()

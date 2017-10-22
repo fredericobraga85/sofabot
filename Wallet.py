@@ -11,6 +11,7 @@ class Wallet:
         self.wallet[fromDigitalCurr] = volume
         self.wallet[toDigitalCurr]   = 0.0
         self.initialDeposit = volume
+        self.piggy = 0.0
 
     def exchange(self, fromDigitalCurr , toDigitalCurr, value_btc, fee):
 
@@ -28,3 +29,7 @@ class Wallet:
     def getDigitalCurrency(self, digitalCurrency):
         return self.wallet[digitalCurrency]
 
+    def transferToPiggy(self):
+        if self.wallet['BTC'] > self.initialDeposit:
+            self.piggy = self.piggy + self.wallet['BTC'] - self.initialDeposit
+            self.wallet['BTC'] = self.initialDeposit

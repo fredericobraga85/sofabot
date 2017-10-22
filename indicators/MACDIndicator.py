@@ -30,6 +30,7 @@ class MACDIndicator(Indicator):
             if df.loc[i - 1, 'macd_long'] > df.loc[i - 1, 'macd_short']:
 
                 if df.loc[i, 'macd_long'] < df.loc[i, 'macd_short']:
+
                     return self.buyCode
 
 
@@ -43,7 +44,8 @@ class MACDIndicator(Indicator):
             super(MACDIndicator, self).plot(df ,plt)
 
             if 'macd_long' in df.columns:
-                plt.plot(df['timestamp'] - df['timestamp'][0], df['macd_long'])
-                plt.plot(df['timestamp'] - df['timestamp'][0], df['macd_short'])
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['macd_long'] / df.iloc[0]['weightedAverage'])
+                plt.plot(df['timestamp'] - df['timestamp'][0], df['macd_short']/ df.iloc[0]['weightedAverage'])
+
 
             plt.show()

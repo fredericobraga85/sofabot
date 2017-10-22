@@ -1,0 +1,35 @@
+<div class="container">
+<div class="col-md-10">
+    <h1>{{exchange.currency_pair}}</h1>
+   <table class="table">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Buy Value</th>
+        <th>Sell Value</th>
+        <th>Actual Value</th>
+        <th>Current BTC</th>
+        <th>Current Coin</th>
+        <th>Piggy</th>
+        <th>Gain/Loss</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for order in exchange.orderstate_set.all %}
+      <tr {% if order.statusCode != 0 %} bgcolor="#56c0e0" {% endif %}>
+         <td>{{ order.state_date }}</td>
+         <td>{{ order.buy_value|floatformat:5 }}</td>
+         <td>{{ order.sell_value|floatformat:5 }}</td>
+         <td>{{ order.actual_price|floatformat:5 }}</td>
+         <td>{{ order.current_btc|floatformat:5 }}</td>
+         <td>{{ order.current_coin|floatformat:5 }}</td>
+         <td>{{ order.piggy|floatformat:5 }}</td>
+         <td>{{ order.perGain|floatformat:2 }}</td>
+         <td >{{ order.statusCode }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
+</div>

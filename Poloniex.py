@@ -7,7 +7,7 @@ from time import sleep
 class Poloniex:
 
 
-    def __init__(self, currencyPair, start, end, period):
+    def __init__(self, currencyPair, start=0, end=0, period=0):
 
         self.currencyPair = currencyPair
         self.start = start
@@ -63,3 +63,4 @@ class Poloniex:
 
     def getPassiveSellFeePerc(self):
         return 0.0015
+

@@ -1,11 +1,11 @@
 
 from OrderState import OrderState
-from Poloniex import Poloniex
 import Visualizer
 from ChartDataAnalyzer import ChartDataAnalyzer
 from Wallet import Wallet
 
 class Trader:
+
 
 
     def __init__(self, indicators, marketExchange , botConfig):
@@ -42,7 +42,7 @@ class Trader:
         self.df['gained'] = False
         self.df['Buy'] = 0
 
-        self.pre_setup_indicators()
+        self.pre_setup_indicators(self.df)
 
         for i, row in self.df.iterrows():
 
@@ -52,7 +52,7 @@ class Trader:
 
                 self.train_inidicators(i)
 
-                if i >= 3 and self.stop == False:
+                if self.stop == False:
 
                     if self.orderState.waitingForBuyOpportunity():
 
@@ -153,6 +153,8 @@ class Trader:
                             self.df.loc[i, 'perGain'] = (self.orderState.sell_value / self.orderState.buy_value - 1) * 100
                             self.df.loc[i, 'gained'] = True
 
+                            self.wallet.transferToPiggy()
+
                             self.orderState.resetValues()
 
                         elif self.isGaining():
@@ -250,17 +252,17 @@ class Trader:
 
 
     def isGaining(self):
-        return self.orderState.getGainPerc() > 1
+        return self.orderState.getGainPerc() >= 1 + self.gain
 
     def didGain(self):
-        return self.orderState.getGainPerc() > 1 + self.gain
+        return self.orderState.getGainPerc() >= 1 + self.gain
 
 
     def isLosing(self):
-        return self.orderState.getGainPerc() < 1 and  self.orderState.getGainPerc() > 1 - self.loss
+        return self.orderState.getGainPerc() <= 1 - self.loss
 
     def didLose(self):
-        return self.orderState.getGainPerc() < 1 - self.loss
+        return self.orderState.getGainPerc() <= 1 - self.loss
 
     def buyOrderWasExecuted(self):
         if self.botConfig.printOrders:
@@ -275,17 +277,19 @@ class Trader:
             print 'Verificando se ordem de venda foi realizada....'
             print 'Setando Fake sell value...'
 
-        if self.reached_objective() or self.reached_limit_loss():
+        # if self.reached_objective() or self.reached_limit_loss():
+        #
+        #     self.orderState.sell_value = self.orderState.actual_price
+        #
+        #     if self.botConfig.printOrders:
+        #         print 'Ordem de venda realizada alcance objetivo ' + str(
+        #             self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
+        #
+        #     return True
+        #
+        # el
 
-            self.orderState.sell_value = self.orderState.actual_price
-
-            if self.botConfig.printOrders:
-                print 'Ordem de venda realizada alcance objetivo ' + str(
-                    self.orderState.sell_value) + ' Preco atual ' + str(self.orderState.actual_price)
-
-            return True
-
-        elif self.didGain():
+        if self.didGain():
 
             if self.orderState.sell_order_gain_active:
                 self.orderState.sell_value = self.orderState.buy_value * (1 + self.gain)
@@ -355,13 +359,13 @@ class Trader:
         for indicator in self.indicators:
 
             shouldBuyCount = shouldBuyCount + indicator.predict(self.orderState, self.df, i)
-            self.df.loc[i, 'shouldBuy'] = shouldBuyCount
 
+        self.df.loc[i, 'shouldBuy'] = shouldBuyCount
         return True if shouldBuyCount >= self.botConfig.shouldBuyAccept else False
 
-    def pre_setup_indicators(self):
+    def pre_setup_indicators(self, df):
         for indicator in self.indicators:
-            indicator.preSetup()
+            indicator.preSetup(df)
 
     def train_inidicators(self, i):
         for indicator in self.indicators:

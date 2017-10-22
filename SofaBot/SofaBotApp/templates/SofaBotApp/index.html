@@ -1,0 +1,260 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SofaBot</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static "SofaBotApp/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "SofaBotApp/css/sofabot.css" %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script>
+        var append_increment = 0;
+        setInterval(function() {
+
+            $.ajax({
+              url: "{% url 'SofaBotApp:updateExchange' %}",
+              success: function(json) {
+
+
+                    for(var i in json)
+                    {
+                       var orderState = json[i]['fields']
+
+                       $('#' + orderState['exchange'] + '_buy_value').html(orderState['buy_value']);
+                       $('#' + orderState['exchange'] + '_sell_value').html(orderState['sell_value']);
+                       $('#' + orderState['exchange'] + '_actual_price').html(orderState['actual_price']);
+                       $('#' + orderState['exchange'] + '_statusCode').html(orderState['statusCode']);
+                       $('#' + orderState['exchange'] + '_current_btc').html(orderState['current_btc']);
+                       $('#' + orderState['exchange'] + '_current_coin').html(orderState['current_coin']);
+                       $('#' + orderState['exchange'] + '_piggy').html(orderState['piggy']);
+
+                    }
+               }
+            });
+        }, 30000)
+
+        function getOrderStateList(exchangeId)
+        {
+            $.ajax({
+                  type: "GET",
+                  url: "{% url 'SofaBotApp:getOrderStateList' %}",
+                  data: {'exchangeId': exchangeId},
+                  success: function(response) {
+
+                       $('#orderStateListDiv').html(response);
+                   }
+                });
+        }
+
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="#">SofaBot</a>
+            <img src="{% static "SofaBotApp/img/sofa_icon.png" %}" />
+        </div>
+    </div>
+</nav>
+
+<div class="container theme-showcase" role="main">
+
+    {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+             <strong>Erro</strong> {{error_message}}
+        </div>
+    {% elif success_message%}
+        <div class="alert alert-success" role="alert">
+             <strong>Sucesso</strong> {{success_message}}
+        </div>
+    {% endif%}
+
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Criar Bot</button>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Criar Bot</h4>
+            </div>
+            <form action="{% url 'SofaBotApp:addBot' %}" method="post">
+            {% csrf_token %}
+            <div class="container">
+
+                <div class="form-group col-md-6">
+                  <label for="currency_pair">Select exchange:</label>
+                  <select class="form-control" name="currency_pair" id="currency_pair" title="currency_pair">
+                       {% for k, v in coins.items %}
+                        <option>{{v}}</option>
+                      {% endfor %}
+                  </select>
+                  <br>
+                  <label>Select quantity:</label>
+                  <div class="container">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <input type="number" name="initial_btc" id="initial_btc" min="0" max={{max_default_currency}} step="0.001" data-bind="value:initial_btc" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label>BTC: <span class="label label-default">{{max_default_currency}}</span></label>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" >Adicionar</button>
+            </div>
+
+            </form>
+            </div>
+        </div>
+      </div>
+
+     <!-- Modal -->
+          <div class="modal fade" id="orderListModal" role="dialog">
+            <div class="modal-dialog modal-xl">
+
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Detalhes</h4>
+                </div>
+                <div id="orderStateListDiv">
+
+                </div>
+
+                </div>
+            </div>
+          </div>
+
+
+    <div class="row">
+
+        <div class="col-md-10">
+           <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Exchange</th>
+                <th>Initial BTC</th>
+                <th>Buy Value</th>
+                <th>Sell Value</th>
+                <th>Actual Value</th>
+                <th>Status</th>
+                <th>Current BTC</th>
+                <th>Current Coin</th>
+                <th>Piggy</th>
+                <th>Active</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if exchange_list %}
+            {% for exchange in exchange_list %}
+            <tr>
+
+                <td><label>{{ exchange.id }}</label></td>
+                <td><label>{{ exchange.currency_pair }}</label></td>
+                <td><label >{{ exchange.initial_btc   }}</label></td>
+                <td><label id='{{exchange.id}}_buy_value'>{{ exchange.orderstate_set.last.buy_value }}</label></td>
+                <td><label id='{{exchange.id}}_sell_value'>{{ exchange.orderstate_set.last.sell_value }}</label></td>
+                <td><label id='{{exchange.id}}_actual_price'></label></td>
+                <td><label id='{{exchange.id}}_statusCode'>{{ exchange.orderstate_set.last.statusCode  }}</label></td>
+                <td><label id='{{exchange.id}}_current_btc'>{{ exchange.orderstate_set.last.current_btc   }}</label></td>
+                <td><label id='{{exchange.id}}_current_coin'>{{ exchange.orderstate_set.last.current_coin   }}</label></td>
+                <td><label id='{{exchange.id}}_piggy'>{{ exchange.orderstate_set.last.piggy }}</label></td>
+                <td><label>{{ exchange.isActive }}</label></td>
+                <td>
+                    {% if exchange.isActive %}
+                    <a
+                        class="btn btn-danger"
+                        href="{% url 'SofaBotApp:stopExchange' exchange.id %}">
+                        <span class="glyphicon glyphicon-ban-circle"></span>
+                    </a>
+                    {% else %}
+                    <a
+                        class="btn btn-success"
+                        href="{% url 'SofaBotApp:startExchange' exchange.id %}">
+                        <span class="glyphicon glyphicon-play-circle"></span>
+                    </a>
+
+                    {% endif %}
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#orderListModal" onclick="getOrderStateList({{exchange.id}})"> <span class="glyphicon glyphicon-list-alt"></span> </button>
+                    <a
+                        class="btn btn-danger"
+                        href="{% url 'SofaBotApp:deleteExchange' exchange.id %}">
+                        <span class="glyphicon glyphicon-play-circle"></span>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="12"><center>No bots available.</center></td>
+            </tr>
+            {% endif %}
+            </tbody>
+            </table>
+        </div>
+         <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Wallet</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Coin</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if wallets %}
+
+                                {% for k, v in wallets.items %}
+                                <tr>
+                                    <td>{{k}}</td>
+                                    <td>{{v}}</td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                            <tr><td>No wallet</td></tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+
+</div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static "SofaBotApp/js/bootstrap.min.js" %}"></script>
+
+</body>
+</html>
+
+
